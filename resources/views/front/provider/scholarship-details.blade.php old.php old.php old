@@ -1,0 +1,601 @@
+@php
+use App\Models\Level;
+use App\Models\CourseCategory;
+use App\Models\Specialization;
+use App\Models\Country;
+@endphp
+@extends('front.layouts.main')
+@push('title')
+  <title>Scholarship Details - Gyandeep NGO</title>
+@endpush
+@section('main-section')
+  <main>
+    <div class="container-fluid margin_60_35">
+      <div class="row">
+
+        @include('front.provider.profile-sidebar')
+
+        <div class="col-xl-10 col-lg-10">
+          <div id="notificationDiv">
+            @if (session()->has('smsg'))
+              <div class="alert alert-success alert-dismissable">
+                {{ session()->get('smsg') }}
+              </div>
+            @endif
+            @if (session()->has('emsg'))
+              <div class="alert alert-danger alert-dismissable">
+                {{ session()->get('emsg') }}
+              </div>
+            @endif
+          </div>
+          <div style="clear:both"></div>
+          <div class="pb-2">
+            <div id="detail-title" style="padding-left:15px"> Add SCholarship
+            </div>
+            <div class="box_general_3">
+              <form action="{{ url('provider/scholarship/update') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id" value="{{ $row->id }}">
+                <div class="row">
+                  <div class="col-md-4 col-sm-12">
+                    <div class="form-group">
+                      <label>Scholarship Name</label>
+                      <input name="name" type="text" class="form-control" placeholder="Enter scholarship Name"
+                        value="{{ $ft == 'edit' ? $row->name : old('name') }}" required>
+                      <span class="text-danger">
+                        @error('name')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                      <label>Eligibility Note</label>
+                      <input name="eligibility" type="text" class="form-control" placeholder="Enter eligibility"
+                        value="{{ $ft == 'edit' ? $row->eligibility : old('eligibility') }}" required>
+                      <span class="text-danger">
+                        @error('eligibility')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-sm-12">
+                    <div class="form-group">
+                      <label>Deadline</label>
+                      <input name="deadline" type="date" class="form-control" placeholder="Enter Deadline"
+                        value="{{ $ft == 'edit' ? $row->deadline : old('deadline') }}" required>
+                      <span class="text-danger">
+                        @error('deadline')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                      <label>What it covers</label>
+                      <select name="covers" type="text" class="form-control select2" required>
+                        <option value="">Select</option>
+                        <option value="full-funding"
+                          {{ $ft == 'edit' && $row->covers == 'full-funding' ? 'Selected' : '' }}>Full Funding
+                        </option>
+                        <option value="partial-funding"
+                          {{ $ft == 'edit' && $row->covers == 'partial-funding' ? 'Selected' : '' }}>Partial Funding
+                        </option>
+                        <option value="only-tution-fees"
+                          {{ $ft == 'edit' && $row->covers == 'only-tution-fees' ? 'Selected' : '' }}>Only Tution Fees
+                        </option>
+                      </select>
+                      <span class="text-danger">
+                        @error('covers')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-12 col-sm-12">
+                    <div class="form-group">
+                      <label>Covers Notes</label>
+                      <input name="covers_notes" type="text" class="form-control" placeholder="Enter Covers Notes"
+                        value="{{ $ft == 'edit' ? $row->covers_notes : old('covers_notes') }}">
+                      <span class="text-danger">
+                        @error('covers_notes')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                  </div>
+                  {{-- <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                      <label>Exam Type</label>
+                      <select onchange="changeExamType(this.value)" name="exam_type" id="exam_type" type="text"
+                        class="form-control select2" required>
+                        <option value="">Select</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Free">Free</option>
+                      </select>
+                      <span class="text-danger">
+                        @error('exam_type')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                  </div>
+                  <div class="col-md-3 col-sm-12">
+                    <div class="form-group">
+                      <label>Exam Fees</label>
+                      <input name="exam_fees" id="exam_fees" type="number" class="form-control" min="0" required>
+                      <span class="text-danger">
+                        @error('exam_fees')
+                          {{ $message }}
+                        @enderror
+                      </span>
+                    </div>
+                  </div> --}}
+                  <div class="form-group col-md-12">
+                    <label class="form-label" for="description">Description</label>
+                    <textarea class="form-control mb-2 mr-sm-2" id="description" name="description" placeholder="Enter description">{{ $ft == 'edit' ? $row->description : old('description') }}</textarea>
+                  </div>
+                  <div class="form-group col-md-12">
+                    <label class="form-label" for="instruction">Instruction</label>
+                    <textarea class="form-control mb-2 mr-sm-2" id="instruction" name="instruction" placeholder="Enter instruction">{{ $ft == 'edit' ? $row->instruction : old('instruction') }}</textarea>
+                  </div>
+                </div>
+                <input type="submit" class="btn_1 medium" value="Save">
+              </form>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6">
+              <div class="pb-2">
+                <div id="detail-title" style="padding-left:15px">
+                  <div>
+                    <i class="icon-info-circled"></i> Eligible Level
+                  </div>
+                </div>
+                <div class="box_general_3">
+                  <div class="row">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Sr. No.</th>
+                          <th>Level</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @php
+                          $i = 1;
+                        @endphp
+                        @foreach ($sl as $sl)
+                          <tr id="sl{{ $sl->id }}">
+                            <td>{{ $i }}</td>
+                            <td>{{ $sl->getLevel->name }}</td>
+                            <td>
+                              <a href="javascript:void()" onclick="DeleteLevel('{{ $sl->id }}')"
+                                class="waves-effect waves-light btn btn-sm btn-outline btn-danger" title="delete">
+                                <i class="icon-trash" aria-hidden="true"></i>
+                              </a>
+                            </td>
+                          </tr>
+                          @php
+                            $i++;
+                          @endphp
+                        @endforeach
+                      </tbody>
+                    </table>
+                    <div id="lvlNotDiv"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+              <div class="pb-2">
+                <div id="detail-title" style="padding-left:15px"> Add Level
+                </div>
+                <div class="box_general_3">
+                  <form action="{{ url('provider/scholarship/level/store') }}" method="post"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="scholarship_id" value="{{ $row->id }}">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label>Levels</label>
+                          <select name="level_id[]" id="level_id" type="text" class="form-control select2"
+                            multiple data-placeholder="Select Level" required>
+                            <option value="">Select</option>
+                           @php
+                              $lvls = Level::all();
+                            @endphp
+                            @foreach ($lvls as $lvl)
+                              <option value="{{ $lvl->id }}">{{ $lvl->name }}</option>
+                           @endforeach
+                          </select>
+                          <span class="text-danger">
+                            @error('level_id')
+                              {{ $message }}
+                            @enderror
+                          </span>
+                        </div>
+
+
+
+
+                      </div>
+                    </div>
+                    <input type="submit" class="btn_1 medium" value="Add">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6">
+              <div class="pb-2">
+                <div id="detail-title" style="padding-left:15px">
+                  <div>
+                    <i class="icon-info-circled"></i> Eligible Country
+                  </div>
+                </div>
+                <div class="box_general_3">
+                  <div class="row">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Sr. No.</th>
+                          <th>Country</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @php
+                          $i = 1;
+                        @endphp
+                        @foreach ($sc as $sc)
+                          <tr id="sc{{ $sc->id }}">
+                            <td>{{ $i }}</td>
+                            <td>{{ $sc->getCountry->name }}</td>
+                            <td>
+                              <a href="javascript:void()" onclick="DeleteCountry('{{ $sc->id }}')"
+                                class="waves-effect waves-light btn btn-sm btn-outline btn-danger" title="delete">
+                                <i class="icon-trash" aria-hidden="true"></i>
+                              </a>
+                            </td>
+                          </tr>
+                          @php
+                            $i++;
+                          @endphp
+                        @endforeach
+                      </tbody>
+                    </table>
+                    <div id="scNotDiv"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+              <div class="pb-2">
+                <div id="detail-title" style="padding-left:15px"> Add Country
+                </div>
+                <div class="box_general_3">
+                  <form action="{{ url('provider/scholarship/country/store') }}" method="post"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="scholarship_id" value="{{ $row->id }}">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label>Country</label>
+                          <select name="country[]" id="country" type="text" class="form-control select2" multiple
+                            data-placeholder="Select Country" required>
+                            <option value="">Select</option>
+                            @php
+                              $pt = Country::all();
+                            @endphp
+                            @foreach ($pt as $c)
+                              <option value="{{ $c->id }}">
+                                {{ $c->name }}</option>
+                            @endforeach
+                          </select>
+                          <span class="text-danger">
+                            @error('country')
+                              {{ $message }}
+                            @enderror
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="submit" class="btn_1 medium" value="Add">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6">
+              <div class="pb-2">
+                <div id="detail-title" style="padding-left:15px">
+                  <div>
+                    <i class="icon-info-circled"></i> Eligible Subject
+                  </div>
+                </div>
+                <div class="box_general_3">
+                  <div class="row">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Sr. No.</th>
+                          <th>Course Category</th>
+                          <th>Specialization</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @php
+                          $i = 1;
+                        @endphp
+                        @foreach ($ss as $ss)
+                          <tr id="ss{{ $ss->id }}">
+                            <td>{{ $i }}</td>
+                            <td>{{ $ss->getCourse->category }}</td>
+                            <td>{{ $ss->getSubject->specialization }}</td>
+                            <td>
+                              <a href="javascript:void()" onclick="DeleteSubject('{{ $ss->id }}')"
+                                class="waves-effect waves-light btn btn-sm btn-outline btn-danger">
+                                <i class="icon-trash" aria-hidden="true"></i>
+                              </a>
+                            </td>
+                          </tr>
+                          @php
+                            $i++;
+                          @endphp
+                        @endforeach
+                      </tbody>
+                    </table>
+                    <div id="ssNotDiv"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+              <div class="pb-2">
+                <div id="detail-title" style="padding-left:15px"> Add Subject
+                </div>
+                <div class="box_general_3">
+                  <form action="{{ url('provider/scholarship/subject/store') }}" method="post"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="scholarship_id" value="{{ $row->id }}">
+                    <div class="row">
+                      <div class="col-md-5 col-sm-12">
+                        <div class="form-group">
+                          <label>Course Category</label>
+                          <select name="course_id" id="course_id" type="text" class="form-control select2"
+                            required>
+                            <option value="">Select Course Category</option>
+                            @php
+                              $pt = CourseCategory::all();
+                            @endphp
+                            @foreach ($pt as $c)
+                              <option value="{{ $c->id }}">
+                                {{ $c->category }}</option>
+                            @endforeach
+                          </select>
+                          <span class="text-danger">
+                            @error('course_id')
+                              {{ $message }}
+                            @enderror
+                          </span>
+                        </div>
+                      </div>
+                      <div class="col-md-7 col-sm-12">
+                        <div class="form-group">
+                          <label>Specialization</label>
+                          <select name="spc_id[]" id="spc_id" type="text" class="form-control select2" multiple
+                            required>
+                            <option value="">Select Specialization</option>
+                          </select>
+                          <span class="text-danger">
+                            @error('spc_id')
+                              {{ $message }}
+                            @enderror
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="submit" class="btn_1 medium" value="Add">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6">
+              <div class="pb-2">
+                <div id="detail-title" style="padding-left:15px">
+                  <div>
+                    <i class="icon-info-circled"></i> Scholarship Custom Eligiblity
+                  </div>
+                </div>
+                <div class="box_general_3">
+                  <div class="row">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Sr. No.</th>
+                          <th>Question</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @php
+                          $i = 1;
+                        @endphp
+                        @foreach ($sce as $sce)
+                          <tr id="sce{{ $sce->id }}">
+                            <td>{{ $i }}</td>
+                            <td>{{ $sce->question }}</td>
+                            <td>
+                              <a href="javascript:void()" onclick="DeleteCE('{{ $sce->id }}')"
+                                class="waves-effect waves-light btn btn-sm btn-outline btn-danger">
+                                <i class="icon-trash" aria-hidden="true"></i>
+                              </a>
+                            </td>
+                          </tr>
+                          @php
+                            $i++;
+                          @endphp
+                        @endforeach
+                      </tbody>
+                    </table>
+                    <div id="sceNotDiv"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-6">
+              <div class="pb-2">
+                <div id="detail-title" style="padding-left:15px"> Add Scholarship Custom Eligiblity
+                </div>
+                <div class="box_general_3">
+                  <form action="{{ url('provider/scholarship/custom-eligibility/store') }}" method="post"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="scholarship_id" value="{{ $row->id }}">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                          <label>Enter Question</label>
+                          <textarea name="question" id="question" class="form-control"></textarea>
+                          <span class="text-danger">
+                            @error('question')
+                              {{ $message }}
+                            @enderror
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <input type="submit" class="btn_1 medium" value="Add">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </main>
+  <script>
+    $(document).ready(function() {
+      $('#course_id').change(function() {
+        var course_id = $('#course_id').val();
+        //alert(course_id);
+        if (course_id != '') {
+          $.ajax({
+            url: "{{ url('common/get-spc-by-cat') }}",
+            method: "get",
+            data: {
+              id: course_id
+            },
+            success: function(data) {
+              //alert(data);
+              $('#spc_id').html(data);
+            }
+          });
+        }
+      });
+    });
+
+    function DeleteSubject(id) {
+      //alert(id);
+      var cd = confirm("Are you sure ?");
+      if (cd == true) {
+        $.ajax({
+          url: "{{ url('provider/scholarship/subject/delete') }}" + "/" + id,
+          success: function(data) {
+            if (data == '1') {
+              $('#ss' + id).remove();
+              $('#ssNotDiv').html(
+                '<div class="alert alert-success alert-dismissable">Record deleted.</div>');
+            }
+          }
+        });
+      }
+    }
+
+    function DeleteLevel(id) {
+      //alert(id);
+      var cd = confirm("Are you sure ?");
+      if (cd == true) {
+        $.ajax({
+          url: "{{ url('provider/scholarship/level/delete') }}" + "/" + id,
+          success: function(data) {
+            if (data == '1') {
+              $('#sl' + id).remove();
+              $('#lvlNotDiv').html(
+                '<div class="alert alert-success alert-dismissable">Record deleted.</div>');
+            }
+          }
+        });
+      }
+    }
+
+    function DeleteCountry(id) {
+      //alert(id);
+      var cd = confirm("Are you sure ?");
+      if (cd == true) {
+        $.ajax({
+          url: "{{ url('provider/scholarship/country/delete') }}" + "/" + id,
+          success: function(data) {
+            if (data == '1') {
+              $('#sc' + id).remove();
+              $('#scNotDiv').html(
+                '<div class="alert alert-success alert-dismissable">Record deleted.</div>');
+            }
+          }
+        });
+      }
+    }
+
+    function DeleteCE(id) {
+      //alert(id);
+      var cd = confirm("Are you sure ?");
+      if (cd == true) {
+        $.ajax({
+          url: "{{ url('provider/scholarship/custom-eligibility/delete') }}" + "/" + id,
+          success: function(data) {
+            if (data == '1') {
+              $('#sce' + id).remove();
+              $('#sceNotDiv').html(
+                '<div class="alert alert-success alert-dismissable">Record deleted.</div>');
+            }
+          }
+        });
+      }
+    }
+
+    function changeExamType(exam_type) {
+      if (exam_type == 'Paid') {
+        $('#exam_fees').val('');
+        $('#exam_fees').attr('required', true);
+        $('#exam_fees').attr('min', '1', true);
+      }
+      if (exam_type == 'Free') {
+        $('#exam_fees').val('0');
+        $('#exam_fees').attr('required', false);
+        $('#exam_fees').hide();
+      }
+    }
+    CKEDITOR.replace('description');
+    CKEDITOR.replace('instruction');
+  </script>
+@endsection
