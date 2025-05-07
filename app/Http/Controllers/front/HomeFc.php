@@ -58,4 +58,8 @@ class HomeFc extends Controller
   {
     return view('front.cancellation-refund');
   }
+  public function home()
+  {
+    return view('front.registration');
+  }
 }

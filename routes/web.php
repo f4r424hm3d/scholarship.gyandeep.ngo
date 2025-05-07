@@ -136,8 +136,9 @@ Route::get('/db-seed', function () {
 
 /* FRONT ROUTES */
 Route::get('exam-question/export/{exam_id}', [ExamQuestionsC::class, 'Export']);
+Route::get('/', [HomeFc::class, 'home']);
 //Route::get('/', [HomeFc::class, 'index']);
-Route::get('/', [ScholarshipFc::class, 'index']);
+//Route::get('/', [ScholarshipFc::class, 'index']);
 Route::get('/home', [HomeFc::class, 'index']);
 Route::get('/about', [AboutFc::class, 'index']);
 Route::get('/about-mudra-education', [AboutFc::class, 'mudraEducation']);
