@@ -64,7 +64,6 @@
                             <a onclick="showMessage2()" href="javascript:void()" class="btn btn-sm btn-info">Join</a><br>
                             <span id="messSpan2"></span>
                           @endif
-
                         </td>
                       </tr>
                     @endforeach
