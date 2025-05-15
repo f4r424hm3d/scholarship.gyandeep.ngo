@@ -13,7 +13,7 @@
 @section('main-section')
   <main class="theia-exception">
     <div id="breadcrumb">
-      <div class="container-fluid">
+      <div class="container">
         <ul>
           <li><a href="{{ url('/') }}">Home</a></li>
           <li>Blog</li>

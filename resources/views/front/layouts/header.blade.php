@@ -12,6 +12,9 @@
   <!-- GOOGLE WEB FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
+ <!-- added font awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <!-- BASE CSS -->
   <link href="{{ url('front/css/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="{{ url('front/css/style.css') }}" rel="stylesheet" />
@@ -369,23 +372,21 @@
 <body>
   <div id="page">
     <header class="header_sticky">
-      <a href="#menu" class="btn_mobile">
-        <div class="hamburger hamburger--spin" id="hamburger">
-          <div class="hamburger-box">
-            <div class="hamburger-inner"></div>
-          </div>
-        </div>
-      </a>
+      
       <!-- /btn_mobile-->
       <div class="container">
-        <div class="row">
-          <div class="col-lg-2 col-6">
-            <div id="logo_home">
-              <a href="{{ url('/') }}" title="Logo"><img
-                  src="https://gyandeep.ngo/front/assets/img/plant.png" /></a>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="">
+            <div id="logo_home" class="img-logos">
+              <a href="{{ url('/') }}" title="Logo">
+                <div class="img-divs">
+                  <img
+                  src="https://gyandeep.ngo/front/assets/img/plant.png" />
+                </div>
+              </a>
             </div>
           </div>
-          <div class="col-lg-10 col-6">
+          <div class="">
             <ul id="top_access" class="d-flex align-items-center">
               @if (session()->has('student_id'))
                 <li class="d-lg-block d-md-block d-xl-block">
@@ -394,10 +395,11 @@
                 </li>
                 <li><a href="{{ url('profile') }}" title="Profile"><i class="pe-7s-user"></i></a></li>
               @else
-                <li><a href="{{ url('login') }}" title="Login"><i class="pe-7s-user"></i></a></li>
                 <li>
-                  <a href="{{ url('signup') }}" title="Sign Up"><i class="pe-7s-add-user"></i></a>
+                  <a class="btn btn-primary main-login" href="{{ url('signup') }}" title="Sign Up"><i class="pe-7s-add-user"></i>Sign Up</a>
                 </li>
+                <li><a class="btn btn-outline-dark outline-login " href="{{ url('login') }}" title="Login"><i class="pe-7s-user"></i> Login</a></li>
+              
               @endif
             </ul>
             <nav id="menu" class="main-menu">
@@ -419,6 +421,13 @@
                 </li> --}}
               </ul>
             </nav>
+            <a href="#menu" class="btn_mobile">
+        <div class="hamburger hamburger--spin" id="hamburger">
+          <div class="hamburger-box">
+            <div class="hamburger-inner"></div>
+          </div>
+        </div>
+      </a>
           </div>
         </div>
       </div>

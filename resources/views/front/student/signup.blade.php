@@ -9,11 +9,14 @@
 @endpush
 @section('main-section')
   <main>
-    <div id="hero_register">
-      <div class="container margin_120_95">
-        <div class="row">
-          <div class="col-lg-6">
-            <h1>925,000+ signed up to get the best of Study Abroad</h1>
+    <div id="hero_register" class="main-signups">
+      <div class="container ">
+       <div class="full-signup-details">
+         <div class="row align-items-center">
+          <div class="col-12 col-sm-6 col-lg-6 mb-3">
+          <div class="signup-detials">
+            
+            <h3>925,000+ signed up to get the best of Study Abroad</h3>
             <p class="lead">Te pri adhuc simul. No eros errem mea. Diam mandamus has ad. Invenire senserit ad
               has, has ei quis iudico, ad mei nonumes periculis.</p>
             <div class="box_feat_2">
@@ -37,8 +40,9 @@
               <p>As the initiative is supported by the Government.</p>
             </div>
           </div>
+          </div>
 
-          <div class="col-lg-5 ml-auto">
+          <div class="col-12 col-sm-6 col-lg-6 mb-3">
             @if (session()->has('smsg'))
               <div class="alert alert-success alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -185,17 +189,19 @@
                     </div>
                   </div>
                 </div>
+                <a class="forgot-show mb-3" href="{{ url('forget-password') }}">Forgot password?</a>
                 <p class="text-center add_top_30">
-                  <input type="submit" class="btn_1 medium" value="Submit">
+                  <input type="submit" class="login-input medium w-100" value="Submit">
                 </p>
                 <div class="text-center">
-                  <a href="{{ url('forget-password') }}"><small>Forgot password?</small></a>
-                  <a href="{{ url('login') }}" class="float-end"><small>Login</small></a>
+                  <h6 class="account-fields" >Are you a already member?<a class="ms-2" href="{{ url('login') }}">Login</a></h6>
+                  
                 </div>
               </form>
             </div>
           </div>
         </div>
+       </div>
       </div>
     </div>
   </main>

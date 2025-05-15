@@ -9,7 +9,7 @@
 
         @include('front.student.profile-sidebar')
 
-        <div class="col-xl-10 col-lg-10">
+        <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 mb-4">
           @if (session()->has('smsg'))
             <div class="alert alert-success alert-dismissable">
               {{ session()->get('smsg') }}

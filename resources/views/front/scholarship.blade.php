@@ -46,16 +46,17 @@
 @section('main-section')
   <main class="theia-exception">
     <div id="breadcrumb">
-      <div class="container-fluid">
+      <div class="container">
         <ul>
           <li><a href="{{ url('/') }}">Home</a></li>
           <li>Scholarships</li>
         </ul>
       </div>
     </div>
-    <div class="container-fluid mt-4">
+   <section class="scholorship-sections" >
+     <div class="container-fluid px-5">
       <div class="main_title text-start mb-4">
-        <h2 class="text-start">Study Abroad <strong>Scholarships </strong>For <strong>International</strong> Students
+        <h2 class="text-start">Study Abroad Scholarships For Internationa  Students
         </h2>
       </div>
       <div class="row">
@@ -236,7 +237,7 @@
             </div>
           </div>
         </div> --}}
-          <p class="fs18 mt-4 mb-3">
+          <p class="fs18 mb-3">
             <strong>{{ $allsch->total() }} </strong> Scholarships matching your search. <strong>Apply
               today</strong>!
           </p>
@@ -266,17 +267,14 @@
             @endphp
             <div class="strip_list fadeIn">
               <div class="row">
-                <div class="col-md-2 col-6 mb-sm-15">
-                  <img src="{{ asset($row->getProvider->logo_path) }}" alt="" class="img-fluid"
-                    style="height:125px">
+                <div class="col-md-3">
+                <div class="scholorship-imgs">
+                    <img src="{{ asset($row->getProvider->logo_path) }}" alt="" class="img-fluid">
                 </div>
-                <div class="col-md-2 col-6 mb-sm-15 d-lg-none d-md-none d-xl-none d-sm-block d-xs-block">
-                  <div class="expire-box">
-                    {!! $dl !!}
-                  </div>
                 </div>
-                <div class="col-md-8">
-                  <p class="mt-0 mb-0 fs20"><a target="_blank"
+                
+                <div class="col-md-9">
+                  <p class=""><a target="_blank"
                       href="{{ url('scholarship/' . $row->id . '/' . $row->slug) }}">{{ $row->name }}</a>
                   </p>
                   <p>
@@ -299,7 +297,12 @@
                     {{ $row->eligibility }}
                   </p>
                 </div>
-                <div class="col-md-2 d-lg-block d-md-block d-xl-block d-sm-none d-xs-none d-none">
+                <div class="col-md col-6 mb-sm-15 d-lg-none d-md-none d-xl-none d-sm-block d-xs-block">
+                  <div class="expire-box">
+                    {!! $dl !!}
+                  </div>
+                </div>
+                <div class="col-md d-lg-block d-md-block d-xl-block d-sm-none d-xs-none d-none">
                   <div class="expire-box">
                     {!! $dl !!}
                   </div>
@@ -370,6 +373,7 @@
         </div>
       </div>
     </div>
+   </section>
   </main>
   <!-- Mobile Filter -->
   <div class="mob-filt-fix d-lg-none d-md-none d-xl-none d-sm-block d-xs-block">

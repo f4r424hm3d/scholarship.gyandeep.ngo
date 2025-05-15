@@ -13,7 +13,7 @@
 
         @include('front.student.profile-sidebar')
 
-        <div class="col-xl-7 col-lg-7">
+        <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 mb-4"">
           <div style="clear:both"></div>
           <div class="pb-2">
             <div id="detail-title" style="padding-left:15px"><i class="icon-info-circled"></i> Change Password</div>
@@ -34,8 +34,7 @@
                       </span>
                     </div>
                   </div>
-                </div>
-                <div class="row">
+                
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Enter New Password</label>
@@ -48,8 +47,7 @@
                       </span>
                     </div>
                   </div>
-                </div>
-                <div class="row">
+               
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Confirm New Password</label>
@@ -63,8 +61,10 @@
                     </div>
                   </div>
                 </div>
-                <input type="submit" class="btn_1 medium" value="Save"> &nbsp; &nbsp;<a href="{{ url('profile') }}"
+              <div class="col-12 text-end">
+                  <input type="submit" class="btn_1 medium" value="Save"> &nbsp; &nbsp;<a href="{{ url('profile') }}"
                   class="medium">Cancel</a>
+              </div>
               </form>
             </div>
           </div>
