@@ -69,9 +69,12 @@
             @else
               <div class="pb-2">
                 <div id="detail-title" style="padding-left:15px"><i class="icon-info-circled"></i> Basic Information</div>
-                <form action="{{ url('profile/update') }}" method="post" enctype="multipart/form-data">
-                  @csrf
-                  <div class="box_general_3">
+
+                <div class="box_general_3">
+                  <p class="text-danger"><strong>Note:</strong> All fields marked with <span class="text-danger">*</span>
+                    are mandatory.</p>
+                  <form action="{{ url('profile/update') }}" method="post" enctype="multipart/form-data">
+                    @csrf
                     <!-- Personal information start 1 -->
                     <div class="row g-3">
                       <div class="col-12">
@@ -184,7 +187,7 @@
                       <div class="col-md-3 col-sm-12">
                         <label class="form-label " for="dob">D.O.B <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" name="dob" id="dob"
-                          placeholder="Enter date of birth" value="{{ old('dob') }}">
+                          placeholder="Enter date of birth" value="{{ old('dob') }}" max="2010-12-31">
                         @error('dob')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -227,7 +230,8 @@
                       <div class="col-md-3 col-sm-12">
                         <label class="form-label " for="passport_expiry">Passport Expiry</label>
                         <input type="date" class="form-control" name="passport_expiry" id="passport_expiry"
-                          placeholder="Enter Passport Expiry date" value="{{ old('passport_expiry') }}">
+                          placeholder="Enter Passport Expiry date" value="{{ old('passport_expiry') }}"
+                          min="{{ date('Y-m-d', strtotime('+1 day')) }}">
                         @error('passport_expiry')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -383,9 +387,12 @@
                     <div class="row">
                       <div class="col-12 mb-3">
                         <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="mt-4">Document </h5>
-                          <p class="text-danger">Only jpg,jpeg,png and pdf files are allowed. File size should not exceed
-                            1MB.</p>
+                          <h5 class="mt-4">
+                            Document <br>
+                            <p class="text-danger">Only jpg,jpeg,png and pdf files are allowed. File size should not
+                              exceed
+                              1MB.</p>
+                          </h5>
                         </div>
                         <hr>
                       </div>
@@ -500,8 +507,8 @@
                         </div>
                       </div>
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
               </div>
             @endif
 

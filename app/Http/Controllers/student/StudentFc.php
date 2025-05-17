@@ -23,7 +23,7 @@ class StudentFc extends Controller
     $id = session()->get('student_id');
     $student = Student::find($id);
     $countries = Country::all();
-    $scholarships = Scholarship::where('deadline', '<=', date('Y-m-d'))->get();
+    $scholarships = Scholarship::where('deadline', '>=', date('Y-m-d'))->get();
     if (old('scholarship')) {
       $categories = CreateExams::where('scholarship_id', old('scholarship'))->groupBy('course_category_id')->get();
     } else {
