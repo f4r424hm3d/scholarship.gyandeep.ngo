@@ -56,26 +56,28 @@
                           {{-- <span class="time-btn2 d-lg-inline-flex float-right">Time : 00:00</span> --}}
                         </h4>
                         <div class="row">
-                          <div class="col-md-12">
-                            <div class="tpb">
-                              <h5>Comprehension:</h5>
-                              <div class="com-scrl-bar">
-                                <p>
-                                  {{ $ques_det->direction }}
-                                </p>
-                                @if ($ques_det->image != '')
-                                  <p><b>Image </b></p>
-                                  <img src="{{ asset($ques_det->image) }}" class="shadow" />
-                                @endif
+                          @if ($ques_det->direction != '')
+                            <div class="col-md-12">
+                              <div class="tpb">
+                                <h5>Comprehension:</h5>
+                                <div class="com-scrl-bar">
+                                  <p>
+                                    {{ $ques_det->direction }}
+                                  </p>
+                                  @if ($ques_det->image != '')
+                                    <p><b>Image </b></p>
+                                    <img src="{{ asset($ques_det->image) }}" class="shadow" />
+                                  @endif
 
-                                {{-- <p><b>Image 2</b></p>
+                                  {{-- <p><b>Image 2</b></p>
                             <img src="images/q.jpg" class="shadow" />
 
                             <p><b>Image 3</b></p>
                             <img src="images/q.jpg" class="shadow" /> --}}
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          @endif
                           <div class="col-md-12">
                             <div class="tpb">
                               <h5>Question:</h5>
@@ -155,7 +157,7 @@
             <div class="rside">
               <div class="d-flex justify-content-center align-items-center">
                 <!-- <div class="user-img"><img src="{{ url('testapp') }}/images/user.png" /></div> -->
-              <div class="user-name">{{ $student->name }}</div>
+                <div class="user-name">{{ $student->name }}</div>
               </div>
               <ul>
                 <li>
@@ -227,7 +229,7 @@
                 </div>
                 <div class="rside-footer">
                   <!-- <a href="{{ url('test/' . $exam->token . '/instruction') }}"
-                    class="waves-effect waves-light btn btn-light img-fluid mb-5">Instructions</a> -->
+                      class="waves-effect waves-light btn btn-light img-fluid mb-5">Instructions</a> -->
                   <a href="#yes-no" class="popup-with-form waves-effect waves-light btn btn-success img-fluid">Submit
                     Test</a>
                 </div>
