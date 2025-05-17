@@ -24,11 +24,11 @@
             <i class="fa fa-graduation-cap me-2" aria-hidden="true"></i> Applied Scholarship
           </a>
         </div>
-        <div class="card mb-3">
+        {{-- <div class="card mb-3">
           <a href="{{ url('student/tests') }}">
             <i class="fa fa-list-alt me-2" aria-hidden="true"></i> Applied Tests
           </a>
-        </div>
+        </div> --}}
         <div class="card mb-3">
           <a href="{{ url('student/attended-tests') }}">
             <i class="fa fa-users me-2" aria-hidden="true"></i> Attended Tests

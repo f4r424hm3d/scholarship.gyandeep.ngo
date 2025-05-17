@@ -56,14 +56,14 @@
                       {{ $student->email }}
                     </div>
                   </div>
-                  <div class="row">
+                  {{-- <div class="row">
                     <div class="offset-8 col-md-4">
 
                       <div class="float-end">
                         <a href="{{ url('profile/edit') }}" class="btn_1 mb-1">Edit Profile</a>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
                 </div>
               </div>
             @else
@@ -384,6 +384,8 @@
                       <div class="col-12 mb-3">
                         <div class="d-flex justify-content-between align-items-center">
                           <h5 class="mt-4">Document </h5>
+                          <p class="text-danger">Only jpg,jpeg,png and pdf files are allowed. File size should not exceed
+                            1MB.</p>
                         </div>
                         <hr>
                       </div>
@@ -481,13 +483,11 @@
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
-                      {{-- <div class="col-md-3 col-sm-12 mb-3">
-                    <label for="country_of_education" class="form-label">Select Exam Date</label>
-                    <select class="form-select" id="country_of_education" name="country_of_education"
-                      aria-label="Country of Education">
-                      <option value="Exam Date">Exam Date</option>
-                    </select>
-                  </div> --}}
+                      <div class="col-md-3 col-sm-12 mb-3">
+                        <label for="country_of_education" class="form-label">Select Exam Date</label>
+                        <input type="date" name="exam_date" id="exam_date" class="form-control"
+                          value="{{ old('exam_date') }}" />
+                      </div>
                     </div>
                     <div class="row">
 

@@ -97,6 +97,7 @@ class StudentFc extends Controller
 
         'scholarship' => 'required',
         'course_category' => 'required',
+        'exam_date' => 'required|date',
       ]
     );
     $field = Student::find(session()->get('student_id'));
@@ -176,6 +177,7 @@ class StudentFc extends Controller
     $appliedScholarship->token = $token;
     $appliedScholarship->payment_status = 'Free';
     $field->mode_of_exam = 'Online';
+    $field->exam_date = $request['exam_date'];
     $appliedScholarship->save();
 
     $assignExam = new AsignExam;

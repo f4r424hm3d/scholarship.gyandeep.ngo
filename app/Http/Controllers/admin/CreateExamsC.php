@@ -13,8 +13,8 @@ class CreateExamsC extends Controller
 {
   public function index($id = null)
   {
-    $today = date('Y-m-d');
-    $rows = CreateExams::where('exam_date', '>=', $today)->get();
+    $today = date('Y-m-d h:i:s');
+    $rows = CreateExams::where('end_time', '>=', $today)->get();
     // printArray($rows->toArray());
     // die;
     if ($id != null) {
@@ -98,8 +98,8 @@ class CreateExamsC extends Controller
   }
   public function expiredExams()
   {
-    $today = date('Y-m-d');
-    $rows = CreateExams::where('exam_date', '<', $today)->get();
+    $today = date('Y-m-d h:i:s');
+    $rows = CreateExams::where('end_time', '<', $today)->get();
     $data = compact('rows');
     return view('backend.expired-exams')->with($data);
   }
