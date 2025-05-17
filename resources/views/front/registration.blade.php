@@ -99,7 +99,7 @@
   <li><strong>NEXT (National Exit Test) Coaching</strong> – Access focused preparation support for India’s medical licensing examination during your MBBS course</li>
   <li><strong>Observership Training During Semester Breaks</strong> – Gain hands-on experience through observerships at reputed multispecialty hospitals in India</li>
   <li><strong>Post-Education Career Guidance</strong> – Dedicated mentorship for licensing exams, internships, and career pathways</li>
-  <li>Offered for MBBS at <strong>Eurasian International University</strong> , Kyrgyzstan</li>
+  <!-- <li>Offered for MBBS at <strong>Eurasian International University</strong> , Kyrgyzstan</li> -->
 </ul>
 
 
@@ -255,10 +255,11 @@
       <li><strong>Step 1:</strong> Fill Out the Online Application – Complete the Scholarship Application Form</li>
       <li><strong>Step 2:</strong> Upload Required Documents – Scan and submit all documents listed in the documentation section</li>
       <li><strong>Step 3:</strong> Scholarship Test &amp; Embassy Interview 
-    <ul>
+    <ul class="all-bos" >
   <li>After submitting the complete application form, you will be required to take an online scholarship exam.</li>
   <li>Once the exam is completed and submitted, wait for your results to be announced.</li>
   <li>Shortlisted candidates will be notified and invited for an official interview via the Kyrgyzstan Embassy in India.</li>
+  <p>All communications will be made through the email and contact details provided in your application.</p>
 </ul>
 
     </li>
@@ -302,12 +303,13 @@
   <p class="ul-event-details-descr">
     The Kyrgyzstan Embassy in India plays a key role in ensuring a transparent, legal, and officially verified scholarship admission process. Their involvement guarantees the authenticity and smooth handling of each student’s journey from application to arrival.
   </p>
+  <p class="ul-event-details-descr" >Key Roles of the Embassy:</p>
   <ul class="fee-userslists">
     <li><strong>Document Verification & Authentication</strong> – Ensuring all academic and identity documents are legitimate and in order.</li>
     <li><strong>Student Interview Coordination</strong> – Scheduling and conducting official scholarship interviews.</li>
-    <li><strong>Visa Processing Assistance</strong> – Supporting students in obtaining study visas through legal channels.</li>
-    <li><strong>Offer Letter Legalization</strong> – Validating and legalizing admission offers from recognized universities.</li>
-    <li><strong>Travel Permission Issuance</strong> – Authorizing and guiding international travel for admitted candidates.</li>
+    <li><strong> Visa Processing Assistance</strong> – Supporting students in obtaining study visas through legal channels.</li>
+    <li><strong> Offer Letter Legalization</strong> – Validating and legalizing admission offers from recognized university.</li>
+    <li><strong>Travel Permission Issuance</strong> – Authorizing and guiding international travel for admitted candidates</li>
   </ul>
 </div>
 
@@ -413,7 +415,7 @@
       Is the MBBS degree recognized in India?
     </button>
   </h2>
-  <div id="faq1" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faq-more">
+  <div id="faq1" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faq-more">
     <div class="accordion-body">
       Yes. The MBBS program is offered by NMC/MCI-approved universities in Kyrgyzstan. Graduates are eligible to appear for licensing exams such as NEXT (India), USMLE (USA), and others.
     </div>
