@@ -34,14 +34,14 @@ class StudentLoginFc extends Controller
         'password' => 'required',
         'password2' => 'required|same:password',
         'current_qualification_level' => 'required',
-        'intrested_course_category' => 'required'
+        'neet_status' => 'required'
       ]
     );
     $field = new Student;
     $field->name = $data['name'];
     $field->email = $data['email'];
     $field->current_qualification_level = $data['current_qualification_level'];
-    $field->intrested_course_category = $data['intrested_course_category'];
+    $field->neet_status = $data['neet_status'];
     $field->c_code = $data['c_code'];
     $field->mobile = $data['mobile'];
     $field->password = $data['password'];
@@ -65,7 +65,7 @@ class StudentLoginFc extends Controller
       }
     );
     if ($chk == false) {
-      $emsg = response()->Fail('Sorry! Please try again latter');
+      $emsg = response('Sorry! Please try again latter');
       session()->flash('emsg', $emsg);
       return redirect('signup');
     } else {
@@ -109,7 +109,7 @@ class StudentLoginFc extends Controller
         $result->lead_type = 'new';
         $result->source = 'signup';
         $result->save();
-        session()->flash('smsg', 'Email verified. Succesfully logged in.');
+        session()->flash('smsg', 'Email verified. Submit scholarship application.');
         $data->session()->put('student_id', $data->session()->get('last_id'));
         return redirect('profile');
       }
@@ -170,7 +170,7 @@ class StudentLoginFc extends Controller
           }
         );
         if ($result == false) {
-          $emsg = response()->Fail('Sorry! Please try again latter');
+          $emsg = response('Sorry! Please try again latter');
           session()->flash('emsg', $emsg);
           return redirect('signup');
         } else {
@@ -227,7 +227,7 @@ class StudentLoginFc extends Controller
         }
       );
       if ($chk == false) {
-        $emsg = response()->Fail('Sorry! Please try again latter');
+        $emsg = response('Sorry! Please try again latter');
         session()->flash('emsg', $emsg);
         return redirect('forget-password');
       } else {

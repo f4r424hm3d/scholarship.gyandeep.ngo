@@ -12,8 +12,8 @@
   <!-- GOOGLE WEB FONT -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet" />
- <!-- added font awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- added font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <!-- BASE CSS -->
   <link href="{{ url('front/css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -372,7 +372,7 @@
 <body>
   <div id="page">
     <header class="header_sticky">
-      
+
       <!-- /btn_mobile-->
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
@@ -380,8 +380,7 @@
             <div id="logo_home" class="img-logos">
               <a href="{{ url('/') }}" title="Logo">
                 <div class="img-divs">
-                  <img
-                  src="https://gyandeep.ngo/front/assets/img/plant.png" />
+                  <img src="https://gyandeep.ngo/front/assets/img/plant.png" />
                 </div>
               </a>
             </div>
@@ -396,17 +395,18 @@
                 <li><a href="{{ url('profile') }}" title="Profile"><i class="pe-7s-user"></i></a></li>
               @else
                 <li>
-                  <a class="btn btn-primary main-login" href="{{ url('signup') }}" title="Sign Up"><i class="pe-7s-add-user"></i>Sign Up</a>
+                  <a class="btn btn-primary main-login" href="{{ url('signup') }}" title="Sign Up"><i
+                      class="pe-7s-add-user"></i>Apply Now</a>
                 </li>
-                <li><a class="btn btn-outline-dark outline-login " href="{{ url('login') }}" title="Login"><i class="pe-7s-user"></i> Login</a></li>
-              
+                <li><a class="btn btn-outline-dark outline-login " href="{{ url('login') }}" title="Login"><i
+                      class="pe-7s-user"></i> Login</a></li>
               @endif
             </ul>
             <nav id="menu" class="main-menu">
               <ul>
-                <li>
+                {{-- <li>
                   <span><a href="{{ url('scholarships') }}">All Scholarships</a></span>
-                </li>
+                </li> --}}
                 {{-- <li>
                   <span><a href="{{ url('providers') }}">Scholarship Providers</a></span>
                 </li> --}}
@@ -422,12 +422,12 @@
               </ul>
             </nav>
             <a href="#menu" class="btn_mobile">
-        <div class="hamburger hamburger--spin" id="hamburger">
-          <div class="hamburger-box">
-            <div class="hamburger-inner"></div>
-          </div>
-        </div>
-      </a>
+              <div class="hamburger hamburger--spin" id="hamburger">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>

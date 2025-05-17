@@ -214,9 +214,10 @@ Route::middleware([StudentLoggedIn::class])->group(function () {
     Route::post('/update', [StudentFc::class, 'updateProfile']);
     Route::get('/change-password', [StudentFc::class, 'viewChangePassword']);
     Route::post('/change-password', [StudentFc::class, 'changePassword']);
-
     Route::get('/applied-scholarship', [StudentAppliedScholarshipFc::class, 'appliedScholarship']);
   });
+
+  Route::get('/get-course-categories/{scholarshipId}', [StudentFc::class, 'getCourseCategories'])->name('get-course-categories');
   Route::prefix('scholarship')->group(function () {
     Route::get('/application', [StudentApplicationFc::class, 'studentApplication']);
     Route::get('/shortlist', [StudentApplicationFc::class, 'shortlist']);

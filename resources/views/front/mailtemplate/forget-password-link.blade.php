@@ -44,7 +44,6 @@
     .blue-btn:hover {
       background: #e74e84;
     }
-
   </style>
 </head>
 
@@ -59,8 +58,8 @@
             <td valign="top" align="center" class="masthead"
               style="padding:20px 0px 5px 0px;background:#3f4079;color:white;">
               <h1 style="font-size:32px;margin:0 auto;max-width:90%;line-height:1.25;">
-                <a href="https://mudraeducation.org" target="_blank" style="text-decoration:none;color:#ffffff;">Mudra
-                  Education</a>
+                <a href="{{ url('/') }}" target="_blank"
+                  style="text-decoration:none;color:#ffffff;">{{ config('app.name') }}</a>
                 <p style="margin-bottom:0;line-height:12px;font-weight:normal;margin-top:15px;font-size:18px;"></p>
               </h1>
             </td>
@@ -78,8 +77,7 @@
             </td>
           </tr>
           <tr>
-            <td valign="top" align="center" class="masthead"
-              style="padding:20px 0;background:#e74e84;color:white;">
+            <td valign="top" align="center" class="masthead" style="padding:20px 0;background:#e74e84;color:white;">
               <h1 style="font-size:32px;margin:0 auto;max-width:90%;line-height:1.25;">
               </h1>
             </td>

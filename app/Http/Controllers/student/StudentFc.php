@@ -4,134 +4,280 @@ namespace App\Http\Controllers\student;
 
 use App\Http\Controllers\Controller;
 use App\Models\AnswerSheet;
+use App\Models\AppliedScholarship;
 use App\Models\AsignExam;
+use App\Models\Country;
+use App\Models\CreateExams;
 use App\Models\ExamQuestions;
+use App\Models\Scholarship;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class StudentFc extends Controller
 {
-    public function profile()
-    {
-        $id = session()->get('student_id');
-        $student = Student::find($id);
-        $data = compact('student');
-        return view('front.student.profile')->with($data);
+  public function profile()
+  {
+    $id = session()->get('student_id');
+    $student = Student::find($id);
+    $countries = Country::all();
+    $scholarships = Scholarship::where('deadline', '<=', date('Y-m-d'))->get();
+    if (old('scholarship')) {
+      $categories = CreateExams::where('scholarship_id', old('scholarship'))->groupBy('course_category_id')->get();
+    } else {
+      $categories = null;
     }
-    public function editProfile()
-    {
-        $id = session()->get('student_id');
-        $student = Student::find($id);
-        $data = compact('student');
-        return view('front.student.edit-profile')->with($data);
+
+    if ($student->photo_path != '') {
+      $avatar = $student->photo_path;
+    } else {
+      if ($student->gender == 'Male' || $student->gender == 'male') {
+        $avatar = 'front/avatars/male.png';
+      }
+      if ($student->gender == 'Female' || $student->gender == 'female') {
+        $avatar = 'front/avatars/female.png';
+      }
+      if ($student->gender == '' || is_null($student->gender)) {
+        $avatar = 'front/avatars/default.png';
+      }
     }
-    public function updateProfile(Request $data)
-    {
-        $data->validate(
-            [
-                'name' => 'required|regex:/^[a-zA-Z ]*$/',
-                'gender' => 'required|in:Male,Female,Other',
-                'c_code' => 'required|numeric',
-                'mobile' => 'required|numeric',
-                'dob' => 'required|date',
-                'nationality' => 'required',
-                'city' => 'regex:/^[a-zA-Z ]*$/',
-                'state' => 'regex:/^[a-zA-Z ]*$/',
-                'country' => 'regex:/^[a-zA-Z ]*$/',
-            ]
-        );
-        $field = Student::find($data['id']);
-        $field->name = $data['name'];
-        $field->gender = $data['gender'];
-        $field->dob = $data['dob'];
-        $field->nationality = $data['nationality'];
-        $field->c_code = $data['c_code'];
-        $field->mobile = $data['mobile'];
-        $field->city = $data['city'];
-        $field->state = $data['state'];
-        $field->country = $data['country'];
-        $field->save();
-        session()->flash('smsg', 'Record has been updated successfully.');
-        return redirect('profile');
+
+    $data = compact('student', 'countries', 'scholarships', 'categories', 'avatar');
+    return view('front.student.profile')->with($data);
+  }
+  public function editProfile()
+  {
+    $id = session()->get('student_id');
+    $student = Student::find($id);
+    $data = compact('student');
+    return view('front.student.edit-profile')->with($data);
+  }
+  public function updateProfile(Request $request)
+  {
+    // printArray($request->all());
+    // die;
+    $request->validate(
+      [
+        'name' => 'required|regex:/^[a-zA-Z ]*$/',
+        'c_code' => 'required|numeric',
+        'mobile' => 'required|numeric',
+        'father' => 'required|regex:/^[a-zA-Z ]*$/',
+        'mother' => 'required|regex:/^[a-zA-Z ]*$/',
+        'parents_mobile' => 'required|numeric',
+        'nationality' => 'required',
+        'gender' => 'required|in:male,female,other',
+        'occupation' => 'required|regex:/^[a-zA-Z ]*$/',
+        'dob' => 'required|date',
+        'first_language' => 'required|regex:/^[a-zA-Z ]*$/',
+        'marital_status' => 'required|regex:/^[a-zA-Z ]*$/',
+        'passport_number' => 'nullable|numeric',
+        'passport_expiry' => 'nullable|date',
+        'religion' => 'required|regex:/^[a-zA-Z ]*$/',
+        'home_address' => 'required|regex:/^[a-zA-Z0-9, ]*$/',
+        'city' => 'required|regex:/^[a-zA-Z ]*$/',
+        'state' => 'required|regex:/^[a-zA-Z ]*$/',
+        'country' => 'required|regex:/^[a-zA-Z ]*$/',
+        'zipcode' => 'required|numeric',
+        // Newly added fields
+        'passing_year_10' => 'required|numeric|digits:4',
+        'result_10' => 'required|string',
+        'passing_year_12' => 'required|numeric|digits:4',
+        'result_12' => 'required|string',
+        'neet_passing_year' => 'nullable|numeric|digits:4',
+        'neet_result' => 'nullable|string',
+
+        'marksheet_10_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
+        'marksheet_12_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
+        'aadhar_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
+        'photo_copy' => 'nullable|mimes:jpg,jpeg,png|max:1025',
+        'neet_result_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
+        'passport_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
+
+        'scholarship' => 'required',
+        'course_category' => 'required',
+      ]
+    );
+    $field = Student::find(session()->get('student_id'));
+    $field->name = $request['name'];
+    $field->c_code = $request['c_code'];
+    $field->mobile = $request['mobile'];
+    $field->father = $request['father'];
+    $field->mother = $request['mother'];
+    $field->parents_mobile = $request['parents_mobile'];
+    $field->nationality = $request['nationality'];
+    $field->gender = $request['gender'];
+    $field->parents_occupation = $request['occupation'];
+    $field->dob = $request['dob'];
+    $field->first_language = $request['first_language'];
+    $field->marital_status = $request['marital_status'];
+    $field->passport_number = $request['passport_number'];
+    $field->passport_expiry_date = $request['passport_expiry'];
+    $field->religion = $request['religion'];
+    $field->address = $request['home_address'];
+    $field->city = $request['city'];
+    $field->state = $request['state'];
+    $field->country = $request['country'];
+    $field->zipcode = $request['zipcode'];
+
+    $field->passing_year_10 = $request['passing_year_10'];
+    $field->result_10 = $request['result_10'];
+    $field->passing_year_12 = $request['passing_year_12'];
+    $field->result_12 = $request['result_12'];
+    $field->neet_passing_year = $request['neet_passing_year'];
+    $field->neet_result = $request['neet_result'];
+
+    if ($request->hasFile('marksheet_10_copy')) {
+      $file = $request->file('marksheet_10_copy');
+      $filename = time() . '_marksheet_10.' . $file->getClientOriginalExtension();
+      $file->move(public_path('uploads/marksheet/'), $filename);
+      $field->marksheet_10_path = 'uploads/marksheet/' . $filename;
     }
-    public function viewChangePassword()
-    {
-        $id = session()->get('student_id');
-        $student = Student::find($id);
-        $data = compact('student');
-        return view('front.student.change-password')->with($data);
+    if ($request->hasFile('marksheet_12_copy')) {
+      $file = $request->file('marksheet_12_copy');
+      $filename = time() . '_marksheet_12.' . $file->getClientOriginalExtension();
+      $file->move(public_path('uploads/marksheet/'), $filename);
+      $field->marksheet_12_path = 'uploads/marksheet/' . $filename;
     }
-    public function changePassword(Request $data)
-    {
-        $id = session()->get('student_id');
-        $student = Student::find($id);
-
-        $data->validate(
-            [
-                'old_password' => 'required|in:' . $student->password,
-                'new_password' => 'required|min:8',
-                'confirm_new_password' => 'required|min:8|same:new_password',
-            ]
-        );
-        $field = Student::find($data['id']);
-        $field->password = $data['new_password'];
-        $field->save();
-        session()->flash('smsg', 'Password has been changed.');
-        return redirect('profile');
+    if ($request->hasFile('aadhar_copy')) {
+      $file = $request->file('aadhar_copy');
+      $filename = time() . '_aadhar.' . $file->getClientOriginalExtension();
+      $file->move(public_path('uploads/aadhar/'), $filename);
+      $field->aadhar_path = 'uploads/aadhar/' . $filename;
     }
-    public function tests()
-    {
-        $id = session()->get('student_id');
-        $student = Student::find($id);
-        $where = ['student_id' => $id, 'attended' => 0];
-        $rows = AsignExam::where($where)->with('getExamDet', 'getApplication')->get();
-        //printArray($rows->toArray());
-        $data = compact('student', 'rows');
-        return view('front.student.tests')->with($data);
+
+    if ($request->hasFile('passport_copy')) {
+      $file = $request->file('passport_copy');
+      $filename = time() . '_passport.' . $file->getClientOriginalExtension();
+      $file->move(public_path('uploads/passport/'), $filename);
+      $field->passport_path = 'uploads/passport/' . $filename;
     }
-    public function attendedTests()
-    {
-        $id = session()->get('student_id');
-        $student = Student::find($id);
-        $where = ['student_id' => $id, 'attended' => 1];
-        $rows = AsignExam::where($where)->with('getExamDet', 'getApplication')->get();
-        //printArray($rows->toArray());
-        $data = compact('student', 'rows');
-        return view('front.student.attended-tests')->with($data);
+    if ($request->hasFile('neet_result_copy')) {
+      $file = $request->file('neet_result_copy');
+      $filename = time() . '_neet_result.' . $file->getClientOriginalExtension();
+      $file->move(public_path('uploads/neet_result/'), $filename);
+      $field->neet_result_path = 'uploads/neet_result/' . $filename;
     }
-    public function attendedTestDetails($id)
-    {
-        $student_id = session()->get('student_id');
-        $student = Student::find($student_id);
-        $where = ['student_id' => $student_id, 'id' => $id];
-        $row = AsignExam::where($where)->with('getExamDet')->firstOrFail();
-
-        $total_question = ExamQuestions::where(['exam_id' => $row->exam_id])->count();
-
-        $total_visited = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id])->count();
-
-        $answered_question = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id, 'marked' => 0])->where('answer', '!=', '')->count();
-
-        $not_answered = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id, 'marked' => 0, 'answer' => null])->count();
-
-        $marked_question = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id, 'marked' => 1, 'answer' => null])->count();
-
-        $marked_and_answered = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id, 'marked' => 1])->where('answer', '!=', '')->count();
-
-        $not_visited = $total_question - $total_visited;
-
-        $sectionDet = ExamQuestions::with('getSubject')->where(['exam_id' => $row->exam_id])->groupBy('subject_id')->select('subject_id')->get();
-
-        //printArray($user_info->toArray());
-        $data = compact('student', 'row', 'total_question', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered','sectionDet','student_id');
-        return view('front.student.attended-test-details')->with($data);
+    if ($request->hasFile('photo_copy')) {
+      $file = $request->file('photo_copy');
+      $filename = time() . '_photo.' . $file->getClientOriginalExtension();
+      $file->move(public_path('uploads/student/'), $filename);
+      $field->photo_path = 'uploads/student/' . $filename;
     }
-    public function success()
-    {
-        $id = session()->get('student_id');
-        $student = Student::find($id);
-        $data = compact('student');
-        return view('front.student.test-complete')->with($data);
+    $field->submit_application = 1;
+    $field->save();
+    $token = Str::random(25);
+    $appliedScholarship = new AppliedScholarship;
+    $appliedScholarship->std_id = $field->id;
+    $appliedScholarship->scholarship_id = $request['scholarship'];
+    $appliedScholarship->exam_id = $request['course_category'];
+    $appliedScholarship->status = 1;
+    $appliedScholarship->token = $token;
+    $appliedScholarship->payment_status = 'Free';
+    $field->mode_of_exam = 'Online';
+    $appliedScholarship->save();
+
+    $assignExam = new AsignExam;
+    $assignExam->student_id = session()->get('student_id');
+    $assignExam->exam_id = $request['course_category'];
+    $assignExam->application_id = $appliedScholarship->id;
+    $assignExam->save();
+
+    session()->flash('smsg', 'Scholarship application has been submitted successfully.');
+    return redirect('profile');
+  }
+
+
+
+
+  public function viewChangePassword()
+  {
+    $id = session()->get('student_id');
+    $student = Student::find($id);
+    $data = compact('student');
+    return view('front.student.change-password')->with($data);
+  }
+  public function changePassword(Request $data)
+  {
+    $id = session()->get('student_id');
+    $student = Student::find($id);
+
+    $data->validate(
+      [
+        // 'old_password' => 'required|in:' . $student->password,
+        'new_password' => 'required|min:8',
+        'confirm_new_password' => 'required|min:8|same:new_password',
+      ]
+    );
+    $field = Student::find($data['id']);
+    $field->password = $data['new_password'];
+    $field->save();
+    session()->flash('smsg', 'Password has been changed.');
+    return redirect('profile');
+  }
+  public function tests()
+  {
+    $id = session()->get('student_id');
+    $student = Student::find($id);
+    $where = ['student_id' => $id, 'attended' => 0];
+    $rows = AsignExam::where($where)->with('getExamDet', 'getApplication')->get();
+    //printArray($rows->toArray());
+    $data = compact('student', 'rows');
+    return view('front.student.tests')->with($data);
+  }
+  public function attendedTests()
+  {
+    $id = session()->get('student_id');
+    $student = Student::find($id);
+    $where = ['student_id' => $id, 'attended' => 1];
+    $rows = AsignExam::where($where)->with('getExamDet', 'getApplication')->get();
+    //printArray($rows->toArray());
+    $data = compact('student', 'rows');
+    return view('front.student.attended-tests')->with($data);
+  }
+  public function attendedTestDetails($id)
+  {
+    $student_id = session()->get('student_id');
+    $student = Student::find($student_id);
+    $where = ['student_id' => $student_id, 'id' => $id];
+    $row = AsignExam::where($where)->with('getExamDet')->firstOrFail();
+
+    $total_question = ExamQuestions::where(['exam_id' => $row->exam_id])->count();
+
+    $total_visited = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id])->count();
+
+    $answered_question = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id, 'marked' => 0])->where('answer', '!=', '')->count();
+
+    $not_answered = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id, 'marked' => 0, 'answer' => null])->count();
+
+    $marked_question = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id, 'marked' => 1, 'answer' => null])->count();
+
+    $marked_and_answered = AnswerSheet::where(['student_id' => $student_id, 'exam_id' => $row->exam_id, 'marked' => 1])->where('answer', '!=', '')->count();
+
+    $not_visited = $total_question - $total_visited;
+
+    $sectionDet = ExamQuestions::with('getSubject')->where(['exam_id' => $row->exam_id])->groupBy('subject_id')->select('subject_id')->get();
+
+    //printArray($user_info->toArray());
+    $data = compact('student', 'row', 'total_question', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered', 'sectionDet', 'student_id');
+    return view('front.student.attended-test-details')->with($data);
+  }
+  public function success()
+  {
+    $id = session()->get('student_id');
+    $student = Student::find($id);
+    $data = compact('student');
+    return view('front.student.test-complete')->with($data);
+  }
+  public function getCourseCategories($scholarshipId)
+  {
+    $now = Carbon::now();
+    $categories = CreateExams::where('scholarship_id', $scholarshipId)->groupBy('course_category_id')->get();
+    $output = '<option value="">Select Course Category</option>';
+    foreach ($categories as $category) {
+      $output .= '<option value="' . $category->id . '">' . $category->getCourseCategory->category . '</option>';
     }
+    return response()->json($output);
+  }
 }

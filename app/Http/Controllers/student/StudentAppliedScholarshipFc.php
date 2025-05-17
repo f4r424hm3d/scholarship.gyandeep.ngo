@@ -8,13 +8,26 @@ use App\Models\Student;
 
 class StudentAppliedScholarshipFc extends Controller
 {
-    public function appliedScholarship()
-    {
-        $id = session()->get('student_id');
-        $student = Student::find($id);
+  public function appliedScholarship()
+  {
+    $id = session()->get('student_id');
+    $student = Student::find($id);
 
-        $as = AppliedScholarship::with('getScholarship', 'getLevel', 'getCat', 'getSubject')->where('std_id', $id)->get();
-        $data = compact('student', 'as');
-        return view('front.student.applied-scholarship')->with($data);
+    $as = AppliedScholarship::where('std_id', $id)->get();
+    if ($student->photo_path != '') {
+      $avatar = $student->photo_path;
+    } else {
+      if ($student->gender == 'Male' || $student->gender == 'male') {
+        $avatar = 'front/avatars/male.png';
+      }
+      if ($student->gender == 'Female' || $student->gender == 'female') {
+        $avatar = 'front/avatars/female.png';
+      }
+      if ($student->gender == '' || is_null($student->gender)) {
+        $avatar = 'front/avatars/default.png';
+      }
     }
+    $data = compact('student', 'as', 'avatar');
+    return view('front.student.applied-scholarship')->with($data);
+  }
 }

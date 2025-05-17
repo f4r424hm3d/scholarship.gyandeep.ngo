@@ -38,3 +38,22 @@ if (!function_exists('dateDiff')) {
     return $days_between = ceil(abs($date2_ts - $date1_ts) / 86400);
   }
 }
+if (!function_exists('avatar')) {
+  function avatar($path, $gender)
+  {
+    if ($path != '') {
+      $avatar = $path;
+    } else {
+      if ($gender == 'Male' || $gender == 'male') {
+        $avatar = 'front/avatars/male.png';
+      }
+      if ($gender == 'Female' || $gender == 'female') {
+        $avatar = 'front/avatars/female.png';
+      }
+      if ($gender == '' || is_null($gender)) {
+        $avatar = 'front/avatars/default.png';
+      }
+    }
+    return $avatar;
+  }
+}

@@ -1,53 +1,39 @@
-@php
-if ($student->gender == 'Male') {
-    $avatar = 'avatars/male.png';
-}
-if ($student->gender == 'Female') {
-    $avatar = 'avatars/female.png';
-}
-if ($student->gender == '') {
-    $avatar = 'avatars/default.png';
-}
-@endphp
 <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 mb-4">
   <div class="pb-2">
     <div class="strip_list">
       <div class="text-center">
         <div class="profile-imges">
-          <img src="{{ url('front/') }}/{{ $avatar }}" class="w-100 rounded-3">
+          <img src="{{ avatar($student->photo_path, $student->gender) }}" class="w-100 rounded-3">
         </div>
         <h5 class="mt-2 text-center">{{ $student->name }}</h5>
-        {{-- <a href="#" class="btn_1 mt-2">Change Photo</a> --}}
       </div>
 
       <div role="tablist" class="accordion main-acco mt-4" id="payment">
         <div class="card mb-3">
-           <a href="{{ url('profile') }}">
-           <i class="fa fa-user me-2" aria-hidden="true"></i>  Profile
-           </a>
+          <a href="{{ url('profile') }}">
+            <i class="fa fa-user me-2" aria-hidden="true"></i> Profile
+          </a>
         </div>
         <div class="card mb-3">
           <a href="{{ url('profile/change-password') }}">
-          <i class="fa fa-lock me-2" aria-hidden="true"></i> Change Password
-           </a>
+            <i class="fa fa-lock me-2" aria-hidden="true"></i> Change Password
+          </a>
         </div>
         <div class="card mb-3">
           <a href="{{ url('profile/applied-scholarship') }}">
-           <i class="fa fa-graduation-cap me-2" aria-hidden="true"></i> Applied Scholarship
-             </a>
+            <i class="fa fa-graduation-cap me-2" aria-hidden="true"></i> Applied Scholarship
+          </a>
         </div>
         <div class="card mb-3">
-           <a href="{{ url('student/tests') }}">
-          <i class="fa fa-list-alt me-2" aria-hidden="true"></i> Applied Tests
+          <a href="{{ url('student/tests') }}">
+            <i class="fa fa-list-alt me-2" aria-hidden="true"></i> Applied Tests
           </a>
         </div>
         <div class="card mb-3">
           <a href="{{ url('student/attended-tests') }}">
-          <i class="fa fa-users me-2" aria-hidden="true"></i>  Attended Tests
+            <i class="fa fa-users me-2" aria-hidden="true"></i> Attended Tests
           </a>
         </div>
-
-      
 
       </div>
     </div>

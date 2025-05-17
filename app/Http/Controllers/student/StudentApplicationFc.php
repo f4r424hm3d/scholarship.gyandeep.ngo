@@ -130,7 +130,7 @@ class StudentApplicationFc extends Controller
     $asignexam->save();
 
     session()->flash('smsg', 'Scholarship applied succesfully. Please fill all the information');
-    return redirect('scholarship/personal-details');
+    return redirect('profile');
   }
   public function personalDetails(Request $request)
   {

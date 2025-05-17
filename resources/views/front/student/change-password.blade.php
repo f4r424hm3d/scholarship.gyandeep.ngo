@@ -16,13 +16,13 @@
         <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 mb-4"">
           <div style="clear:both"></div>
           <div class="pb-2">
-            <div id="detail-title" style="padding-left:15px"><i class="icon-info-circled"></i> Change Password</div>
+            <div id="detail-title" style="padding-left:15px"><i class="icon-info-circled"></i> Reset Password</div>
             <div class="box_general_3">
               <form action="{{ url('profile/change-password') }}" method="post">
                 @csrf
                 <input type="hidden" name="id" value="{{ $student->id }}">
                 <div class="row">
-                  <div class="col-md-6">
+                  {{-- <div class="col-md-6">
                     <div class="form-group">
                       <label>Enter Old Password</label>
                       <input name="old_password" type="password" class="form-control" placeholder="Enter Current Password"
@@ -33,8 +33,8 @@
                         @enderror
                       </span>
                     </div>
-                  </div>
-                
+                  </div> --}}
+
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Enter New Password</label>
@@ -47,7 +47,7 @@
                       </span>
                     </div>
                   </div>
-               
+
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Confirm New Password</label>
@@ -61,10 +61,10 @@
                     </div>
                   </div>
                 </div>
-              <div class="col-12 text-end">
+                <div class="col-12 text-end">
                   <input type="submit" class="btn_1 medium" value="Save"> &nbsp; &nbsp;<a href="{{ url('profile') }}"
-                  class="medium">Cancel</a>
-              </div>
+                    class="medium">Cancel</a>
+                </div>
               </form>
             </div>
           </div>

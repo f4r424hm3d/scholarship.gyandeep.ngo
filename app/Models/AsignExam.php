@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class AsignExam extends Model
 {
-    use HasFactory;
-    public function getExamDet()
-    {
-        return $this->hasOne(CreateExams::class, 'id', 'exam_id')->with('getScholarship', 'getCourseCategory');
-    }
-    public function getApplication()
-    {
-        return $this->hasOne(AppliedScholarship::class, 'id', 'application_id');
-    }
+  use HasFactory;
+  public function getExamDet()
+  {
+    return $this->hasOne(CreateExams::class, 'id', 'exam_id');
+  }
+  public function getApplication()
+  {
+    return $this->hasOne(AppliedScholarship::class, 'id', 'application_id');
+  }
 }
