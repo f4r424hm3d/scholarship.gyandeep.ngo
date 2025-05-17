@@ -56,7 +56,7 @@
                           {{-- <span class="time-btn2 d-lg-inline-flex float-right">Time : 00:00</span> --}}
                         </h4>
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col-md-12">
                             <div class="tpb">
                               <h5>Comprehension:</h5>
                               <div class="com-scrl-bar">
@@ -76,7 +76,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="col-md-6">
+                          <div class="col-md-12">
                             <div class="tpb">
                               <h5>Question:</h5>
                               <p>
@@ -153,8 +153,10 @@
 
           <div class="col-lg-3 col-12">
             <div class="rside">
-              <div class="user-img"><img src="{{ url('testapp') }}/images/user.png" /></div>
+              <div class="d-flex justify-content-center align-items-center">
+                <!-- <div class="user-img"><img src="{{ url('testapp') }}/images/user.png" /></div> -->
               <div class="user-name">{{ $student->name }}</div>
+              </div>
               <ul>
                 <li>
                   <div class="b1">{{ $answered_question }}</div>
@@ -224,8 +226,8 @@
                   </div>
                 </div>
                 <div class="rside-footer">
-                  <a href="{{ url('test/' . $exam->token . '/instruction') }}"
-                    class="waves-effect waves-light btn btn-light img-fluid mb-5">Instructions</a>
+                  <!-- <a href="{{ url('test/' . $exam->token . '/instruction') }}"
+                    class="waves-effect waves-light btn btn-light img-fluid mb-5">Instructions</a> -->
                   <a href="#yes-no" class="popup-with-form waves-effect waves-light btn btn-success img-fluid">Submit
                     Test</a>
                 </div>
