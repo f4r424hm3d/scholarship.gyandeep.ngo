@@ -254,7 +254,14 @@
     <ul class="fee-userslists more-sets">
       <li><strong>Step 1:</strong> Fill Out the Online Application – Complete the Scholarship Application Form</li>
       <li><strong>Step 2:</strong> Upload Required Documents – Scan and submit all documents listed in the documentation section</li>
-      <li><strong>Step 3:</strong> Scholarship Test &amp; Embassy Interview – Take the scholarship exam and attend the official interview at the Kyrgyzstan Embassy (if shortlisted)</li>
+      <li><strong>Step 3:</strong> Scholarship Test &amp; Embassy Interview 
+    <ul>
+  <li>After submitting the complete application form, you will be required to take an online scholarship exam.</li>
+  <li>Once the exam is completed and submitted, wait for your results to be announced.</li>
+  <li>Shortlisted candidates will be notified and invited for an official interview via the Kyrgyzstan Embassy in India.</li>
+</ul>
+
+    </li>
     </ul>
   </div>
 </div>
