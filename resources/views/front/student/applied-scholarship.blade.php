@@ -48,28 +48,34 @@
                         Category - <b>{{ $as->getExam->getCourseCategory->category ?? '' }}</b><br>
                       </td>
                       <td>
-                        Start at - <b>{{ getFormattedDate($as->getExam->start_time, 'd M Y - h:i A') }}</b><br>
-                        End at - <b>{{ getFormattedDate($as->getExam->end_time, 'd M Y - h:i A') }}</b><br>
-                        @php
-                          $current_time = date('Y-m-d H:i:s');
-                          $start_time = getFormattedDate($as->getExam->start_time, 'd M Y - h:i A');
-                          //$current_time = '2022-07-20 12:00:00';
-                        @endphp
-                        @if ($current_time >= $as->getExam->start_time && $current_time < $as->getExam->end_time)
-                          <a onclick="window.open('{{ url('test/' . $as->getExam->token) }}','test','toolbars=0,width=100%,scrollbars=1');"
-                            href="javascript:void()" href="" class="btn btn-sm btn-success">Join</a>
-                        @elseif ($current_time > $as->getExam->end_time)
-                          <span class='text-danger'>Exam expired</span>
+                        @if ($as->getAsignExam->attended == 1 && $as->getAsignExam->submitted == 1)
+                          <span class="text-success">Exam Attended</span><br>
                         @else
-                          <a onclick="showMessage('{{ $start_time }}')" href="javascript:void()"
-                            class="btn btn-sm btn-info">Join</a><br>
-                          <span id="messSpan"></span>
+                          Start at - <b>{{ getFormattedDate($as->getExam->start_time, 'd M Y - h:i A') }}</b><br>
+                          End at - <b>{{ getFormattedDate($as->getExam->end_time, 'd M Y - h:i A') }}</b><br>
+                          @php
+                            $current_time = date('Y-m-d H:i:s');
+                            $start_time = getFormattedDate($as->getExam->start_time, 'd M Y - h:i A');
+                            //$current_time = '2022-07-20 12:00:00';
+                          @endphp
+                          @if ($current_time >= $as->getExam->start_time && $current_time < $as->getExam->end_time)
+                            <a onclick="window.open('{{ url('test/' . $as->getExam->token) }}','test','toolbars=0,width=100%,scrollbars=1');"
+                              href="javascript:void()" href="" class="btn btn-sm btn-success">Join</a>
+                          @elseif ($current_time > $as->getExam->end_time)
+                            <span class='text-danger'>Exam expired</span>
+                          @else
+                            <a onclick="showMessage('{{ $start_time }}')" href="javascript:void()"
+                              class="btn btn-sm btn-info">Join</a><br>
+                            <span id="messSpan"></span>
+                          @endif
                         @endif
-
                       </td>
-
                       <td>
-
+                        @if ($as->getAsignExam->attended == 1 && $as->getAsignExam->submitted == 1)
+                          <span class="text-success">Completed</span>
+                        @else
+                          <span class="text-danger">Pending</span>
+                        @endif
                       </td>
                     </tr>
                   @endforeach

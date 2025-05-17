@@ -28,10 +28,12 @@
     <header class="main-header">
       <div class="inside-header">
         <div class="d-flex align-items-center logo-box justify-content-start">
-          <a href="{{ url('testapp/') }}/index.html" class="logo">
+          <a href="{{ url('testapp/') }}" class="logo">
             <div class="logo-lg">
-              <span class="light-logo"><img src="{{ url('testapp/') }}/images/logo.png" alt="logo" /></span>
-              <span class="dark-logo"><img src="{{ url('testapp/') }}/images/logo.png" alt="logo" /></span>
+              <span class="light-logo"><img src="https://gyandeep.ngo/front/assets/img/plant.png"
+                  alt="logo" /></span>
+              <span class="dark-logo"><img src="https://gyandeep.ngo/front/assets/img/plant.png"
+                  alt="logo" /></span>
             </div>
           </a>
         </div>
@@ -47,20 +49,19 @@
             </ul>
           </div>
 
-
           @if (session()->has('end_time'))
-          <div class="time-btn d-lg-inline-flex">
-            <i class="ti-timer"></i> <span class="hide-m">Time</span> Left: &nbsp;
-            <script language="JavaScript">
-              TargetDate = "{{ date('Y-m-d H:i:s', strtotime(session()->get('end_time'))) }}";
+            <div class="time-btn d-lg-inline-flex">
+              <i class="ti-timer"></i> <span class="hide-m">Time</span> Left: &nbsp;
+              <script language="JavaScript">
+                TargetDate = "{{ date('Y-m-d H:i:s', strtotime(session()->get('end_time'))) }}";
                 CountActive = true;
                 CountStepper = -1;
                 LeadingZero = true;
                 DisplayFormat = "%%H%% : %%M%% : %%S%%";
                 FinishMessage = "Time finished!";
-            </script>
-            <script language="JavaScript" src="https://rhashemian.github.io/js/countdown.js"></script>
-          </div>
+              </script>
+              <script language="JavaScript" src="https://rhashemian.github.io/js/countdown.js"></script>
+            </div>
           @endif
           <div class="navbar-custom-menu r-side">
             <ul class="nav navbar-nav">

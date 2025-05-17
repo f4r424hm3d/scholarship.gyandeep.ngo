@@ -13,7 +13,9 @@ class StudentAppliedScholarshipFc extends Controller
     $id = session()->get('student_id');
     $student = Student::find($id);
 
-    $as = AppliedScholarship::where('std_id', $id)->get();
+    $as = AppliedScholarship::with('getExam')->where('std_id', $id)->get();
+    // printArray($as);
+    // die();
     if ($student->photo_path != '') {
       $avatar = $student->photo_path;
     } else {
