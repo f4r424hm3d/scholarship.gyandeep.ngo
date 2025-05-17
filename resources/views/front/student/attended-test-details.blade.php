@@ -128,8 +128,6 @@
 
                           $accuracy = $totalAttempted == 0 ? '0' : round(($ca * 100) / $totalAttempted, 2);
                           //$accuracy = 1;
-
-                          $grandTotalAccuracy = $grandTotalAccuracy + $accuracy;
                         @endphp
                         <tr>
                           <th>{{ $ed->getSubject->subject }}</th>
@@ -159,7 +157,11 @@
                         <th>Total</th>
                         <td>{{ $grandTotalAttempted }} / {{ $grandTotalQuestion }}</td>
                         <td>{{ $grandTotalCA }}</td>
-                        <td>{{ $grandTotalAccuracy }} %</td>
+                        @php
+                          $finalAccuracy =
+                              $grandTotalAttempted == 0 ? 0 : round(($grandTotalCA * 100) / $grandTotalAttempted, 2);
+                        @endphp
+                        <td>{{ $finalAccuracy }} %</td>
                       </tr>
                     </tbody>
                   </table>
