@@ -123,4 +123,7 @@ return [
     'store' => env('APP_MAINTENANCE_STORE', 'database'),
   ],
 
+  'support_email' => env('SUPPORT_EMAIL', 'mbbs.scholarship@gyandeep.ngo'),
+  'contact_number' => env('CONTACT_NUMBER', '+91 9289333536'),
+
 ];
