@@ -8,7 +8,7 @@
 
       <div class="container ">
        <div class="row">
-        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mx-auto">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-6 mx-auto">
            <div id="login" class="login-forms">
           <!-- <h4 class="" >Please Log In to continue</h4> -->
            <div class="main-background" ></div>

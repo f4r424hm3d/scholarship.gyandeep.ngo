@@ -374,7 +374,7 @@
     <header class="header_sticky">
 
       <!-- /btn_mobile-->
-      <div class="container">
+      <div class="container-fluid px-sm-5">
         <div class="d-flex justify-content-between align-items-center">
           <div class="">
             <div id="logo_home" class="img-logos">
@@ -386,7 +386,10 @@
             </div>
           </div>
           <div class="">
-            <ul id="top_access" class="d-flex align-items-center">
+            
+            <!-- sidebar-menu start -->
+            <nav id="menu" class="main-menu">
+<ul id="top_access" class="d-flex align-items-center profiles-users ">
               @if (session()->has('student_id'))
                 <li class="d-lg-block d-md-block d-xl-block">
                   <a href="{{ url('student-logout') }}" class="btn_1 text-center pt-2"
@@ -402,7 +405,7 @@
                       class="pe-7s-user"></i> Login</a></li>
               @endif
             </ul>
-            <nav id="menu" class="main-menu">
+
               <ul>
                 {{-- <li>
                   <span><a href="{{ url('scholarships') }}">All Scholarships</a></span>
@@ -421,6 +424,8 @@
                 </li> --}}
               </ul>
             </nav>
+
+          <!-- hamburder icon  outside   -->
             <a href="#menu" class="btn_mobile">
               <div class="hamburger hamburger--spin" id="hamburger">
                 <div class="hamburger-box">

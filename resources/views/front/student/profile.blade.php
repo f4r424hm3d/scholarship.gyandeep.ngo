@@ -9,8 +9,8 @@
 @section('main-section')
   <main>
 
-    <section class="main-profile  pt-5 px-0 px-sm-4 px-md-5">
-      <div class="container-fluid">
+    <section class="main-profile  py-sm-5">
+      <div class="container-fluid px-sm-5">
         <div class="row">
 
           @include('front.student.profile-sidebar')
@@ -92,7 +92,7 @@
                         @enderror
                       </div>
 
-                      <div class="col-md-4 col-sm-12">
+                      <div class="col-md-3 col-sm-12">
                         <label class="form-label " for="email">Email <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" id="email" value="{{ $student->email }}" disabled>
                         @error('email')
@@ -100,9 +100,9 @@
                         @enderror
                       </div>
 
-                      <div class="col-md-2 col-sm-12">
+                      <div class="col-md-3 col-sm-12">
                         <label class="form-label " for="c_code">Country Code <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="c_code" id="c_code"
+                        <input type="number" min="0" class="form-control" name="c_code" id="c_code"
                           placeholder="Enter country code" value="{{ old('c_code') }}">
                         @error('c_code')
                           <span class="text-danger">{{ $message }}</span>

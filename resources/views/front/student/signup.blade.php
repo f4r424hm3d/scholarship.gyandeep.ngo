@@ -12,8 +12,8 @@
     <div id="hero_register" class="main-signups">
       <div class="container ">
         <div class="full-signup-details">
-          <div class="row align-items-center">
-            <div class="col-12 col-sm-6 col-lg-6 mb-3">
+          <div class="row align-items-center flex-column-reverse flex-lg-row ">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-3">
               <div class="signup-detials">
 
                 <h3>Apply for MBBS Scholarship in Kyrgyzstan
@@ -46,7 +46,7 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
               </div>
             </div>
 
-            <div class="col-12 col-sm-6 col-lg-6 mb-3">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-3">
               @if (session()->has('smsg'))
                 <div class="alert alert-success alert-dismissable">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -62,9 +62,8 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
               <div class="box_form">
                 <form method="post" action="{{ url('student-signup') }}" enctype="multipart/form-data">
                   @csrf
-                  <h5 class="text-center mb-3">Apply Now</h5>
-
-                  <div class="row">
+                <div class="row">
+                    <h5 class="text-center mb-3">Apply Now</h5>
                     <div class="col-md-12">
                       <div class="form-group">
                         <input name="name" type="text" class="form-control" placeholder="Enter full name"
@@ -76,8 +75,7 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
                         </span>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
+                  
                     <div class="col-lg-12">
                       <div class="form-group">
                         <input name="email" type="email" class="form-control" placeholder="Enter Email Address"
@@ -122,8 +120,7 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
                         </span>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
+                  
                     <div class="col-md-6">
                       <div class="form-group">
                         <select name="current_qualification_level" id="current_qualification_level" class="form-control"
@@ -160,8 +157,7 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
                         </span>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
+               
                     <div class="col-md-6">
                       <div class="form-group">
                         <input type="password" class="form-control" placeholder="Enter password" id="password"
@@ -184,7 +180,8 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
                         </span>
                       </div>
                     </div>
-                  </div>
+                </div>
+                
                   <a class="forgot-show mb-3" href="{{ url('forget-password') }}">Forgot password?</a>
                   <p class="text-center add_top_30">
                     <input type="submit" class="login-input medium w-100" value="Submit">

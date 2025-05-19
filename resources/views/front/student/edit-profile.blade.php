@@ -8,8 +8,8 @@
 @endpush
 @section('main-section')
   <main>
-    <section class="main-profile  pt-5 px-0 px-sm-4 px-md-5">
-      <div class="container-fluid">
+    <section class="main-profile py-sm-5">
+      <div class="container-fluid px-sm-5">
         <div class="row">
 
           @include('front.student.profile-sidebar')
