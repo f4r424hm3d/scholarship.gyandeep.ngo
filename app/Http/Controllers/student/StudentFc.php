@@ -14,6 +14,7 @@ use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class StudentFc extends Controller
@@ -132,59 +133,90 @@ class StudentFc extends Controller
     if ($request->hasFile('marksheet_10_copy')) {
       $file = $request->file('marksheet_10_copy');
       $filename = time() . '_marksheet_10.' . $file->getClientOriginalExtension();
-      $file->move(public_path('uploads/marksheet/'), $filename);
+      $file->move('uploads/marksheet/', $filename);
       $field->marksheet_10_path = 'uploads/marksheet/' . $filename;
     }
     if ($request->hasFile('marksheet_12_copy')) {
       $file = $request->file('marksheet_12_copy');
       $filename = time() . '_marksheet_12.' . $file->getClientOriginalExtension();
-      $file->move(public_path('uploads/marksheet/'), $filename);
+      $file->move('uploads/marksheet/', $filename);
       $field->marksheet_12_path = 'uploads/marksheet/' . $filename;
     }
     if ($request->hasFile('aadhar_copy')) {
       $file = $request->file('aadhar_copy');
       $filename = time() . '_aadhar.' . $file->getClientOriginalExtension();
-      $file->move(public_path('uploads/aadhar/'), $filename);
+      $file->move('uploads/aadhar/', $filename);
       $field->aadhar_path = 'uploads/aadhar/' . $filename;
     }
 
     if ($request->hasFile('passport_copy')) {
       $file = $request->file('passport_copy');
       $filename = time() . '_passport.' . $file->getClientOriginalExtension();
-      $file->move(public_path('uploads/passport/'), $filename);
+      $file->move('uploads/passport/', $filename);
       $field->passport_path = 'uploads/passport/' . $filename;
     }
     if ($request->hasFile('neet_result_copy')) {
       $file = $request->file('neet_result_copy');
       $filename = time() . '_neet_result.' . $file->getClientOriginalExtension();
-      $file->move(public_path('uploads/neet_result/'), $filename);
+      $file->move('uploads/neet_result/', $filename);
       $field->neet_result_path = 'uploads/neet_result/' . $filename;
     }
     if ($request->hasFile('photo_copy')) {
       $file = $request->file('photo_copy');
       $filename = time() . '_photo.' . $file->getClientOriginalExtension();
-      $file->move(public_path('uploads/student/'), $filename);
+      $file->move('uploads/student/', $filename);
       $field->photo_path = 'uploads/student/' . $filename;
     }
     $field->submit_application = 1;
     $field->save();
     $token = Str::random(25);
-    $appliedScholarship = new AppliedScholarship;
-    $appliedScholarship->std_id = $field->id;
-    $appliedScholarship->scholarship_id = $request['scholarship'];
-    $appliedScholarship->exam_id = $request['course_category'];
-    $appliedScholarship->status = 1;
-    $appliedScholarship->token = $token;
-    $appliedScholarship->payment_status = 'Free';
-    $field->mode_of_exam = 'Online';
-    $field->exam_date = $request['exam_date'];
-    $appliedScholarship->save();
 
-    $assignExam = new AsignExam;
-    $assignExam->student_id = session()->get('student_id');
-    $assignExam->exam_id = $request['course_category'];
-    $assignExam->application_id = $appliedScholarship->id;
-    $assignExam->save();
+    // Check if scholarship already applied
+    $existingApplication = AppliedScholarship::where('std_id', $field->id)
+      ->where('scholarship_id', $request['scholarship'])
+      ->where('exam_id', $request['course_category'])
+      ->first();
+
+    if (!$existingApplication) {
+      $appliedScholarship = new AppliedScholarship;
+      $appliedScholarship->std_id = $field->id;
+      $appliedScholarship->scholarship_id = $request['scholarship'];
+      $appliedScholarship->exam_id = $request['course_category'];
+      $appliedScholarship->status = 1;
+      $appliedScholarship->token = $token;
+      $appliedScholarship->payment_status = 'Free';
+      $field->mode_of_exam = 'Online';
+      $field->exam_date = $request['exam_date'];
+      $appliedScholarship->save();
+
+      // Check if exam assignment already exists
+      $existingAssign = AsignExam::where('student_id', $field->id)
+        ->where('exam_id', $request['course_category'])
+        ->where('application_id', $appliedScholarship->id)
+        ->first();
+
+      if (!$existingAssign) {
+        $assignExam = new AsignExam;
+        $assignExam->student_id = $field->id;
+        $assignExam->exam_id = $request['course_category'];
+        $assignExam->application_id = $appliedScholarship->id;
+        $assignExam->save();
+      }
+      $login_link = url('email-login/?uid=' . $field->id . '&token=' . $field->remember_token);
+      $emaildata = ['name' => $field->name, 'id' => $field->id, 'remember_token' => $field->remember_token, 'login_link' => $login_link, 'exam_date' => $request['exam_date'], 'scholarship_name' => $appliedScholarship->getScholarship->name, 'start_time' => $assignExam->getExamDet->start_time, 'end_time' => $assignExam->getExamDet->end_time, 'duration' => $assignExam->getExamDet->duration];
+
+      $dd = ['to' => $field->email, 'to_name' => $field->name, 'subject' => 'Scholarship Exam Registration Successful – Please Read Instructions & Start Your Exam'];
+
+      Mail::send(
+        'mails.application-success-mail',
+        $emaildata,
+        function ($message) use ($dd) {
+          $message->to($dd['to'], $dd['to_name']);
+          $message->subject($dd['subject']);
+          $message->priority(1);
+        }
+      );
+    }
 
     session()->flash('smsg', 'Scholarship application has been submitted successfully.');
     return redirect('profile');

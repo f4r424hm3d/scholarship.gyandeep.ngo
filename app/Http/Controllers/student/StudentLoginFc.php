@@ -250,7 +250,7 @@ class StudentLoginFc extends Controller
     return view('front.student.email-sent');
   }
 
-  public function emailLogin(Request $request)
+  public function emailLogin_X(Request $request)
   {
     //printArray($request->all());
     //die;
@@ -278,6 +278,31 @@ class StudentLoginFc extends Controller
       }
     }
   }
+  public function emailLogin(Request $request)
+  {
+    //printArray($request->all());
+    //die;
+    $id = $request['uid'];
+    $remember_token = $request['token'];
+    $where = ['id' => $id, 'remember_token' => $remember_token];
+    $field = Student::where($where)->first();
+    $current_time = date("YmdHis");
+    //printArray($field->all());
+    if (is_null($field)) {
+      return redirect('account/invalid_link');
+    } else {
+      $lc = $field->login_count == '' ? 0 : $field->login_count + 1;
+      $field->login_count = $lc;
+      $field->last_login = date("Y-m-d H:i:s");
+      $field->remember_token = null;
+      $field->otp_expire_at = null;
+      $field->save();
+      session()->flash('smsg', 'You have successfully logged in.');
+      $request->session()->put('student_id', $field->id);
+      return redirect('profile/applied-scholarship');
+    }
+  }
+
 
   public function invalidLink()
   {

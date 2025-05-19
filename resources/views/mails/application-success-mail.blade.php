@@ -66,22 +66,29 @@
           </tr>
           <tr>
             <td valign="top" class="content" style="background:white;padding:25px;">
-              Dear <b>{{ $name }}</b>,
               <p style="text-align: justify">
-                We received a request indicating that you’re having trouble logging into your account and may have
-                forgotten your password.
+                {{-- Subject: ✅ Scholarship Exam Registration Successful – Please Read Instructions & Start Your Exam --}}
+
+                Dear {{ $name }},
                 <br>
-                If this request was initiated by you, you can reset your password using the link below:
+                Congratulations! 🎉 <br>
+                Your scholarship registration form has been successfully submitted.<br>
+
+                You have chosen to take the exam on [Insert Date]. <br>
+
+                Please click the button below to begin your exam: <br>
+
+                👉 <button class="blue-btn"><a href="{{ $login_link }}">Start Exam</a></button>
                 <br>
-                <button class="blue-btn"><a href="{{ $reset_password_link }}">Reset Password</a></button>
+                Before starting, we strongly recommend you read all exam instructions carefully to ensure a smooth
+                experience.
                 <br>
-                If you did not request a password reset, please ignore this message. Your account remains secure.
-                <br>
-                If you need any further assistance, feel free to contact our support team.
+                Wishing you all the best!
+                Give it your best shot and aim high — scholarships up to 100% are waiting for top performers!
                 <br>
                 Best regards, <br>
                 {{ config('app.name') }} <br>
-                Support Team
+                {{ config('app.support_email') }} | {{ config('app.contact_number') }} <br>
               </p>
             </td>
           </tr>

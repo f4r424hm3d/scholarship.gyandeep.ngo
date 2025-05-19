@@ -66,23 +66,14 @@
           </tr>
           <tr>
             <td valign="top" class="content" style="background:white;padding:25px;">
-              Dear <b>{{ $name }}</b>,
               <p style="text-align: justify">
-                We received a request indicating that you’re having trouble logging into your account and may have
-                forgotten your password.
-                <br>
-                If this request was initiated by you, you can reset your password using the link below:
-                <br>
-                <button class="blue-btn"><a href="{{ $reset_password_link }}">Reset Password</a></button>
-                <br>
-                If you did not request a password reset, please ignore this message. Your account remains secure.
-                <br>
-                If you need any further assistance, feel free to contact our support team.
-                <br>
-                Best regards, <br>
-                {{ config('app.name') }} <br>
-                Support Team
+                Hi {{ $name }},
+
+                Sorry to hear you’re having trouble logging. We got a message that you forgot your password. If this was
+                you, you can get right back into your account or reset your password now.
               </p>
+              <button class="pink-btn"><a href="{{ $login_link }}">Log in</a></button>
+              <button class="blue-btn"><a href="{{ $reset_password_link }}">Reset your password</a></button>
             </td>
           </tr>
           <tr>
