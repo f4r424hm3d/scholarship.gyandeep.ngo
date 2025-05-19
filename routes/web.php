@@ -560,7 +560,8 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
       Route::get('/{slug}', [StudentC::class, 'index']);
     });
     Route::get('student-trash', [StudentC::class, 'trash']);
-    Route::prefix('/student')->group(function () {
+    Route::prefix('/student/')->group(function () {
+      Route::get('/{student_id}', [StudentProfileC::class, 'index']);
       Route::get('/add', [StudentC::class, 'add']);
       Route::get('/trash', [StudentC::class, 'trash']);
       Route::post('/store/', [StudentC::class, 'store']);

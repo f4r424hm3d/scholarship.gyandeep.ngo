@@ -1,16 +1,15 @@
 @php
-use App\Models\Country;
-use App\Models\CourseCategory;
-use App\Models\Specialization;
-use App\Models\Level;
-use App\Models\Student;
+  use App\Models\Country;
+  use App\Models\CourseCategory;
+  use App\Models\Specialization;
+  use App\Models\Level;
+  use App\Models\Student;
 
+  $clt = Request::segment(3) ?? 'new';
 
-$clt = Request::segment(3) ?? 'new';
-
-unset($_GET['page']);
-$url_arr = array_filter($_GET);
-$qs = http_build_query($url_arr);
+  unset($_GET['page']);
+  $url_arr = array_filter($_GET);
+  $qs = http_build_query($url_arr);
 @endphp
 @extends('backend.layouts.main')
 @push('title')
@@ -143,7 +142,7 @@ $qs = http_build_query($url_arr);
             <div class="box">
               <div class="box-body">
                 @foreach ($lt as $lt)
-                    @php
+                  @php
                     $ltc = Student::with('getLevel', 'getCourse', 'getLastFup', 'getAC');
 
                     if (isset($_GET['nationality']) && $_GET['nationality'] != '') {
@@ -177,11 +176,11 @@ $qs = http_build_query($url_arr);
                     }
 
                     $ltc = $ltc->where('lead_type', $lt->slug)->count();
-                    @endphp
-                    <a href="{{ url('admin/students/' . $lt->slug . '?' . $qs) }}"
-                        class="btn btn-sm btn-{{ $clt == $lt->slug ? 'success' : 'info btn-outline' }}">
-                        {{ $lt->title }} {{ $ltc }}
-                    </a>
+                  @endphp
+                  <a href="{{ url('admin/students/' . $lt->slug . '?' . $qs) }}"
+                    class="btn btn-sm btn-{{ $clt == $lt->slug ? 'success' : 'info btn-outline' }}">
+                    {{ $lt->title }} {{ $ltc }}
+                  </a>
                 @endforeach
               </div>
             </div>
@@ -204,13 +203,12 @@ $qs = http_build_query($url_arr);
                             value="" />
                         </th>
                         <th>Sr. No.</th>
+                        <th>Date</th>
                         <th>Action</th>
                         <th>Follow Up</th>
                         <th>Contact</th>
-                        <th>Nationality</th>
-                        <th>Inernational Id</th>
                         <th>Qualification Level</th>
-                        <th>Intrested Course</th>
+                        <th>Exam Result</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -226,7 +224,26 @@ $qs = http_build_query($url_arr);
                               value="{{ $row->id }}" />
                           </td>
                           <td>
-                            {{ $i }}&nbsp;&nbsp;
+                            {{ $i }}
+                          </td>
+                          <td>
+                            {{ getFormattedDate($row->created_at, 'd M Y h:i A') }}
+                          </td>
+                          <td>
+                            @if ($row->getAC->count() > 0)
+                              @php
+                                $alto = '';
+                                foreach ($row->getAC as $ac) {
+                                    $alto .= $ac->getUser->name . ' , ';
+                                }
+                              @endphp
+                              <span class="badge badge-primary" title="{{ $alto }}">{{ $row->getAC->count() }}
+                              </span>
+                            @endif
+                            <a href="{{ url('admin/student/' . $row->id) }}"
+                              class="waves-effect waves-light btn btn-sm btn-outline btn-info">
+                              <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
                             @if ($row->called == 1)
                               <span class="permCalled" title="Called" data-toggle="tooltip">
                                 <i class="fa fa-phone text-success" aria-hidden="true"></i>
@@ -243,26 +260,7 @@ $qs = http_build_query($url_arr);
                             <span class="tempWapp hide-this" title="Whatsapp" data-toggle="tooltip">
                               <i class="fa fa-whatsapp text-success" aria-hidden="true"></i>
                             </span>
-                            <br>
-                            @if ($row->getAC->count() > 0)
-                              @php
-                                $alto = '';
-                                foreach ($row->getAC as $ac) {
-                                    $alto .= $ac->getUser->name . ' , ';
-                                }
-                              @endphp
-                              <span class="badge badge-primary"
-                                title="{{ $alto }}">{{ $row->getAC->count() }}
-                              </span>
-                            @endif
-                          </td>
-                          <td width="200px">
-                            {{ getFormattedDate($row->created_at, 'd M Y h:i A') }}
-                            <br>
-                            <a href="{{ url('admin/student/' . $row->id) }}"
-                              class="waves-effect waves-light btn btn-sm btn-outline btn-info">
-                              <i class="fa fa-user" aria-hidden="true"></i>
-                            </a>
+
                           </td>
                           <td>
                             <div id="followupDiv{{ $row->id }}">
@@ -301,16 +299,14 @@ $qs = http_build_query($url_arr);
                             </small>
                           </td>
                           <td>
-                            {{ $row->name }}<br>
-                            {{ $row->c_code . ' ' . $row->mobile }} <br>
-                            {{ $row->email }}<br>
-                            {{ $row->gender }}<br>
-                            {{ $row->dob }}<br>
+                            Name : {{ $row->name }}<br>
+                            Contact : {{ $row->c_code . ' ' . $row->mobile }} <br>
+                            Email : {{ $row->email }}<br>
+                            Gender : {{ $row->gender }}<br>
+                            DOB : {{ $row->dob }}<br>
                           </td>
-                          <td>{{ $row->nationality }}</td>
-                          <td>{{ $row->aadhar }}</td>
                           <td>{{ $row->getLevel->name ?? '' }}</td>
-                          <td>{{ $row->getCourse->category ?? '' }}</td>
+                          <td></td>
                         </tr>
                         @php
                           $i++;
