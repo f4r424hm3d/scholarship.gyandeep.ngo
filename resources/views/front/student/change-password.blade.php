@@ -8,12 +8,13 @@
 @endpush
 @section('main-section')
   <main>
-    <div class="container-fluid margin_60_35">
+    <section class="main-profile py-5">
+      <div class="container-fluid px-sm-5">
       <div class="row">
 
         @include('front.student.profile-sidebar')
 
-        <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 mb-4"">
+        <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 mb-4">
           <div style="clear:both"></div>
           <div class="pb-2">
             <div id="detail-title" style="padding-left:15px"><i class="icon-info-circled"></i> Reset Password</div>
@@ -78,5 +79,6 @@
 
       </div>
     </div>
+    </section>
   </main>
 @endsection

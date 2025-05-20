@@ -17,11 +17,15 @@
           {{ session()->get('emsg') }}
         </div>
       @endif
-      <div class="container margin_60_35">
-        <div id="login">
-          <h1>Forgot password</h1>
-          <div class="box_form">
-            <p class="mb-3">Don't have an account? Create your account. It's take less then a minutes</p>
+      <section class="forgot-section py-5 mb-5">
+        <div class="container px-sm-5">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-6 mx-auto">
+            <div id="login">
+         
+          <div class="box_form"> 
+             <h2>Forgot password</h2>
+            <p class="mb-3 have-account ">Don't have an account? <span>Create your account. It's take less then a minutes</span></p>
             <form method="post" action="{{ url('forget-password') }}" enctype="multipart/form-data">
               @csrf
               <div class="form-group">
@@ -33,16 +37,25 @@
                   @enderror
                 </span>
               </div>
-              <a href="{{ url('login') }}"><small>Already member ? Login </small></a>
-              <a href="{{ url('signup') }}" class="float-end"><small>Create a new account</small></a>
-              <div class="form-group text-center add_top_20 mb-0">
-                <input class="btn_1 medium" type="submit" value="Submit">
+             <div class="text-right mt-2">
+              
+            <p> <a href="{{ url('signup') }}">Create a new account</a></p>
+             </div>
+              <div class="form-group text-center">
+                <input class="w-100 btn btn-primary" type="submit" value="Submit">
+                  <div class="text-center mt-2">
+                   Already a member ? <a href="{{ url('login') }}">Login</a>
+                </div>
+                
               </div>
             </form>
           </div>
         </div>
+        </div>
+      </div>
         <!-- /login -->
       </div>
+      </section>
     </div>
   </main>
 @endsection

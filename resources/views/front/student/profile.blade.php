@@ -9,13 +9,13 @@
 @section('main-section')
   <main>
 
-    <section class="main-profile  py-sm-5">
+    <section class="main-profile  py-5"> 
       <div class="container-fluid px-sm-5">
         <div class="row">
 
           @include('front.student.profile-sidebar')
 
-          <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 mb-4">
+          <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 mb-4">
             @if (session()->has('smsg'))
               <div class="alert alert-success alert-dismissable">
                 {{ session()->get('smsg') }}
@@ -33,27 +33,61 @@
                 <div class="box_general_3">
                   <div class="row">
                     <div class="col-md-6 mb-4">
-                      <i class="icon-user-1 name-icon "></i> <strong>Gender :</strong>
-                      {{ $student->gender }}
+                      <div class="d-flex ">
+                        <i class="icon-user-1 name-icon "></i>
+                        <span class="text-detailss" ><strong>Gender :</strong>
+                      {{ $student->gender }}</span>
+                      </div>
+                       
                     </div>
                     <div class="col-md-6 mb-4">
-                      <i class="icon-calendar name-icon"></i> <strong>DOB :</strong> {{ $student->dob }}
+                       <div class="d-flex ">
+                        <i class="icon-calendar name-icon"></i> 
+                        <span class="text-detailss" >
+                          <strong>DOB :</strong> {{ $student->dob }}
+                        </span>
+                      </div>
+                      
                     </div>
                     <div class="col-md-6 mb-4">
-                      <i class="icon-flag name-icon"></i> <strong>Nationality :</strong>
+                       <div class="d-flex ">
+                         <i class="icon-flag name-icon"></i>
+                        <span class="text-detailss" >
+                          <strong>Nationality :</strong>
                       {{ $student->nationality }}
+                        </span>
+                      </div>
+                      
                     </div>
                     <div class="col-md-6 mb-4">
-                      <i class="icon-location-outline name-icon"></i> <strong>Current location :</strong>
+                       <div class="d-flex ">
+                        <i class="icon-location-outline name-icon"></i>
+                        <span class="text-detailss" >
+                          <strong>Current location :</strong>
                       {{ $student->city }} , {{ $student->state }} , {{ $student->country }}
+                        </span>
+                      </div>
+                       
                     </div>
                     <div class="col-md-6 mb-4">
-                      <i class="fa fa-phone name-icon"></i> <strong>Contact number :</strong>
+                       <div class="d-flex ">
+                         <i class="fa fa-phone name-icon"></i>
+                        <span class="text-detailss" >
+                          <strong>Contact number :</strong>
                       +{{ $student->c_code }} {{ $student->mobile }}
+                        </span>
+                      </div>
+                      
                     </div>
                     <div class="col-md-6">
-                      <i class="icon-gmail name-icon"></i> <strong>Email :</strong>
+                       <div class="d-flex ">
+                        <i class="icon-gmail name-icon"></i>
+                        <span class="text-detailss" >
+                          <strong>Email :</strong>
                       {{ $student->email }}
+                        </span>
+                      </div>
+                       
                     </div>
                   </div>
                   {{-- <div class="row">
@@ -333,8 +367,7 @@
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
-                    </div>
-                    <div class="row">
+                    
                       <div class="col-md-3 col-sm-12 mb-3">
                         <label for="country_of_education" class="form-label">Grade</label>
                         <input type="text" class="form-control" id="12th" placeholder="12th" value="12th"
@@ -358,8 +391,7 @@
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
-                    </div>
-                    <div class="row">
+                  
                       <div class="col-md-3 col-sm-12 mb-3">
                         <label for="country_of_education" class="form-label">Grade</label>
                         <input type="text" class="form-control" id="NEET" placeholder="NEET" value="NEET"
@@ -386,14 +418,12 @@
                     <!-- Test Score start 1 -->
                     <div class="row">
                       <div class="col-12 mb-3">
-                        <div class="d-flex justify-content-between align-items-center">
-                          <h5 class="mt-4">
-                            Document <br>
-                            <p class="text-danger">Only jpg,jpeg,png and pdf files are allowed. File size should not
+                          <h5 class="d-flex align-items-center main-docs">
+                            Document : 
+                            <p class="text-danger main-onlys ">Only jpg,  jpeg,  png and pdf files are allowed. File size should not
                               exceed
                               1MB.</p>
                           </h5>
-                        </div>
                         <hr>
                       </div>
                       <!-- Document Select Dropdown -->
@@ -459,7 +489,7 @@
                         </div>
                         <hr>
                       </div>
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="scholarship" class="form-label">Select Scholarship</label>
                         <select class="form-select" id="scholarship" name="scholarship"
                           aria-label="Country of Education">
@@ -473,7 +503,7 @@
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="course_category" class="form-label">Select Category</label>
                         <select class="form-select" id="course_category" name="course_category"
                           aria-label="Country of Education">
@@ -490,7 +520,7 @@
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="country_of_education" class="form-label">Select Exam Date</label>
                         <input type="date" name="exam_date" id="exam_date" class="form-control"
                           value="{{ old('exam_date') }}" />
@@ -499,7 +529,7 @@
                     <div class="row">
 
                       <!-- Buttons -->
-                      <div class="col-md-4 mb-3 d-flex align-items-end">
+                      <div class="col-md-12 mb-3 text-end ">
                         <div>
                           <button id="sbtBtnDu" type="submit" class="btn btn-primary me-2">
                             Submit Application

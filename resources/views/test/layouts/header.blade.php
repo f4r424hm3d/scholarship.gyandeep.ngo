@@ -25,16 +25,21 @@
   <div class="wrapper">
     <div id="loader"></div>
 
-    <header class="main-header">
-      <div class="inside-header">
+    <header class="main-header instruction-header">
+      <div class="container-fluid px-sm-5">
         <div class="d-flex align-items-center logo-box justify-content-start">
           <a href="{{ url('testapp/') }}" class="logo">
             <div class="logo-lg">
+              <div class="img-divs"><img src="https://gyandeep.ngo/front/assets/img/plant.png"
+                  alt="logo" /></div>
+          
+            </div>
+            <!-- <div class="logo-lg">
               <span class="light-logo"><img src="https://gyandeep.ngo/front/assets/img/plant.png"
                   alt="logo" /></span>
               <span class="dark-logo"><img src="https://gyandeep.ngo/front/assets/img/plant.png"
                   alt="logo" /></span>
-            </div>
+            </div> -->
           </a>
         </div>
 
@@ -42,7 +47,7 @@
           <div class="app-menu">
             <ul class="header-megamenu nav">
               <li class="btn-group nav-item d-lg-flex align-items-center">
-                <p class="mb-0 text-fade pr-10 pt-5 tmp">
+                <p class="mb-0">
                   {{ $exam->getScholarship->name }}
                 </p>
               </li>
@@ -64,16 +69,16 @@
             </div>
           @endif
           <div class="navbar-custom-menu r-side">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav main-navbs">
               <li class="btn-group nav-item d-lg-inline-flex d-none">
                 <a href="{{ url('testapp/') }}/#" data-provide="fullscreen"
-                  class="waves-effect waves-light nav-link full-screen" title="Full Screen">
+                  class="waves-effect waves-light nav-link full-screen m-0 border" title="Full Screen">
                   <i data-feather="maximize"></i>
                 </a>
               </li>
               <!-- User Account-->
               <li class="dropdown user user-menu">
-                <a href="{{ url('testapp/') }}/#" class="waves-effect waves-light dropdown-toggle"
+                <a href="{{ url('testapp/') }}/#" class="waves-effect m-0 waves-light dropdown-toggle"
                   data-toggle="dropdown" title="User">
                   <i data-feather="user"></i>
                 </a>

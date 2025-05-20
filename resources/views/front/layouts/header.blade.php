@@ -392,10 +392,12 @@
 <ul id="top_access" class="d-flex align-items-center profiles-users ">
               @if (session()->has('student_id'))
                 <li class="d-lg-block d-md-block d-xl-block">
-                  <a href="{{ url('student-logout') }}" class="btn_1 text-center pt-2"
-                    style="color: #fff !important">Logout</a>
+                  <a href="{{ url('student-logout') }}" class="btn btn-primary"
+                    style="color: #fff !important"> <i class="fa fa-sign-out mr-2" aria-hidden="true"></i>
+ Logout</a>
                 </li>
-                <li><a href="{{ url('profile') }}" title="Profile"><i class="pe-7s-user"></i></a></li>
+                <li><a href="{{ url('profile') }}" title="Profile" class="btn btn-outline-dark" ><i class="fa fa-user-o main-usrs mr-2" aria-hidden="true"></i>
+ Profile</a></li>
               @else
                 <li>
                   <a class="btn btn-primary main-login" href="{{ url('signup') }}" title="Sign Up"><i

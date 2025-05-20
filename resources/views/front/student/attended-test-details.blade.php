@@ -9,7 +9,8 @@
 @endpush
 @section('main-section')
   <main>
-    <div class="container-fluid margin_60_35">
+   <section class="main-profile py-sm-5" >
+ <div class="container-fluid px-sm-5">
       <div class="row">
 
         @include('front.student.profile-sidebar')
@@ -28,8 +29,8 @@
           <div style="clear:both"></div>
           <div class="pb-2">
             <div class="box_general_3">
-              <div class="row">
-                <table class="table table-stripe">
+             <div class="table-responsive">
+                 <table class="table table-striped mb-0">
                   <tr>
                     <th>Scholarship</th>
                     <td><a href="javascript:void()">{{ $row->getExamDet->getScholarship->name }}</a></td>
@@ -44,11 +45,11 @@
                     </td>
                   </tr>
                 </table>
-              </div>
+               </div> 
             </div>
             <div class="box_general_3">
-              <div class="row">
-                <table class="table table-striped">
+              <div class="table-responsive">
+                 <table class="table table-striped mb-0">
                   <tr>
                     <th>No. of questions</th>
                     <td>{{ $total_question }}</td>
@@ -66,15 +67,15 @@
                     <td>{{ $not_visited }}</td>
                   </tr>
                 </table>
-              </div>
+             </div>
             </div>
 
             @if ($row->getExamDet->show_result == 1)
               <div class="box_general_3">
-                <h5 class="text-info">Section Wise Result</h5>
+                <h5 >Section Wise Result</h5>
                 <p>Your detailed section performance is shown below.</p>
-                <div class="row">
-                  <table class="table table-striped">
+                 <div class="table-responsive">
+                   <table class="table table-striped mb-0">
                     <thead>
                       <tr>
                         <th>Section</th>
@@ -138,12 +139,12 @@
                       @endforeach
                     </tbody>
                   </table>
-                </div>
+                 </div>
               </div>
               <div class="box_general_3">
-                <h5 class="text-info">Total Result</h5>
-                <div class="row">
-                  <table class="table table-striped">
+                <h5 >Total Result</h5>
+                <div class="table-responsive">
+                   <table class="table table-striped mb-0">
                     <thead>
                       <tr>
                         <th></th>
@@ -165,7 +166,7 @@
                       </tr>
                     </tbody>
                   </table>
-                </div>
+                 </div>
               </div>
             @endif
           </div>
@@ -173,6 +174,7 @@
 
       </div>
     </div>
+   </section>
   </main>
   <script>
     function showMessage(time) {

@@ -8,18 +8,19 @@
 @endpush
 @section('main-section')
   <main>
-    <div class="container-fluid margin_60_35">
+   <section class="main-profile py-sm-5">
+     <div class="container-fluid px-sm-5">
       <div class="row">
 
         @include('front.student.profile-sidebar')
 
-        <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 mb-4">
+        <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 mb-4">
           @if (session()->has('smsg'))
             <div class="alert alert-success alert-dismissable">
               {{ session()->get('smsg') }}
             </div>
           @endif
-          @if (session()->has('emsg'))
+          @if (session()->has('emsg')) 
             <div class="alert alert-danger alert-dismissable">
               {{ session()->get('emsg') }}
             </div>
@@ -28,7 +29,7 @@
           <div class="pb-2">
             <div id="detail-title" style="padding-left:15px">scholarship Test</div>
             <div class="box_general_3">
-              <div class="row">
+              <div class="table-responsive">
                 <table class="table table-striped">
                   <thead>
                     <tr>
@@ -72,6 +73,7 @@
 
       </div>
     </div>
+   </section>
   </main>
   <script>
     function showMessage(time) {

@@ -14,7 +14,7 @@
 
           @include('front.student.profile-sidebar')
 
-          <div class="col-xl-9 col-lg-8 col-md-12 col-sm-12 mb-4">
+          <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 mb-4">
             <div style="clear:both"></div>
             <div class="pb-2">
               <div id="detail-title" style="padding-left:15px"><i class="icon-info-circled"></i> Basic Information</div>
@@ -655,4 +655,4 @@
       </div>
     </section>
   </main>
-@endsection
+@endsection 
