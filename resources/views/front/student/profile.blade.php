@@ -77,7 +77,7 @@
                           <i class="fa fa-file name-icon"></i>
                           <span class="text-detailss">
                             <strong>10th Marksheet :</strong> {!! $student->marksheet_10_path
-                                ? '<a href="' . asset($student->marksheet_10_path) . '">Uploaded</a>'
+                                ? '<a href="' . asset($student->marksheet_10_path) . '" target="_blank">Uploaded</a>'
                                 : 'Not Uploaded' !!}
 
                           </span>
@@ -89,7 +89,7 @@
                           <i class="fa fa-file name-icon"></i>
                           <span class="text-detailss">
                             <strong>12th Marksheet :</strong> {!! $student->marksheet_12_path
-                                ? '<a href="' . asset($student->marksheet_12_path) . '">Uploaded</a>'
+                                ? '<a href="' . asset($student->marksheet_12_path) . '" target="_blank">Uploaded</a>'
                                 : 'Not Uploaded' !!}
 
                           </span>
@@ -101,7 +101,7 @@
                           <i class="fa fa-file name-icon"></i>
                           <span class="text-detailss">
                             <strong>NEET Result Copy :</strong> {!! $student->neet_result_path
-                                ? '<a href="' . asset($student->neet_result_path) . '">Uploaded</a>'
+                                ? '<a href="' . asset($student->neet_result_path) . '" target="_blank">Uploaded</a>'
                                 : 'Not Uploaded' !!}
 
                           </span>
@@ -112,7 +112,9 @@
                         <div class="d-flex">
                           <i class="fa fa-file name-icon"></i>
                           <span class="text-detailss">
-                            <strong>Passport Copy :</strong> {!! $student->passport_path ? '<a href="' . asset($student->passport_path) . '">Uploaded</a>' : 'Not Uploaded' !!}
+                            <strong>Passport Copy :</strong> {!! $student->passport_path
+                                ? '<a href="' . asset($student->passport_path) . '" target="_blank">Uploaded</a>'
+                                : 'Not Uploaded' !!}
 
                           </span>
                         </div>
@@ -121,7 +123,9 @@
                         <div class="d-flex">
                           <i class="fa fa-id-card name-icon"></i>
                           <span class="text-detailss">
-                            <strong>Aadhar Card :</strong> {!! $student->aadhar_path ? '<a href="' . asset($student->aadhar_path) . '">Uploaded</a>' : 'Not Uploaded' !!}
+                            <strong>Aadhar Card :</strong> {!! $student->aadhar_path
+                                ? '<a href="' . asset($student->aadhar_path) . '" target="_blank">Uploaded</a>'
+                                : 'Not Uploaded' !!}
                           </span>
                         </div>
                       </div>
@@ -129,7 +133,9 @@
                         <div class="d-flex">
                           <i class="fa fa-user name-icon"></i>
                           <span class="text-detailss">
-                            <strong>Photo :</strong> {!! $student->photo_path ? '<a href="' . asset($student->photo_path) . '">Uploaded</a>' : 'Not Uploaded' !!}
+                            <strong>Photo :</strong> {!! $student->photo_path
+                                ? '<a href="' . asset($student->photo_path) . '" target="_blank">Uploaded</a>'
+                                : 'Not Uploaded' !!}
                           </span>
                         </div>
                       </div>

@@ -6,13 +6,14 @@
   <title>Test Instruction - Gyandeep NGO</title>
 @endpush
 @section('main-section')
-  <div class="content-wrapper">
-    <div class="container-full">
+  <section class="content-wrapper py-5">
+    <div class="container ">
       <section class="content">
         <div class="row">
 
-          <div class="col-xl-10 col-12">
-            <div class="box">
+          <div class="col-xl-10 mx-auto col-12">
+            <div class="content-instructions">
+                <div class="box">
               <div class="box-body pt-10 pb-1">
                 <div class="mailbox-read-info">
                   <h4 class="mb-0">General Instructions:
@@ -63,33 +64,33 @@
                     <li>The Question Palette displayed on the right side of screen will show the status of each question
                       using on of the following symbols:</li>
                   </ol> -->
-<ul>
+<ul class="main-start" >
                     <li>
-                      <div class="b1"></div>
+                      <div class="b1 b-box"></div>
                       <p>You have answered the question.</p>
                     </li>
                     <li>
-                      <div class="b2"></div>
+                      <div class="b2 b-box"></div>
                       <p>
                         You have visited but not answered the question yet.
                       </p>
                     </li>
                     <li>
-                      <div class="b3"></div>
+                      <div class="b3 b-box"></div>
                       <p>
                         You have not answered the question but have marked
                         for review.
                       </p>
                     </li>
                     <li>
-                      <div class="b4"><i class="fa fa-check"></i></div>
+                      <div class="b4 b-box"><i class="fa fa-check"></i></div>
                       <p>
                         You have answered the question but have marked for
                         review.
                       </p>
                     </li>
                     <li>
-                      <div class="b5"></div>
+                      <div class="b5 b-box"></div>
                       <p>You have not visited the question yet.</p>
                     </li>
                   </ul>
@@ -110,20 +111,22 @@ I agree to abide by the rules and regulations during the examination. I understa
 
                 <div class="box-footer">
                   <a href="{{ url('test/' . $exam->token . '/instruction') }}"><button type="button"
-                      class="waves-effect waves-light btn btn-light"><i class="ti-arrow-left"></i> Go back</button></a>
+                      class="btn btn-light "><i class="ti-arrow-left mr-1"></i>Back</button></a>
                   <div class="pull-right">
-                    <button id="nextBtn" type="button" class="waves-effect waves-light btn btn-light">Next <i
-                        class="ti-arrow-right"></i></button>
+                    <button id="nextBtn" type="button" class="btn btn-primary fw-bold">Next <i
+                        class="ti-arrow-right ml-1"></i></button>
                   </div>
                 </div>
               </form>
             </div>
+            </div>
+          
 
           </div>
         </div>
-      </section>
+      <!-- </section> -->
     </div>
-  </div>
+</section>
   <script>
     $(document).ready(function() {
       $('#termcondition').on('click', function() {

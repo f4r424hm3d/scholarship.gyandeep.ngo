@@ -25,12 +25,14 @@
     //   });
     // });
   </script>
-  <div class="content-wrapper">
-    <div class="container-full">
-      <section class="content">
-        <div class="row">
-          <div class="col-lg-9 col-12">
-            <div class="box">
+  <section class="contenwrapper my-3">
+    <div class="container">
+      <!-- <section class="content"> -->
+        <div class="row flex-column-reverse flex-md-row
+         ">
+          <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+            <div class="content-instructions">
+               <div class="box">
               <div id="tp">
                 <div class="head">
                   <ul class="nav nav-tabs customtab2" role="tablist">
@@ -45,7 +47,7 @@
                   </ul>
                 </div>
 
-                <div class="box-body">
+                <div class="box-body p-3 p-sm-auto">
                   <!-- Tab panes -->
                   @if ($section_id != '')
                     <div class="tab-content">
@@ -151,9 +153,11 @@
                 </div>
               @endif
             </div>
+            </div>
+           
           </div>
 
-          <div class="col-lg-3 col-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-12">
             <div class="rside">
               <div class="d-flex justify-content-center align-items-center">
                 <!-- <div class="user-img"><img src="{{ url('testapp') }}/images/user.png" /></div> -->
@@ -182,7 +186,8 @@
                 </li>
               </ul>
               @if ($section_id != '')
-                <div class="sec">Section: {{ $row->getSubject->subject }}</div>
+               <div class="all-borsection">
+                 <div class="sec">Section: {{ $row->getSubject->subject }}</div>
                 <div class="num">
                   <div class="ps-scrl-bar">
                     {{-- <a href="#" class="attemp">1</a>
@@ -233,13 +238,14 @@
                   <a href="#yes-no" class="popup-with-form waves-effect waves-light btn btn-success img-fluid">Submit
                     Test</a>
                 </div>
+               </div>
               @endif
             </div>
           </div>
         </div>
-      </section>
+      <!-- </section> -->
     </div>
-  </div>
+                      </section>
   <!-- report form -->
   <form id="report-form" class="mfp-hide white-popup-block w-400">
     <div id="errSpanReport">
