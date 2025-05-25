@@ -57,3 +57,25 @@ if (!function_exists('avatar')) {
     return $avatar;
   }
 }
+if (!function_exists('aurl')) {
+  function aurl($path = null)
+  {
+    $path = strtolower($path);
+    if ($path != '') {
+      return url('/admin/' . $path);
+    } else {
+      return url('/admin/');
+    }
+  }
+}
+if (!function_exists('uurl')) {
+  function uurl($path = null)
+  {
+    $path = strtolower($path);
+    if ($path != '') {
+      return url('/user/' . $path);
+    } else {
+      return url('/user/');
+    }
+  }
+}

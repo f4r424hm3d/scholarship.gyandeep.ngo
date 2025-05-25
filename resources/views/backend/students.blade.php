@@ -240,7 +240,7 @@
                               <span class="badge badge-primary" title="{{ $alto }}">{{ $row->getAC->count() }}
                               </span>
                             @endif
-                            <a href="{{ url('admin/student/' . $row->id) }}"
+                            <a href="{{ url('admin/student/' . $row->id . '/profile') }}"
                               class="waves-effect waves-light btn btn-sm btn-outline btn-info">
                               <i class="fa fa-user" aria-hidden="true"></i>
                             </a>

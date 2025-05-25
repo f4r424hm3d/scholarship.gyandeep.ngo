@@ -574,8 +574,9 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
       Route::get('/bulk-force-delete', [StudentC::class, 'bulkForceDelete']);
       Route::get('/bulk-restore', [StudentC::class, 'bulkRestore']);
     });
-    Route::prefix('/student/profile/{id}')->group(function () {
-      Route::get('', [StudentProfileC::class, 'index']);
+    Route::prefix('/student/{student_id}/')->group(function () {
+      Route::get('/profile/', [StudentProfileC::class, 'index']);
+      Route::get('/scholarship/', [StudentProfileC::class, 'scholarship']);
     });
     Route::get('/add-student-follow-up', [StudentFollowUpC::class, 'addFollowup']);
     Route::get('/get-last-follow-up', [StudentFollowUpC::class, 'getLastFollowUp']);

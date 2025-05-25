@@ -30,19 +30,22 @@
       <!-- <section class="content"> -->
         <div class="row flex-column-reverse flex-md-row
          ">
-          <div class="col-lg-8 col-md-12 col-sm-12 col-12">
+          <div class="col-lg-8 col-md-12 col-sm-12 col-12 mb-4">
             <div class="content-instructions">
                <div class="box">
               <div id="tp">
                 <div class="head">
                   <ul class="nav nav-tabs customtab2" role="tablist">
-                    <li class="pl-10 pr-15">Sections :</li>
-                    @foreach ($examsub as $row)
+                    <li class="pl-10 pr-15 new-sections">Sections :</li>
+                    <ul class="main-flexs" >
+ @foreach ($examsub as $row)
                       <li class="nav-item">
                         <a class="nav-link {{ $row->getSubject->id == $section_id ? 'active' : '' }}"
                           href="{{ url('test/' . $exam->token . '/' . $row->getSubject->id) }}">{{ $row->getSubject->subject }}</a>
                       </li>
                     @endforeach
+                    </ul>
+                   
 
                   </ul>
                 </div>
@@ -52,7 +55,7 @@
                   @if ($section_id != '')
                     <div class="tab-content">
                       <div class="tab-pane active">
-                        <h4 class="border-bottom pb-10" style="font-weight: 500">
+                        <h4 class="border-bottom pb-10 main-questions">
                           Question: <span id="qn_span"></span>
                           <span class="time-btn2 d-lg-inline-flex float-right">Marks: +1: -0</span>
                           {{-- <span class="time-btn2 d-lg-inline-flex float-right">Time : 00:00</span> --}}
@@ -82,10 +85,12 @@
                           @endif
                           <div class="col-md-12">
                             <div class="tpb">
-                              <h5>Question:</h5>
+                          
+                                <h5>Question:</h5>
                               <p>
                                 {{ $ques_det->question }}
                               </p>
+                           
                               <div class="demo-radio-button mt-30 mb-15">
                                 <div class="d-block">
                                   <input name="answer" type="radio" id="a" class="with-gap"
@@ -122,18 +127,21 @@
               </div>
               @if ($section_id != '')
                 <div class="box-footer">
-                  <button onclick="saveAndNext('mark','{{ $next }}')" type="button"
-                    class="waves-effect waves-light btn btn-light">
+                 <div class="btn-footer">
+                   <button onclick="saveAndNext('mark','{{ $next }}')" type="button"
+                    class="waves-effect waves-light btn btn-light footer-btn">
                     Mark for Review & Next
                   </button>
-                  <button onclick="clearAnswer()" type="button" class="waves-effect waves-light btn btn-danger">
+                  <button onclick="clearAnswer()" type="button" class="waves-effect footer-btn waves-light btn btn-danger">
                     Clear
                   </button>
+                  <a class="popup-with-form btn btn-success waves-effect footer-btn waves-light btn btn-warning"
+                    href="#report-form">Report</a>
+                 </div>
                   {{-- <button type="button" class="waves-effect waves-light btn btn-light">
                 Save & Mark for Review
               </button> --}}
-                  <a class="popup-with-form btn btn-success waves-effect waves-light btn btn-warning"
-                    href="#report-form">Report</a>
+                  
                   {{-- <button type="button" class="waves-effect waves-light btn btn-light">
                 Skip
               </button> --}}
@@ -157,9 +165,9 @@
            
           </div>
 
-          <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+          <div class="col-lg-4 col-md-12 col-sm-12 col-12 mb-4">
             <div class="rside">
-              <div class="d-flex justify-content-center align-items-center">
+              <div class="d-flex justify-content-center align-items-center mt-2">
                 <!-- <div class="user-img"><img src="{{ url('testapp') }}/images/user.png" /></div> -->
                 <div class="user-name">{{ $student->name }}</div>
               </div>
