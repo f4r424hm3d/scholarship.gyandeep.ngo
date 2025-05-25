@@ -10,6 +10,7 @@ use App\Models\ExamQuestions;
 use App\Models\Subjects;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Log;
 
 class ExamQuestionsC extends Controller
 {
@@ -111,7 +112,7 @@ class ExamQuestionsC extends Controller
     session()->flash('smsg', 'Record has been updated successfully.');
     return redirect('admin/exam-question/' . $exam_id);
   }
-  public function Import(Request $request)
+  public function Import_x(Request $request)
   {
     // printArray($data->all());
     // die;
@@ -132,6 +133,33 @@ class ExamQuestionsC extends Controller
       }
     }
   }
+
+  public function import(Request $request)
+  {
+    $request->validate([
+      'file' => 'required|mimes:xlsx,csv,xls',
+      'exam_id' => 'required|exists:create_exams,id',
+    ]);
+
+    $file = $request->file('file');
+    $exam_id = $request->input('exam_id');
+
+    if ($file) {
+      try {
+        Excel::import(new ExamQuestionsImport($exam_id), $file);
+        return redirect('admin/exam-question/' . $exam_id);
+      } catch (\Exception $ex) {
+        Log::error('Exam Import Error: ' . $ex->getMessage());
+        session()->flash('emsg', 'An error occurred during import. Please check the file format and try again.');
+        return back();
+      }
+    }
+
+    session()->flash('emsg', 'No file selected.');
+    return back();
+  }
+
+
   public function Export($exam_id)
   {
     // printArray($data->all());
