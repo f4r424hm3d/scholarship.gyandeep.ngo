@@ -26,7 +26,7 @@ class StudentFc extends Controller
     $countries = Country::all();
     $scholarships = Scholarship::where('deadline', '>=', date('Y-m-d'))->get();
     if (old('scholarship')) {
-      $categories = CreateExams::where('scholarship_id', old('scholarship'))->groupBy('course_category_id')->get();
+      $categories = CreateExams::where('scholarship_id', old('scholarship'))->groupBy('course_category_id')->inRandomOrder()->get();
     } else {
       $categories = null;
     }
@@ -89,10 +89,10 @@ class StudentFc extends Controller
         'neet_passing_year' => 'nullable|numeric|digits:4',
         'neet_result' => 'nullable|string',
 
-        'marksheet_10_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
-        'marksheet_12_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
-        'aadhar_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
-        'photo_copy' => 'nullable|mimes:jpg,jpeg,png|max:1025',
+        'marksheet_10_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',
+        'marksheet_12_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',
+        'aadhar_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',
+        'photo_copy' => 'required|mimes:jpg,jpeg,png|max:1025',
         'neet_result_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
         'passport_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
 
@@ -307,7 +307,7 @@ class StudentFc extends Controller
   public function getCourseCategories($scholarshipId)
   {
     $now = Carbon::now();
-    $categories = CreateExams::where('scholarship_id', $scholarshipId)->groupBy('course_category_id')->get();
+    $categories = CreateExams::where('scholarship_id', $scholarshipId)->groupBy('course_category_id')->inRandomOrder()->get();
     $output = '<option value="">Select Course Category</option>';
     foreach ($categories as $category) {
       $output .= '<option value="' . $category->id . '">' . $category->getCourseCategory->category . '</option>';
