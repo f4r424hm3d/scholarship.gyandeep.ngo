@@ -304,14 +304,44 @@ class StudentFc extends Controller
     $data = compact('student');
     return view('front.student.test-complete')->with($data);
   }
-  public function getCourseCategories($scholarshipId)
+  public function getCourseCategories_x($scholarshipId)
   {
     $now = Carbon::now();
     $categories = CreateExams::where('scholarship_id', $scholarshipId)->groupBy('course_category_id')->inRandomOrder()->get();
+
+
     $output = '<option value="">Select Course Category</option>';
     foreach ($categories as $category) {
       $output .= '<option value="' . $category->id . '">' . $category->getCourseCategory->category . '</option>';
     }
+    return response()->json($output);
+  }
+  public function getCourseCategories($scholarshipId)
+  {
+    $categoryIds = CreateExams::where('scholarship_id', $scholarshipId)
+      ->select('course_category_id')
+      ->distinct()
+      ->inRandomOrder()
+      ->pluck('course_category_id');
+
+    $categories = collect();
+
+    foreach ($categoryIds as $categoryId) {
+      $randomExam = CreateExams::where('scholarship_id', $scholarshipId)
+        ->where('course_category_id', $categoryId)
+        ->inRandomOrder()
+        ->first();
+
+      if ($randomExam) {
+        $categories->push($randomExam);
+      }
+    }
+
+    $output = '<option value="">Select Course Category</option>';
+    foreach ($categories as $category) {
+      $output .= '<option value="' . $category->id . '">' . $category->getCourseCategory->category . '</option>';
+    }
+
     return response()->json($output);
   }
 }
