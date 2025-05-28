@@ -682,4 +682,5 @@ Route::prefix('common')->group(function () {
   Route::get('/get-all-follow-up', [StudentFollowUpC::class, 'getAllFollowUp']);
   Route::get('/asign-leads', [StudentFollowUpC::class, 'asignLeads']);
   Route::get('/unasign-leads', [StudentFollowUpC::class, 'unAsignLeads']);
+  Route::get('/get-course-categories/{scholarshipId}', [StudentFc::class, 'getCourseCategories'])->name('get-course-categories')->name('common.get.categories');
 });
