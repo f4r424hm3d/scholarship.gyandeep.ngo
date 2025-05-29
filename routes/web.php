@@ -561,22 +561,21 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
     });
     Route::get('student-trash', [StudentC::class, 'trash']);
     Route::prefix('/student/')->group(function () {
-      Route::get('/{student_id}', [StudentProfileC::class, 'index']);
       Route::get('/add', [StudentC::class, 'add']);
       Route::get('/trash', [StudentC::class, 'trash']);
       Route::post('/store/', [StudentC::class, 'store']);
       Route::post('/import', [StudentC::class, 'import']);
       Route::get('/delete/{id}', [StudentC::class, 'delete']);
       Route::get('/force-delete/{id}', [StudentC::class, 'forceDelete']);
-      Route::get('/update/{id}', [StudentC::class, 'index']);
-      Route::post('/update/{id}', [StudentC::class, 'update']);
       Route::get('/bulk-delete', [StudentC::class, 'bulkDelete']);
       Route::get('/bulk-force-delete', [StudentC::class, 'bulkForceDelete']);
       Route::get('/bulk-restore', [StudentC::class, 'bulkRestore']);
-    });
-    Route::prefix('/student/{student_id}/')->group(function () {
-      Route::get('/profile/', [StudentProfileC::class, 'index']);
-      Route::get('/scholarship/', [StudentProfileC::class, 'scholarship']);
+
+      Route::post('/update/', [StudentProfileC::class, 'update']);
+      Route::prefix('/{student_id}/')->group(function () {
+        Route::get('/profile/', [StudentProfileC::class, 'index']);
+        Route::get('/scholarship/', [StudentProfileC::class, 'scholarship']);
+      });
     });
     Route::get('/add-student-follow-up', [StudentFollowUpC::class, 'addFollowup']);
     Route::get('/get-last-follow-up', [StudentFollowUpC::class, 'getLastFollowUp']);

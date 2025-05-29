@@ -158,6 +158,7 @@
             <div class="card-body {{ $ft == 'edit' ? '' : 'hide-thi' }}" id="tblCDiv">
               <form action="{{ aurl('student/update') }}" class="needs-validation" method="post"
                 enctype="multipart/form-data" novalidate>
+                <input type="hidden" name="id" value="{{ $student->id }}">
                 @csrf
                 <div class="row">
                   <div class="col-md-2 col-sm-12 mb-3">
@@ -202,12 +203,12 @@
                       :sd="$student" readonly="readonl" />
                   </div>
                   <div class="col-md-3 col-sm-12 mb-3">
-                    <x-input-field type="text" label="Passport" name="passport" id="passport" :ft="$ft"
-                      :sd="$student" readonly="readonl" />
+                    <x-input-field type="text" label="Passport Number" name="passport_number" id="passport_number"
+                      :ft="$ft" :sd="$student" readonly="readonl" />
                   </div>
                   <div class="col-md-3 col-sm-12 mb-3">
-                    <x-input-field type="text" label="Passport Expiry" name="passport_expiry" id="passport_expiry"
-                      :ft="$ft" :sd="$student" readonly="readonl" />
+                    <x-input-field type="date" label="Passport Expiry Date" name="passport_expiry_date"
+                      id="passport_expiry_date" :ft="$ft" :sd="$student" readonly="readonl" />
                   </div>
                   <div class="col-md-3 col-sm-12 mb-3">
                     <x-input-field type="text" label="Father Name" name="father" id="father" :ft="$ft"
@@ -395,8 +396,8 @@
                         </td>
                         <th>Passport Size Photo</th>
                         <td>
-                          @if ($student->photo_copy != null)
-                            <a href="{{ asset($student->photo_copy) }}" target="_blank"
+                          @if ($student->photo_path != null)
+                            <a href="{{ asset($student->photo_path) }}" target="_blank"
                               class="btn btn-xs btn-info btn-link">View</a>
                           @else
                             <label for="photo_copy" class="form-label text-danger">No file uploaded</label>
