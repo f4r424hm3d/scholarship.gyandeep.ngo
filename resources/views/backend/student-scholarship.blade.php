@@ -1,37 +1,41 @@
-@php
-  $c_url = request()->path();
-@endphp
-@extends('front.layouts.main')
+@extends('backend.layouts.main')
 @push('title')
-  <title>Applications - Gyandeep NGO</title>
+  <title>{{ $page_title }}</title>
 @endpush
 @section('main-section')
-  <main>
-    <section class="main-profile py-sm-5">
-      <div class="container-fluid px-sm-5">
+  <div class="content-wrapper">
+    <div class="container-full">
+      <!-- Content Header (Page header) -->
+      <div class="content-header">
+        <div class="d-flex align-items-center">
+          <div class="mr-auto">
+            <div class="d-inline-block align-items-center">
+              <nav>
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{{ url('/admin/') }}"><i class="mdi mdi-home-outline"></i></a>
+                  </li>
+                  <li class="breadcrumb-item"><a href="{{ url('/admin/students/') }}">Students</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{ $page_title }}</li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Main content -->
+      <section class="content">
         <div class="row">
-
-          @include('front.student.profile-sidebar')
-
-          <div class="col-xl-9 col-lg-12 col-md-12 col-sm-12 mb-4">
-            @if (session()->has('smsg'))
-              <div class="alert alert-success alert-dismissable">
-                {{ session()->get('smsg') }}
-              </div>
-            @endif
-            @if (session()->has('emsg'))
-              <div class="alert alert-danger alert-dismissable">
-                {{ session()->get('emsg') }}
-              </div>
-            @endif
-            <div style="clear:both"></div>
-            <div class="pb-2">
-              <div id="detail-title" style="padding-left:15px">
-                <i class="icon-info-circled"></i> Applications
-              </div>
-              <div class="box_general_3">
+          @include('backend.student-profile-header')
+          <div class="col-lg-12 col-md-12 col-12">
+            <!-- NOTIFICATION FIELD START -->
+            <x-result-notification-field />
+            <!-- NOTIFICATION FIELD END -->
+          </div>
+          <div class="col-lg-12 col-md-12 col-12">
+            <div class="box">
+              <div class="box-body">
                 <div class="table-responsive">
-                  <table class="table">
+                  <table id="exampl" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                         <th>Scholarship</th>
@@ -41,6 +45,9 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @php
+                        $i = 1;
+                      @endphp
                       @foreach ($as as $as)
                         <tr>
                           <td>
@@ -60,15 +67,8 @@
                                 $start_time = getFormattedDate($as->getExam->start_time, 'd M Y - h:i A');
                                 //$current_time = '2022-07-20 12:00:00';
                               @endphp
-                              @if ($current_time >= $as->getExam->start_time && $current_time < $as->getExam->end_time)
-                                <a onclick="window.open('{{ url('test/' . $as->getExam->token) }}','test','toolbars=0,width=100%,scrollbars=1');"
-                                  href="javascript:void()" href="" class="btn btn-sm btn-success">Join</a>
-                              @elseif ($current_time > $as->getExam->end_time)
+                              @if ($current_time > $as->getExam->end_time)
                                 <span class='text-danger'>Exam expired</span>
-                              @else
-                                <a onclick="showMessage('{{ $start_time }}')" href="javascript:void()"
-                                  class="btn btn-sm btn-info">Join</a><br>
-                                <span id="messSpan"></span>
                               @endif
                             @endif
                           </td>
@@ -87,22 +87,28 @@
               </div>
             </div>
           </div>
-
         </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
-    function showMessage(time) {
-      $('#messSpan').html('Exam will start on <b>' + time + '</b>.');
-    }
-
-    function showMessage2() {
-      $('#messSpan2').html("<span class='text-danger'>Payment pending , You can't joined</span>");
-    }
-
-    function showMessage3() {
-      $('#messSpan3').html("<span class='text-danger'>Exam expired</span>");
-    }
+    $('#scholarship').on('change', function() {
+      var scholarshipId = $('#scholarship').val();
+      if (scholarshipId) {
+        $.ajax({
+          url: "{{ url('common/get-course-categories') }}/" + scholarshipId,
+          type: 'GET',
+          success: function(data) {
+            $('#course_category').html(data);
+          },
+          error: function() {
+            alert('Unable to fetch course categories.');
+          }
+        });
+      } else {
+        $('#course_category').empty().append('<option value="">Select Category</option>');
+      }
+    });
   </script>
 @endsection

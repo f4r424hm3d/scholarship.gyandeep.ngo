@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AppliedScholarship;
 use App\Models\Country;
 use App\Models\CreateExams;
 use App\Models\Scholarship;
@@ -117,5 +118,21 @@ class StudentProfileC extends Controller
     $field->save();
     session()->flash('smsg', 'New record has been added successfully.');
     return redirect('admin/student/' . $field->id . '/profile');
+  }
+  public function scholarship(Request $request, $studentId)
+  {
+    $student = Student::find($studentId);
+    $as = AppliedScholarship::with('getExam')->where('std_id', $studentId)->get();
+    $scholarships = Scholarship::where('deadline', '>=', date('Y-m-d'))->get();
+    if (old('scholarship')) {
+      $categories = CreateExams::where('scholarship_id', old('scholarship'))->groupBy('course_category_id')->inRandomOrder()->get();
+    } else {
+      $categories = null;
+    }
+    $page_title = 'Student Scholarship';
+    $ft = 'edit';
+    $page_route = 'scholarship';
+    $data = compact('student', 'page_title', 'ft', 'page_route', 'scholarships', 'categories', 'as');
+    return view('backend.student-scholarship', $data);
   }
 }
