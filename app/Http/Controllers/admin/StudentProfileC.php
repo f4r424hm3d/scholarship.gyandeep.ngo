@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AnswerSheet;
 use App\Models\AppliedScholarship;
+use App\Models\AsignExam;
 use App\Models\Country;
 use App\Models\CreateExams;
+use App\Models\ExamQuestions;
 use App\Models\Scholarship;
 use App\Models\Student;
 use Illuminate\Http\Request;
@@ -19,7 +22,7 @@ class StudentProfileC extends Controller
     $maritulStatuses = ['Single' => 'Single', 'Married' => 'Married'];
     $page_title = 'Student Profile';
     $ft = 'edit';
-    $page_route = 'student';
+    $page_route = 'profile';
 
     $scholarships = Scholarship::where('deadline', '>=', date('Y-m-d'))->get();
     if (old('scholarship')) {
@@ -134,5 +137,47 @@ class StudentProfileC extends Controller
     $page_route = 'scholarship';
     $data = compact('student', 'page_title', 'ft', 'page_route', 'scholarships', 'categories', 'as');
     return view('backend.student-scholarship', $data);
+  }
+  public function exams(Request $request, $studentId)
+  {
+    $student = Student::find($studentId);
+    $where = ['student_id' => $studentId, 'attended' => 1];
+    $rows = AsignExam::where($where)->with('getExamDet', 'getApplication')->get();
+
+    $page_title = 'Student Exams';
+    $ft = 'edit';
+    $page_route = 'exams';
+    $data = compact('student', 'page_title', 'ft', 'page_route', 'rows');
+    return view('backend.student-exams', $data);
+  }
+  public function examDetails(Request $request, $studentId, $examId)
+  {
+    $student = Student::find($studentId);
+    $where = ['student_id' => $studentId, 'id' => $examId];
+    $row = AsignExam::where($where)->with('getExamDet')->firstOrFail();
+
+    $total_question = ExamQuestions::where(['exam_id' => $row->exam_id])->count();
+
+    $total_visited = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id])->count();
+
+    $answered_question = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 0])->where('answer', '!=', '')->count();
+
+    $not_answered = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 0, 'answer' => null])->count();
+
+    $marked_question = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 1, 'answer' => null])->count();
+
+    $marked_and_answered = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 1])->where('answer', '!=', '')->count();
+
+    $not_visited = $total_question - $total_visited;
+
+    $sectionDet = ExamQuestions::with('getSubject')->where(['exam_id' => $row->exam_id])->groupBy('subject_id')->select('subject_id')->get();
+
+    $page_title = 'Attended Test Details';
+    $ft = 'edit';
+    $page_route = 'exam-details';
+
+    //printArray($user_info->toArray());
+    $data = compact('student', 'row', 'total_question', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered', 'sectionDet', 'studentId', 'page_title', 'ft', 'page_route');
+    return view('backend.attended-test-details')->with($data);
   }
 }

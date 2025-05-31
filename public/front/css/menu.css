@@ -21,7 +21,7 @@
  position: relative;
  z-index: 9;
  width: auto;
- top: 11px;
+ /* top: 11px; */
  float: right;
  -moz-transition: all 0.3s ease-in-out;
  -o-transition: all 0.3s ease-in-out;
@@ -36,14 +36,14 @@
  margin: 0;
  padding: 0;
 }
- .main-menu ul a,  .main-menu ul li a {
+ /* .main-menu ul a,  .main-menu ul li a {
  position: relative;
  margin: 0;
  padding: 0;
  display: block;
  padding: 5px 10px;
  white-space: nowrap;
-}
+} */
 
 
 
@@ -183,7 +183,16 @@
 ================================================== */
 
 @media only screen and (max-width: 991px) {
- .btn_mobile {
+ /* .btn_mobile {
+ position: unset;
+ left: 15px;
+ top: 17px;
+ width: 30px;
+ display: block;
+ z-index: 9999;
+} */
+
+.btn_mobile .is-active {
  position: absolute;
  left: 15px;
  top: 17px;
@@ -192,16 +201,16 @@
  z-index: 9999;
 }
  .hamburger-inner,  .hamburger-inner::before,  .hamburger-inner::after {
- background-color: #333 !important;
+ background-color: #309bcd !important
 }
  .hamburger--spin.is-active .hamburger-inner {
- background-color: #292363 !important;
+ background-color: #309bcd !important
 }
  .hamburger--spin.is-active .hamburger-inner::before {
- background-color: #292363 !important;
+ background-color: #309bcd !important
 }
  .hamburger--spin.is-active .hamburger-inner::after {
- background-color: #292363 !important;
+ background-color: #309bcd !important
 }
  nav#menu {
  display: none !important;

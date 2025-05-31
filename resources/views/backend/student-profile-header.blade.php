@@ -11,6 +11,9 @@
         <a href="{{ aurl('student/' . $student->id . '/scholarship') }}"
           class="btn btn-xs btn{{ $page_route == 'scholarship' ? '' : ' btn-outline' }} btn-info">Scholarship</a>
 
+        <a href="{{ aurl('student/' . $student->id . '/exams') }}"
+          class="btn btn-xs btn{{ $page_route == 'exams' ? '' : ' btn-outline' }} btn-info">Exams</a>
+
       </span>
     </div>
   </div>

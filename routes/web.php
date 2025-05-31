@@ -575,6 +575,8 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
       Route::prefix('/{student_id}/')->group(function () {
         Route::get('/profile/', [StudentProfileC::class, 'index']);
         Route::get('/scholarship/', [StudentProfileC::class, 'scholarship']);
+        Route::get('/exams/', [StudentProfileC::class, 'exams']);
+        Route::get('/exams/{exam_id}', [StudentProfileC::class, 'examDetails']);
       });
     });
     Route::get('/add-student-follow-up', [StudentFollowUpC::class, 'addFollowup']);
