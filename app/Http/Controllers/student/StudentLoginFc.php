@@ -67,7 +67,7 @@ class StudentLoginFc extends Controller
         $leadData = [
             'name' => $request['name'],
             'email' => $request['email'],
-            'c_Code' => $request['c_Code'],
+            'c_code' => $request['c_code'],
             'mobile' => $request['mobile'],
             'current_qualification_level' => $request['current_qualification_level'],
             'neet_status' => $request['neet_status'],
