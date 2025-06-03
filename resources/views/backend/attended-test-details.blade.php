@@ -73,107 +73,107 @@
                       <td>{{ $not_visited }}</td>
                     </tr>
                   </table>
-                  @if ($row->getExamDet->show_result == 1)
-                    <div class="box_general_3">
-                      <h5>Section Wise Result</h5>
-                      <p>Your detailed section performance is shown below.</p>
-                      <div class="table-responsive">
-                        <table class="table table-striped mb-0">
-                          <thead>
-                            <tr>
-                              <th>Section</th>
-                              <th>Attempted</th>
-                              <th>Correct</th>
-                              <th>accuracy</th>
-                            </tr>
-                          </thead>
-                          <tbody>
+
+                  <div class="box_general_3">
+                    <h5>Section Wise Result</h5>
+                    <p>Your detailed section performance is shown below.</p>
+                    <div class="table-responsive">
+                      <table class="table table-striped mb-0">
+                        <thead>
+                          <tr>
+                            <th>Section</th>
+                            <th>Attempted</th>
+                            <th>Correct</th>
+                            <th>accuracy</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @php
+                            $grandTotalAttempted = 0;
+                            $grandTotalQuestion = 0;
+                            $grandTotalCA = 0;
+                            $grandTotalAccuracy = 0;
+                          @endphp
+                          @foreach ($sectionDet as $ed)
                             @php
-                              $grandTotalAttempted = 0;
-                              $grandTotalQuestion = 0;
-                              $grandTotalCA = 0;
-                              $grandTotalAccuracy = 0;
+                              $totalQuestion = ExamQuestions::where([
+                                  'exam_id' => $row->exam_id,
+                                  'subject_id' => $ed->subject_id,
+                              ])->count();
+
+                              $grandTotalQuestion = $grandTotalQuestion + $totalQuestion;
+
+                              $totalAttempted = AnswerSheet::where([
+                                  'student_id' => $student->id,
+                                  'exam_id' => $row->exam_id,
+                                  'subject_id' => $ed->subject_id,
+                              ])
+                                  ->where('answer', '!=', '')
+                                  ->count();
+                              $grandTotalAttempted = $grandTotalAttempted + $totalAttempted;
+
+                              $anslist = AnswerSheet::with('getAnswer')
+                                  ->where([
+                                      'student_id' => $student->id,
+                                      'exam_id' => $row->exam_id,
+                                      'subject_id' => $ed->subject_id,
+                                  ])
+                                  ->where('answer', '!=', '')
+                                  ->get();
+                              //printArray($anslist->toArray());
+                              $ca = 0;
+                              foreach ($anslist as $ansd) {
+                                  if ($ansd->answer == $ansd->getAnswer->answer) {
+                                      $ca++;
+                                  }
+                              }
+
+                              $grandTotalCA = $grandTotalCA + $ca;
+
+                              $accuracy = $totalAttempted == 0 ? '0' : round(($ca * 100) / $totalAttempted, 2);
+                              //$accuracy = 1;
                             @endphp
-                            @foreach ($sectionDet as $ed)
-                              @php
-                                $totalQuestion = ExamQuestions::where([
-                                    'exam_id' => $row->exam_id,
-                                    'subject_id' => $ed->subject_id,
-                                ])->count();
-
-                                $grandTotalQuestion = $grandTotalQuestion + $totalQuestion;
-
-                                $totalAttempted = AnswerSheet::where([
-                                    'student_id' => $student->id,
-                                    'exam_id' => $row->exam_id,
-                                    'subject_id' => $ed->subject_id,
-                                ])
-                                    ->where('answer', '!=', '')
-                                    ->count();
-                                $grandTotalAttempted = $grandTotalAttempted + $totalAttempted;
-
-                                $anslist = AnswerSheet::with('getAnswer')
-                                    ->where([
-                                        'student_id' => $student->id,
-                                        'exam_id' => $row->exam_id,
-                                        'subject_id' => $ed->subject_id,
-                                    ])
-                                    ->where('answer', '!=', '')
-                                    ->get();
-                                //printArray($anslist->toArray());
-                                $ca = 0;
-                                foreach ($anslist as $ansd) {
-                                    if ($ansd->answer == $ansd->getAnswer->answer) {
-                                        $ca++;
-                                    }
-                                }
-
-                                $grandTotalCA = $grandTotalCA + $ca;
-
-                                $accuracy = $totalAttempted == 0 ? '0' : round(($ca * 100) / $totalAttempted, 2);
-                                //$accuracy = 1;
-                              @endphp
-                              <tr>
-                                <th>{{ $ed->getSubject->subject }}</th>
-                                <td>{{ $totalAttempted }} / {{ $totalQuestion }}</td>
-                                <td>{{ $ca }}</td>
-                                <td>{{ $accuracy }} %</td>
-                              </tr>
-                            @endforeach
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                    <div class="box_general_3">
-                      <h5>Total Result</h5>
-                      <div class="table-responsive">
-                        <table class="table table-striped mb-0">
-                          <thead>
                             <tr>
-                              <th></th>
-                              <th>Attempted</th>
-                              <th>Correct</th>
-                              <th>accuracy</th>
+                              <th>{{ $ed->getSubject->subject }}</th>
+                              <td>{{ $totalAttempted }} / {{ $totalQuestion }}</td>
+                              <td>{{ $ca }}</td>
+                              <td>{{ $accuracy }} %</td>
                             </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th>Total</th>
-                              <td>{{ $grandTotalAttempted }} / {{ $grandTotalQuestion }}</td>
-                              <td>{{ $grandTotalCA }}</td>
-                              @php
-                                $finalAccuracy =
-                                    $grandTotalAttempted == 0
-                                        ? 0
-                                        : round(($grandTotalCA * 100) / $grandTotalAttempted, 2);
-                              @endphp
-                              <td>{{ $finalAccuracy }} %</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                          @endforeach
+                        </tbody>
+                      </table>
                     </div>
-                  @endif
+                  </div>
+                  <div class="box_general_3">
+                    <h5>Total Result</h5>
+                    <div class="table-responsive">
+                      <table class="table table-striped mb-0">
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th>Attempted</th>
+                            <th>Correct</th>
+                            <th>accuracy</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th>Total</th>
+                            <td>{{ $grandTotalAttempted }} / {{ $grandTotalQuestion }}</td>
+                            <td>{{ $grandTotalCA }}</td>
+                            @php
+                              $finalAccuracy =
+                                  $grandTotalAttempted == 0
+                                      ? 0
+                                      : round(($grandTotalCA * 100) / $grandTotalAttempted, 2);
+                            @endphp
+                            <td>{{ $finalAccuracy }} %</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
