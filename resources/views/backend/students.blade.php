@@ -215,14 +215,6 @@
                       @php
                       @endphp
                       @foreach ($rows as $row)
-                        @php
-                          $end_time = strtotime(
-                              $row->getLastExam->attended_at .
-                                  '+' .
-                                  $row->getLastExam->getExamDet->duration .
-                                  ' minutes',
-                          );
-                        @endphp
                         <tr id="row{{ $row->id }}">
                           <td>
                             <input style="opacity: 9;left:30px" type="checkbox" name="selected_id[]" class="checkbox"
@@ -312,12 +304,10 @@
                           </td>
                           <td>{{ $row->getLevel->name ?? '' }}</td>
                           <td>
-                            Application : {{ $row->submit_application == true ? 'Submitted' : 'Not Submitted' }} <br>
-                            Exam Status : @if ($row->getLastExam->submitted == 1 || $row->getLastExam->getExamDet->end_time < $ct || $end_time < $ctp)
-                              <span @class(['text-success', 'font-bold' => true])>Submitted</span>
-                            @else
-                              <span @class(['text-primary', 'font-bold' => true])>Attending</span>
-                            @endif <br>
+                            Application : {!! $row->submit_application == true
+                                ? '<span class="badge bg-success">Submitted</span>'
+                                : '<span class="badge bg-danger">Not Submitted</span>' !!} <br>
+
                           </td>
                         </tr>
                         @php
