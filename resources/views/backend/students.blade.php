@@ -208,7 +208,7 @@
                         <th>Follow Up</th>
                         <th>Contact</th>
                         <th>Qualification Level</th>
-                        <th>Exam Result</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -216,7 +216,12 @@
                       @endphp
                       @foreach ($rows as $row)
                         @php
-
+                          $end_time = strtotime(
+                              $row->getLastExam->attended_at .
+                                  '+' .
+                                  $row->getLastExam->getExamDet->duration .
+                                  ' minutes',
+                          );
                         @endphp
                         <tr id="row{{ $row->id }}">
                           <td>
@@ -306,7 +311,14 @@
                             DOB : {{ $row->dob }}<br>
                           </td>
                           <td>{{ $row->getLevel->name ?? '' }}</td>
-                          <td></td>
+                          <td>
+                            Application : {{ $row->submit_application == true ? 'Submitted' : 'Not Submitted' }} <br>
+                            Exam Status : @if ($row->getLastExam->submitted == 1 || $row->getLastExam->getExamDet->end_time < $ct || $end_time < $ctp)
+                              <span @class(['text-success', 'font-bold' => true])>Submitted</span>
+                            @else
+                              <span @class(['text-primary', 'font-bold' => true])>Attending</span>
+                            @endif <br>
+                          </td>
                         </tr>
                         @php
                           $i++;
