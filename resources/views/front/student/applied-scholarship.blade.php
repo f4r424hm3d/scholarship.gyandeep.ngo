@@ -62,12 +62,12 @@
                               @endphp
                               @if ($current_time >= $as->getExam->start_time && $current_time < $as->getExam->end_time)
                                 <a onclick="window.open('{{ url('test/' . $as->getExam->token) }}','test','toolbars=0,width=100%,scrollbars=1');"
-                                  href="javascript:void()" href="" class="btn btn-sm btn-success">Join</a>
+                                  href="javascript:void()" class="btn btn-sm btn-success">Start Exam</a>
                               @elseif ($current_time > $as->getExam->end_time)
                                 <span class='text-danger'>Exam expired</span>
                               @else
                                 <a onclick="showMessage('{{ $start_time }}')" href="javascript:void()"
-                                  class="btn btn-sm btn-info">Join</a><br>
+                                  class="btn btn-sm btn-info">Start Exam</a><br>
                                 <span id="messSpan"></span>
                               @endif
                             @endif
