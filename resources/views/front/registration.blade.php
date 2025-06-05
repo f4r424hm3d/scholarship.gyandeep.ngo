@@ -23,20 +23,25 @@
         </div>
       </div>
     </section>
-<section class="main-registrations">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 mx-auto">
-        <ul class="min-flexs" >
-          <li><a class="btn btn-primary main-login mains-circles" href="{{ url('signup') }}" title="Sign Up"><i
+    <section class="main-registrations">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <ul class="min-flexs">
+              @if (session()->has('student_id'))
+                <li><a class="btn btn-primary main-login mains-circles" href="{{ url('profile/applied-scholarship') }}"
+                    title="Sign Up"><i class="pe-7s-add-user"></i>Start Exam</a></li>
+              @else
+                <li><a class="btn btn-primary main-login mains-circles" href="{{ url('signup') }}" title="Sign Up"><i
                       class="pe-7s-add-user"></i>Apply Now</a></li>
-                      <li><a class="btn btn-outline-dark outline-login mains-circles " href="{{ url('login') }}" title="Login"><i
-                      class="pe-7s-user"></i> Login Now</a></li>
-        </ul>
+                <li><a class="btn btn-outline-dark outline-login mains-circles " href="{{ url('login') }}"
+                    title="Login"><i class="pe-7s-user"></i> Login Now</a></li>
+              @endif
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <section class="ul-contactd">
       <div class="container">
@@ -109,14 +114,14 @@
               <h2 class="ul-section-title text-white">Scholarship Benefits</h2>
 
               <!-- <ul class="fee-userslists">
-                    <li><strong>Tuition Fee Waiver</strong> – Scholarship for top-performing students through a merit-based test</li>
-                    <li><strong>Study at NMC-Approved University</strong> Recognized by global medical councils, including India’s NMC</li>
-                    <li>Embassy-verified Admission Process</li>
-                    <li>Hostel Accommodation Assistance</li>
-                    <li>Visa &amp; Travel Support</li>
-                    <li>Free Books &amp; Study Material (Year 1)</li>
-                    <li>Post-education Career Guidance</li>
-                  </ul> -->
+                                  <li><strong>Tuition Fee Waiver</strong> – Scholarship for top-performing students through a merit-based test</li>
+                                  <li><strong>Study at NMC-Approved University</strong> Recognized by global medical councils, including India’s NMC</li>
+                                  <li>Embassy-verified Admission Process</li>
+                                  <li>Hostel Accommodation Assistance</li>
+                                  <li>Visa &amp; Travel Support</li>
+                                  <li>Free Books &amp; Study Material (Year 1)</li>
+                                  <li>Post-education Career Guidance</li>
+                                </ul> -->
               <ul class="fee-userslists">
                 <li><strong>Tuition Fee Waiver</strong> – Scholarship for top-performing students through a merit-based
                   test</li>
@@ -207,23 +212,23 @@
           <!-- form -->
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4">
             <!-- <div class="ul-contact-form-wrapper ">
-                  <h2 class="ul-section-title text-white">Documentation Process</h2>
-                  <p class="ul-event-details-descr">*All documentation is processed through the Kyrgyzstan
-                    Embassy in India.*</p>
-                  <ul class="fee-userslists">
-                    <li>Valid Passport Copy</li>
-                    <li>10th &amp; 12th Marksheet</li>
-                    <li>NEET Scorecard (for Indian nationals)</li>
-                    <li>Birth Certificate</li>
-                    <li>Recent Passport Size Photos (10)</li>
-                    <li>Police Clearance Certificate</li>
-                    <li>Medical Fitness Certificate</li>
-                    <li>Income Certificate (if applying for need-based category)</li>
-                    <li>Scholarship Application Form (downloadable)</li>
+                                <h2 class="ul-section-title text-white">Documentation Process</h2>
+                                <p class="ul-event-details-descr">*All documentation is processed through the Kyrgyzstan
+                                  Embassy in India.*</p>
+                                <ul class="fee-userslists">
+                                  <li>Valid Passport Copy</li>
+                                  <li>10th &amp; 12th Marksheet</li>
+                                  <li>NEET Scorecard (for Indian nationals)</li>
+                                  <li>Birth Certificate</li>
+                                  <li>Recent Passport Size Photos (10)</li>
+                                  <li>Police Clearance Certificate</li>
+                                  <li>Medical Fitness Certificate</li>
+                                  <li>Income Certificate (if applying for need-based category)</li>
+                                  <li>Scholarship Application Form (downloadable)</li>
 
-                  </ul>
+                                </ul>
 
-                </div> -->
+                              </div> -->
 
             <div class="ul-contact-form-wrapper">
               <h2 class="ul-section-title text-white">Documentation Process</h2>
@@ -268,18 +273,18 @@
 
             <!-- donate form  -->
             <!-- <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 ">
-                  <div class="para-white px-3">
-                    <h3 class="ul-event-details-inner-title text-white">How to Apply ?</h3>
-                    <p class="ul-event-details-descr">Simple 3-Step Process:</p>
-                    <ul class="fee-userslists more-sets">
-                      <li>*Fill Online Application Form* (includes passport yes/no question)</li>
-                      <li>*Upload Required Documents*</li>
-                      <li>*Wait for Embassy Interview Slot*</li>
+                                <div class="para-white px-3">
+                                  <h3 class="ul-event-details-inner-title text-white">How to Apply ?</h3>
+                                  <p class="ul-event-details-descr">Simple 3-Step Process:</p>
+                                  <ul class="fee-userslists more-sets">
+                                    <li>*Fill Online Application Form* (includes passport yes/no question)</li>
+                                    <li>*Upload Required Documents*</li>
+                                    <li>*Wait for Embassy Interview Slot*</li>
 
-                    </ul>
-                  </div>
+                                  </ul>
+                                </div>
 
-                </div> -->
+                              </div> -->
 
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4">
               <div class="para-white px-3">
@@ -323,19 +328,19 @@
           <!-- form -->
           <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4">
             <!-- <div class="ul-contact-form-wrapper ">
-                  <h2 class="ul-section-title text-white">Embassy Mediation</h2>
-                  <p class="ul-event-details-descr">The *Kyrgyzstan Embassy in India* ensures a transparent,
-                    legal, and verified scholarship admission process.</p>
-                  <ul class="fee-userslists">
-                    <li>Verification of Documents</li>
-                    <li>Student Interview Scheduling</li>
-                    <li>Visa Processing</li>
-                    <li>Legalization of Education Offer Letter</li>
-                    <li>Issuance of Travel Permission</li>
+                                <h2 class="ul-section-title text-white">Embassy Mediation</h2>
+                                <p class="ul-event-details-descr">The *Kyrgyzstan Embassy in India* ensures a transparent,
+                                  legal, and verified scholarship admission process.</p>
+                                <ul class="fee-userslists">
+                                  <li>Verification of Documents</li>
+                                  <li>Student Interview Scheduling</li>
+                                  <li>Visa Processing</li>
+                                  <li>Legalization of Education Offer Letter</li>
+                                  <li>Issuance of Travel Permission</li>
 
-                  </ul>
+                                </ul>
 
-                </div> -->
+                              </div> -->
 
             <div class="ul-contact-form-wrapper">
               <h2 class="ul-section-title text-white">Embassy Mediation</h2>
@@ -382,77 +387,77 @@
               </h2>
               <div class="accordion" id="faq-more">
                 <!-- <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#one"
-                          aria-expanded="true" aria-controls="one">
-                          Is the MBBS degree valid in India?
-                        </button>
-                      </h2>
-                      <div id="one" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                        data-bs-parent="#faq-more">
-                        <div class="accordion-body">
-                          Yes, degrees from listed universities are NMC approved.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingTwo">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#two" aria-expanded="false" aria-controls="two">
-                          Can I apply without a passport?
-                        </button>
-                      </h2>
-                      <div id="two" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                        data-bs-parent="#faq-more">
-                        <div class="accordion-body">
-                          Yes, but you must initiate the passport application immediately.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#three" aria-expanded="false" aria-controls="three">
-                          Is NEET mandatory?
-                        </button>
-                      </h2>
-                      <div id="three" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#faq-more">
-                        <div class="accordion-body">
-                          Only for Indian applicants.
-                        </div>
-                      </div>
-                    </div>
+                                    <h2 class="accordion-header" id="headingOne">
+                                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#one"
+                                        aria-expanded="true" aria-controls="one">
+                                        Is the MBBS degree valid in India?
+                                      </button>
+                                    </h2>
+                                    <div id="one" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                      data-bs-parent="#faq-more">
+                                      <div class="accordion-body">
+                                        Yes, degrees from listed universities are NMC approved.
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingTwo">
+                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#two" aria-expanded="false" aria-controls="two">
+                                        Can I apply without a passport?
+                                      </button>
+                                    </h2>
+                                    <div id="two" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                      data-bs-parent="#faq-more">
+                                      <div class="accordion-body">
+                                        Yes, but you must initiate the passport application immediately.
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#three" aria-expanded="false" aria-controls="three">
+                                        Is NEET mandatory?
+                                      </button>
+                                    </h2>
+                                    <div id="three" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                      data-bs-parent="#faq-more">
+                                      <div class="accordion-body">
+                                        Only for Indian applicants.
+                                      </div>
+                                    </div>
+                                  </div>
 
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#three" aria-expanded="false" aria-controls="three">
-                          Will the embassy help with the visa?
-                        </button>
-                      </h2>
-                      <div id="three" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#faq-more">
-                        <div class="accordion-body">
-                          Yes, the Kyrgyzstan Embassy will assist in the full process.
-                        </div>
-                      </div>
-                    </div>
+                                  <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#three" aria-expanded="false" aria-controls="three">
+                                        Will the embassy help with the visa?
+                                      </button>
+                                    </h2>
+                                    <div id="three" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                      data-bs-parent="#faq-more">
+                                      <div class="accordion-body">
+                                        Yes, the Kyrgyzstan Embassy will assist in the full process.
+                                      </div>
+                                    </div>
+                                  </div>
 
-                    <div class="accordion-item">
-                      <h2 class="accordion-header" id="headingThree">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                          data-bs-target="#three" aria-expanded="false" aria-controls="three">
-                          Is this scholarship need-based or merit-based?
-                        </button>
-                      </h2>
-                      <div id="three" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                        data-bs-parent="#faq-more">
-                        <div class="accordion-body">
-                          A combination of both. Income certificate is not mandatory but preferred.
-                        </div>
-                      </div>
-                    </div> -->
+                                  <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingThree">
+                                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#three" aria-expanded="false" aria-controls="three">
+                                        Is this scholarship need-based or merit-based?
+                                      </button>
+                                    </h2>
+                                    <div id="three" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                      data-bs-parent="#faq-more">
+                                      <div class="accordion-body">
+                                        A combination of both. Income certificate is not mandatory but preferred.
+                                      </div>
+                                    </div>
+                                  </div> -->
 
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="headingOne">
