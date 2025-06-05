@@ -23,11 +23,25 @@
         </div>
       </div>
     </section>
+<section class="main-registrations">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 mx-auto">
+        <ul class="min-flexs" >
+          <li><a class="btn btn-primary main-login mains-circles" href="{{ url('signup') }}" title="Sign Up"><i
+                      class="pe-7s-add-user"></i>Apply Now</a></li>
+                      <li><a class="btn btn-outline-dark outline-login mains-circles " href="{{ url('login') }}" title="Login"><i
+                      class="pe-7s-user"></i> Login Now</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
     <section class="ul-contactd">
       <div class="container">
         <div class="row ">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-4">
             <div class="form-wrapper">
               <h2 class="ul-section-title text-white">About Eurasian International University (EIU)</h2>
 
@@ -43,7 +57,7 @@
           </div>
 
           <!-- form -->
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-4">
             <div class="form-wrapper">
               <h2 class="ul-section-title text-white">About Gyandeep Welfare & Rehabilitation Society</h2>
 
@@ -83,14 +97,14 @@
     <section class="ul-contactd">
       <div class="container">
         <div class="row ">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-4">
             <div class="ul-contact-imgd">
               <img src="https://gyandeep.ngo/front/assets/img/Scholarship-Benefits.jpeg" alt="Image" class="img-fluid">
             </div>
           </div>
 
           <!-- form -->
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-6 mb-4">
             <div class="ul-contact-form-wrapper">
               <h2 class="ul-section-title text-white">Scholarship Benefits</h2>
 
