@@ -6870,10 +6870,10 @@ p.ul-event-details-descr {
 }
 
 .main-logo {
-    width: 158px;
-    height: 53px;
+    width: 179px;
+    height: 60px;
     padding-bottom: 0px;
-    margin-bottom: 0px;
+    margin-bottom: 17px;
 }
 
 .main-logo img {
@@ -7397,6 +7397,28 @@ ul.all-bos {
     gap: 5px;
     flex-wrap: wrap;
 }
+
+ul.min-flexs {
+     display: flex;
+    justify-content: center;
+    gap: 43px;
+    background-color: #ffffff;
+    margin-bottom: 34px;
+    padding: 24px;
+    border-radius: 135px;
+    border: 1px solid #c3c3c3;
+}
+
+.mains-circles {
+    border-radius: 43px !important;
+    padding: 8px 33px;
+    font-weight: 600;
+    gap: 20px;
+}
+.main-registrations{
+	display: none;
+}
+
 /* responsive gourav css start   */
 
 @media (max-width:1200px){
@@ -7445,6 +7467,9 @@ ul.all-bos {
 }
 
 @media (max-width:992px){
+		.main-registrations{
+	display: block;
+}
 	.img-divs {
     max-width: 156px;
 }
@@ -7504,6 +7529,7 @@ ul.all-bos {
 }
 
 @media (max-width:576px){
+
 	.form-wrapper {
     padding: 22px;
 }
@@ -7529,12 +7555,51 @@ ul.all-bos {
 }
 
 .ul-why-join-txt .accordion-button:not(.collapsed) {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .ul-why-join-txt .accordion-button {
     padding: 0px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 500;
+}
+
+.mains-circles {
+    border-radius: 43px !important;
+    padding: 8px 18px;
+    font-weight: 600;
+    gap: 14px;
+}
+
+ul.min-flexs {
+    gap: 8px;
+    justify-content: space-around;
+}
+
+.mains-circles {
+    padding: 8px 10px;
+    gap: 14px;
+	font-size: 14px !important;
+	justify-content: center;
+}
+}
+
+@media (max-width:400px) {
+ul.min-flexs li {
+    flex-grow: 1;
+}
+	ul.min-flexs {
+    /* flex-wrap: wrap; */
+    padding: 16px;
+}
+/* .mains-circles i {
+    display: none;
+} */
+.mains-circles {
+      /* width: 167px; */
+    justify-content: center;
+    height: 36px;
+	border-radius: 15px;
+	font-size: 13px !important;
 }
 }

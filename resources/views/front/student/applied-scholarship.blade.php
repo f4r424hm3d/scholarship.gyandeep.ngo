@@ -61,8 +61,25 @@
                                 //$current_time = '2022-07-20 12:00:00';
                               @endphp
                               @if ($current_time >= $as->getExam->start_time && $current_time < $as->getExam->end_time)
-                                <a onclick="window.open('{{ url('test/' . $as->getExam->token) }}','test','toolbars=0,width=100%,scrollbars=1');"
-                                  href="javascript:void()" class="btn btn-sm btn-success">Start Exam</a>
+                                {{-- <a onclick="window.open('{{ url('test/' . $as->getExam->token) }}','test','toolbars=0,width=100%,scrollbars=1');"
+                                  href="javascript:void()" class="btn btn-sm btn-success">Start Exam</a> --}}
+                                {{-- <a onclick="window.open('{{ url('test/' . $as->getExam->token) }}', 'test', 'toolbar=0,scrollbars=1,resizable=1,width=' + screen.availWidth + ',height=' + screen.availHeight); return false;"
+                                  href="javascript:void(0)" class="btn btn-sm btn-success">Start Exam</a> --}}
+                                <a onclick="openExamWindow('{{ url('test/' . $as->getExam->token) }}'); return false;"
+                                  href="#" class="btn btn-sm btn-success">Start Exam</a>
+
+                                <script>
+                                  function openExamWindow(url) {
+                                    const width = screen.availWidth;
+                                    const height = screen.availHeight;
+
+                                    window.open(
+                                      url,
+                                      'examWindow',
+                                      `toolbar=0,scrollbars=1,resizable=1,top=0,left=0,width=${width},height=${height}`
+                                    );
+                                  }
+                                </script>
                               @elseif ($current_time > $as->getExam->end_time)
                                 <span class='text-danger'>Exam expired</span>
                               @else

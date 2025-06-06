@@ -30,9 +30,8 @@
         <div class="d-flex align-items-center logo-box justify-content-start">
           <a href="{{ url('testapp/') }}" class="logo">
             <div class="logo-lg">
-              <div class="img-divs"><img src="https://gyandeep.ngo/front/assets/img/plant.png"
-                  alt="logo" /></div>
-          
+              <div class="img-divs"><img src="https://gyandeep.ngo/front/assets/img/plant.png" alt="logo" /></div>
+
             </div>
             <!-- <div class="logo-lg">
               <span class="light-logo"><img src="https://gyandeep.ngo/front/assets/img/plant.png"
@@ -70,15 +69,18 @@
           @endif
           <div class="navbar-custom-menu r-side">
             <ul class="nav navbar-nav main-navbs">
+              {{-- <li class="btn-group nav-item d-lg-inline-flex d-none">
+                <video id="preview" width="80" autoplay muted style="border:1px solid #000;"></video>
+              </li> --}}
               <li class="btn-group nav-item d-lg-inline-flex d-none">
-                <a href="{{ url('testapp/') }}/#" data-provide="fullscreen"
+                <a href="#" data-provide="fullscreen"
                   class="waves-effect waves-light nav-link full-screen m-0 border" title="Full Screen">
                   <i data-feather="maximize"></i>
                 </a>
               </li>
               <!-- User Account-->
               <li class="dropdown user user-menu">
-                <a href="{{ url('testapp/') }}/#" class="waves-effect m-0 waves-light dropdown-toggle"
+                <a href="{{ url('profile/') }}" class="waves-effect m-0 waves-light dropdown-toggle"
                   data-toggle="dropdown" title="User">
                   <i data-feather="user"></i>
                 </a>
@@ -98,3 +100,24 @@
         </nav>
       </div>
     </header>
+
+    {{-- <script>
+      async function requestPermissions() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: true
+          });
+          const videoElement = document.getElementById("preview");
+          videoElement.srcObject = stream;
+          videoElement.play(); // Starts playing the stream
+          console.log("✅ Camera preview started");
+        } catch (err) {
+          console.error("❌ Permission denied or error:", err);
+          alert("Camera and microphone permission is required to take the test.");
+          window.close();
+        }
+      }
+
+      window.onload = requestPermissions;
+    </script> --}}
