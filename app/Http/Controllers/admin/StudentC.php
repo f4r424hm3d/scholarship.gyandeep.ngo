@@ -158,7 +158,8 @@ class StudentC extends Controller
     $ids = $request['ids'];
     $td = 0;
     for ($i = 0; $i < count($ids); $i++) {
-      $result = Student::find($ids[$i])->delete();
+      //$result = Student::find($ids[$i])->delete();
+      $result = Student::find($ids[$i])->forceDelete();
       if ($result) {
         $td++;
       }

@@ -191,11 +191,11 @@
                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Students
               </a>
             </li>
-            <li class="{{ $seg2 == 'student-trash' ? 'current' : '' }}">
+            {{-- <li class="{{ $seg2 == 'student-trash' ? 'current' : '' }}">
               <a href="{{ url('admin/student-trash') }}">
                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Trash
               </a>
-            </li>
+            </li> --}}
             <li class="{{ $seg2 == 'applications' ? 'current' : '' }}">
               <a href="{{ url('admin/applications') }}">
                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Applications

@@ -334,7 +334,7 @@
                   </a>
                   <a title="Move to trash" data-toggle="tooltip" onclick="bulkSoftDelete()" href="javascript:void()"
                     class="btn btn-danger btn-sm">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete
                   </a>
                   <a title="Mark as Called" data-toggle="tooltip" onclick="ajaxBulkUpdate('called','1')"
                     href="javascript:void()" class="btn btn-success btn-sm">
