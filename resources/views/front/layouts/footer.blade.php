@@ -74,12 +74,12 @@
           <p class="ul-footer-about-txt">A registered non-profit organization committed to the welfare, education, and
             rehabilitation of differently-abled individuals</p>
           <div class="ul-footer-socials">
-            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i>
+            <a href="https://www.facebook.com/www.gyandeep.ngo"><i class="fa fa-facebook" aria-hidden="true"></i>
 </a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i>
+            <a href="https://x.com/Gyandeepngo"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/company/gyandeep-ngo"><i class="fa fa-linkedin" aria-hidden="true"></i>
 </a>
-            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i>
+            <a href="https://www.instagram.com/gyan.deepngo"><i class="fa fa-instagram" aria-hidden="true"></i>
 </a>
           </div>
         </div>
@@ -151,18 +151,18 @@
  98704 06867</a>
           </div>
           <form action="#" class="ul-nwsltr-form">
-            <div class="top">
+            <!-- <div class="top">
               <input type="email" name="email" id="nwsltr-email" placeholder="Your Email Address" class="ul-nwsltr-input">
               <button type="submit"><i class="fa fa-arrow-right" aria-hidden="true"></i>
 </button>
-            </div>
+            </div> -->
 
-            <div class="agreement">
+            <!-- <div class="agreement">
               <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="policy">
     <label class="form-check-label" for="policy">I Agree with the <a href="#">Privacy Policy</label>
   </div>
-            </div>
+            </div> -->
 
 
 
