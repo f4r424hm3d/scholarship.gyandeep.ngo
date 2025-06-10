@@ -211,7 +211,7 @@ class StudentLoginFc extends Controller
         $dd = ['to' => 'farazahmad280@gmail.com', 'subject' => 'OTP'];
         Mail::send('front.mailtemplate.send-otp', $emaildata, function ($message) use ($dd) {
             $message->to($dd['to']);
-            $message->from('info@mudraeducation.org', 'Gyandeep NGO');
+            $message->from('info@gyandeep.ngo', 'Gyandeep NGO');
             $message->subject($dd['subject']);
         });
     }

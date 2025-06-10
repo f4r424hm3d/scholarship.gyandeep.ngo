@@ -26,7 +26,7 @@
               <h3>Contacts info & Details</h3>
               <p class="text-justify">Do you want to advertise or list your scholarship on our site? We will be happy to
                 assist you in this, please write us at <a
-                  href="mailto:info@mudraeducation.org">info@mudraeducation.org</a>. Please use the official email of the
+                  href="mailto:info@gyandeep.ngo">info@gyandeep.ngo</a>. Please use the official email of the
                 university, organization, or funding agency. Any requests from non official emails will not be
                 entertained.</p>
               <ul>
@@ -34,7 +34,7 @@
                   10 am – 6 pm on weekdays</li>
                 <li><strong>General questions:</strong>
                   <a href="+919818560331">(+91) 9818560331</a>, <a href="+919870406867">9870406867</a><br>
-                  <a href="mailto:info@mudraeducation.org">info@mudraeducation.org</a>
+                  <a href="mailto:info@gyandeep.ngo">info@gyandeep.ngo</a>
                 </li>
                 <li><strong>Location:</strong>
                   <p>B-16 ground floor Gurugram, Mayfield Garden, Sector 50, Gurugram</p>

@@ -1,6 +1,6 @@
 @php
-$seg2 = Request::segment(2);
-$seg3 = Request::segment(3);
+  $seg2 = Request::segment(2);
+  $seg3 = Request::segment(3);
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -145,8 +145,7 @@ $seg3 = Request::segment(3);
                         class="ti-user text-muted mr-2"></i>
                       Profile</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ url('employee/logout') }}"><i
-                        class="ti-lock text-muted mr-2"></i>
+                    <a class="dropdown-item" href="{{ url('employee/logout') }}"><i class="ti-lock text-muted mr-2"></i>
                       Logout</a>
                   </li>
                 </ul>
@@ -186,16 +185,6 @@ $seg3 = Request::segment(3);
             <li class="{{ $seg2 == 'students' && $seg3 != 'trash' ? 'current' : '' }}">
               <a href="{{ url('employee/students/') }}">
                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Students
-              </a>
-            </li>
-            <li class="{{ $seg2 == 'student-trash' ? 'current' : '' }}">
-              <a href="{{ url('employee/student-trash') }}">
-                <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Trash
-              </a>
-            </li>
-            <li class="{{ $seg2 == 'applications' ? 'current' : '' }}">
-              <a href="{{ url('employee/applications') }}">
-                <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Applications
               </a>
             </li>
           </ul>

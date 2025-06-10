@@ -31,7 +31,7 @@
                 <br>
                 <br>
                 In case of any queries, feel free to contact us at <span
-                  style="color: #fcb709;font-weight:bold">info@mudraeducation.org</span>
+                  style="color: #fcb709;font-weight:bold">info@gyandeep.ngo</span>
               </p>
               <hr>
               <p style="text-align: justify">
