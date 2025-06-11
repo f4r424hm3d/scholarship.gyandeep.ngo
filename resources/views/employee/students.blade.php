@@ -171,13 +171,12 @@ $qs = http_build_query($url_arr);
                             value="" />
                         </th>
                         <th>Sr. No.</th>
+                        <th>Date</th>
                         <th>Action</th>
                         <th>Follow Up</th>
                         <th>Contact</th>
-                        <th>Nationality</th>
-                        <th>Inernational Id</th>
                         <th>Qualification Level</th>
-                        <th>Intrested Course</th>
+                        <th>Status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -193,7 +192,16 @@ $qs = http_build_query($url_arr);
                               value="{{ $row->getStudent->id }}" />
                           </td>
                           <td>
-                            {{ $i }}&nbsp;&nbsp;
+                            {{ $i }}
+                          </td>
+                          <td>
+                            {{ getFormattedDate($row->created_at, 'd M Y h:i A') }}
+                          </td>
+                          <td>
+                            <a href="{{ url('employee/student/' . $row->id . '/profile') }}"
+                              class="waves-effect waves-light btn btn-sm btn-outline btn-info">
+                              <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
                             @if ($row->getStudent->called == 1)
                               <span class="permCalled" title="Called" data-toggle="tooltip">
                                 <i class="fa fa-phone text-success" aria-hidden="true"></i>
@@ -211,14 +219,7 @@ $qs = http_build_query($url_arr);
                               <i class="fa fa-whatsapp text-success" aria-hidden="true"></i>
                             </span>
                           </td>
-                          <td>
-                            {{ getFormattedDate($row->created_at, 'd M Y h:i A') }}
-                            <br>
-                            <a href="{{ url('employee/student/' . $row->getStudent->id) }}"
-                              class="waves-effect waves-light btn btn-sm btn-outline btn-info">
-                              <i class="fa fa-user" aria-hidden="true"></i>
-                            </a>
-                          </td>
+
                           <td>
                             <div id="followupDiv{{ $row->getStudent->id }}">
                               @if ($row->getStudent->lead_status != null)
@@ -256,16 +257,19 @@ $qs = http_build_query($url_arr);
                             </small>
                           </td>
                           <td>
-                            {{ $row->getStudent->name }}<br>
-                            {{ $row->getStudent->c_code . ' ' . $row->getStudent->mobile }} <br>
-                            {{ $row->getStudent->email }}<br>
-                            {{ $row->getStudent->gender }}<br>
-                            {{ $row->getStudent->dob }}<br>
+                            Name : {{ $row->getStudent->name }}<br>
+                            Contact : {{ $row->getStudent->c_code . ' ' . $row->getStudent->mobile }} <br>
+                            Email : {{ $row->getStudent->email }}<br>
+                            Gender : {{ $row->getStudent->gender }}<br>
+                            DOB : {{ $row->getStudent->dob }}<br>
                           </td>
-                          <td>{{ $row->getStudent->nationality }}</td>
-                          <td>{{ $row->getStudent->aadhar }}</td>
-                          <td>{{ $row->getStudent->getLevel->name ?? '' }}</td>
-                          <td>{{ $row->getStudent->getCourse->category ?? '' }}</td>
+                           <td>{{ $row->getStudent->getLevel->name ?? '' }}</td>
+                          <td>
+                            Application : {!! $row->getStudent->submit_application == true
+                                ? '<span class="badge bg-success">Submitted</span>'
+                                : '<span class="badge bg-danger">Not Submitted</span>' !!} <br>
+
+                          </td>
                         </tr>
                         @php
                           $i++;
@@ -380,7 +384,7 @@ $qs = http_build_query($url_arr);
       });
       //alert(users_arr);
       $.ajax({
-        url: "{{ url('common/
+        url: "{{ url('common/update-bulk-field') }}",
         type: 'GET',
         data: {
           ids: users_arr,
