@@ -25,7 +25,23 @@ $jqendt = ($et - $ct) * 1000;
     //   });
     // });
 </script>
+<!-- Button trigger modal -->
+
+
+<button type="button" class=" btn-dark start-record">
+     <div id="speech" class=" m-left type2">
+      <div class="pulse-ring"></div>
+      <span class="record-icon">
+    <!-- <i class="fa fa-circle" aria-hidden="true"></i> -->
+
+  </span>  </div>
+  REC
+</button>
+
+
+
 <section class="contenwrapper my-3">
+
     <div class="container">
         <!-- <section class="content"> -->
         <div class="row flex-column flex-md-row
@@ -259,6 +275,10 @@ $jqendt = ($et - $ct) * 1000;
         <!-- </section> -->
     </div>
 </section>
+
+
+
+
 <!-- report form -->
 <form id="report-form" class="mfp-hide white-popup-block w-400">
     <div id="errSpanReport">
