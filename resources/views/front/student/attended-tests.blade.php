@@ -56,8 +56,9 @@
                               <span @class(['text-success', 'font-bold' => true])>Submitted</span>
                             @else
                               <span @class(['text-primary', 'font-bold' => true])>Attending</span> <br>
-                              <a href="{{ url('test/' . $row->getExamDet->token) }}"
-                                class="btn btn-sm btn-success">Join</a>
+                              <a onclick="openExamWindow('{{ url('test/' . $row->getExamDet->token) }}'); return false;"
+                                href="#" class="btn btn-sm btn-success">Go to
+                                Exam Panel</a>
                             @endif
                           </td>
                           <td>
@@ -77,6 +78,18 @@
       </div>
     </section>
   </main>
+  <script>
+    function openExamWindow(url) {
+      const width = screen.availWidth;
+      const height = screen.availHeight;
+
+      window.open(
+        url,
+        'examWindow',
+        `toolbar=0,scrollbars=1,resizable=1,top=0,left=0,width=${width},height=${height}`
+      );
+    }
+  </script>
   <script>
     function showMessage(time) {
       $('#messSpan').html('Exam will start on <b>' + time + '</b>.');
