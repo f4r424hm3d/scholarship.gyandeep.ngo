@@ -23,19 +23,19 @@
         </div>
       </div>
     </section>
+
     <section class="main-registrations">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mx-auto">
             <ul class="min-flexs">
               @if (session()->has('student_id'))
-                <li><a class="btn btn-primary main-login mains-circles" href="{{ url('profile/applied-scholarship') }}"
-                    title="Sign Up"><i class="pe-7s-add-user"></i>Start Exam</a></li>
+                <li><a class="color-button" href="{{ url('profile/applied-scholarship') }}"
+                    title="Sign Up"><i class="fa fa-angle-double-right" aria-hidden="true"></i>Start Exam</a></li>
               @else
-                <li><a class="btn btn-primary main-login mains-circles" href="{{ url('signup') }}" title="Sign Up"><i
-                      class="pe-7s-add-user"></i>Apply Now</a></li>
-                <li><a class="btn btn-outline-dark outline-login mains-circles " href="{{ url('login') }}"
-                    title="Login"><i class="pe-7s-user"></i> Login Now</a></li>
+                <li><a class="color-button"  href="{{ url('signup') }}" title="Sign Up">Apply Now <i class="fa fa-angle-double-right" aria-hidden="true"></i> </a></li>
+                <li><a class="outline-button " href="{{ url('login') }}"
+                    title="Login"> Login Now <i class="fa fa-user" aria-hidden="true"></i></a></li>
               @endif
             </ul>
           </div>

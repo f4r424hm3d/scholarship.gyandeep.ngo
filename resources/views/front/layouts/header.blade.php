@@ -401,11 +401,11 @@
                       Profile</a></li>
                 @else
                   <li>
-                    <a class="btn btn-primary main-login" href="{{ url('signup') }}" title="Sign Up"><i
-                        class="pe-7s-add-user"></i>Apply Now</a>
+                    <a id="myDIV" class="color-button" href="{{ url('signup') }}" title="Sign Up">Apply Now <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+</a>
                   </li>
-                  <li><a class="btn btn-outline-dark outline-login " href="{{ url('login') }}" title="Login"><i
-                        class="pe-7s-user"></i> Login</a></li>
+                  <li><a class="outline-button " href="{{ url('login') }}" title="Login"> Login Now  <i class="fa fa-user" aria-hidden="true"></i>
+</a></li>
                 @endif
               </ul>
 

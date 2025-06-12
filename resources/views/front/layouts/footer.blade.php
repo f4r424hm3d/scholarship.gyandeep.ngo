@@ -1,4 +1,9 @@
 <footer class="ul-footer">
+       <div class="whats-float">
+  <a href="https://wa.me/+919289333536" class="open-button">
+    <!-- <span>Need any help<br><small>Chat with us</small></span> -->
+    <img alt="whatsapp image" src="{{ asset('front/img/whatsap-icons.png') }}"></a>
+</div>
   <div class="ul-footer-top">
     <div class="container">
      <div class="row">
