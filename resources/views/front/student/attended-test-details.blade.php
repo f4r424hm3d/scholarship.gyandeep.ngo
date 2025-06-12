@@ -5,7 +5,8 @@
 @endphp
 @extends('front.layouts.main')
 @push('title')
-  <title>Attended Test - Gyandeep NGO</title>
+  <title>
+    Attended Test - Gyandeep NGO</title>
 @endpush
 @section('main-section')
   <main>
@@ -41,8 +42,15 @@
                       <td>{{ getFormattedDate($row->attended_at, 'd M Y  h:i A') }}
                       </td>
                       <th>Submitted At</th>
-                      <td>{{ getFormattedDate($row->submitted_at, 'd M Y  h:i A') }}
+
+                      <td>
+                        @if ($row->submitted == 1)
+                          {{ getFormattedDate($row->submitted_at, 'd M Y  h:i A') }}
+                        @else
+                          <span class="text-danger">Not Submitted</span>
+                        @endif
                       </td>
+
                     </tr>
                   </table>
                 </div>

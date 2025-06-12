@@ -37,65 +37,44 @@
                         <th>Scholarship</th>
                         <th>Applied For</th>
                         <th>Exam Detail</th>
-                        <th>Status</th>
+                        {{-- <th>Status</th> --}}
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($as as $as)
+                      @foreach ($rows as $row)
+                        @php
+                          $examEndTimeAfterAttended = strtotime(
+                              $row->getAsignExam->attended_at . '+' . $row->getExam->duration . ' minutes',
+                          );
+                        @endphp
                         <tr>
                           <td>
-                            {{ $as->getScholarship->name }}
+                            {{ $row->getScholarship->name }}
                           </td>
                           <td>
-                            Category - <b>{{ $as->getExam->getCourseCategory->category ?? '' }}</b><br>
+                            Category - <b>{{ $row->getExam->getCourseCategory->category ?? '' }}</b><br>
                           </td>
                           <td>
-                            @if ($as->getAsignExam->attended == 1 && $as->getAsignExam->submitted == 1)
+                            @if ($row->getAsignExam->submitted == 1 || ($row->getAsignExam->attended == 1 && $examEndTimeAfterAttended < $ctp))
                               <span class="text-success">Exam Attended</span><br>
                             @else
-                              Start at - <b>{{ getFormattedDate($as->getExam->start_time, 'd M Y - h:i A') }}</b><br>
-                              End at - <b>{{ getFormattedDate($as->getExam->end_time, 'd M Y - h:i A') }}</b><br>
-                              @php
-                                $current_time = date('Y-m-d H:i:s');
-                                $start_time = getFormattedDate($as->getExam->start_time, 'd M Y - h:i A');
-                                //$current_time = '2022-07-20 12:00:00';
-                              @endphp
-                              @if ($current_time >= $as->getExam->start_time && $current_time < $as->getExam->end_time)
-                                {{-- <a onclick="window.open('{{ url('test/' . $as->getExam->token) }}','test','toolbars=0,width=100%,scrollbars=1');"
-                                  href="javascript:void()" class="btn btn-sm btn-success">Start Exam</a> --}}
-                                {{-- <a onclick="window.open('{{ url('test/' . $as->getExam->token) }}', 'test', 'toolbar=0,scrollbars=1,resizable=1,width=' + screen.availWidth + ',height=' + screen.availHeight); return false;"
-                                  href="javascript:void(0)" class="btn btn-sm btn-success">Start Exam</a> --}}
-                                <a onclick="openExamWindow('{{ url('test/' . $as->getExam->token) }}'); return false;"
+                              Start at - <b>{{ getFormattedDate($row->getExam->start_time, 'd M Y - h:i A') }}</b><br>
+                              End at - <b>{{ getFormattedDate($row->getExam->end_time, 'd M Y - h:i A') }}</b><br>
+                              @if ($ct >= $row->getExam->start_time && $ct < $row->getExam->end_time)
+                                <a onclick="openExamWindow('{{ url('test/' . $row->getExam->token) }}'); return false;"
                                   href="#" class="btn btn-sm btn-success">Start Exam</a>
-
-                                <script>
-                                  function openExamWindow(url) {
-                                    const width = screen.availWidth;
-                                    const height = screen.availHeight;
-
-                                    window.open(
-                                      url,
-                                      'examWindow',
-                                      `toolbar=0,scrollbars=1,resizable=1,top=0,left=0,width=${width},height=${height}`
-                                    );
-                                  }
-                                </script>
-                              @elseif ($current_time > $as->getExam->end_time)
+                              @elseif ($ct > $row->getExam->end_time)
                                 <span class='text-danger'>Exam expired</span>
-                              @else
-                                <a onclick="showMessage('{{ $start_time }}')" href="javascript:void()"
-                                  class="btn btn-sm btn-info">Start Exam</a><br>
-                                <span id="messSpan"></span>
                               @endif
                             @endif
                           </td>
-                          <td>
-                            @if ($as->getAsignExam->attended == 1 && $as->getAsignExam->submitted == 1)
+                          {{-- <td>
+                            @if ($row->getAsignExam->attended == 1 && $row->getAsignExam->submitted == 1)
                               <span class="text-success">Completed</span>
                             @else
                               <span class="text-danger">Pending</span>
                             @endif
-                          </td>
+                          </td> --}}
                         </tr>
                       @endforeach
                     </tbody>
@@ -109,6 +88,18 @@
       </div>
     </section>
   </main>
+  <script>
+    function openExamWindow(url) {
+      const width = screen.availWidth;
+      const height = screen.availHeight;
+
+      window.open(
+        url,
+        'examWindow',
+        `toolbar=0,scrollbars=1,resizable=1,top=0,left=0,width=${width},height=${height}`
+      );
+    }
+  </script>
   <script>
     function showMessage(time) {
       $('#messSpan').html('Exam will start on <b>' + time + '</b>.');

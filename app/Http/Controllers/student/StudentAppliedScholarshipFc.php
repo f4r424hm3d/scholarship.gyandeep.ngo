@@ -13,8 +13,8 @@ class StudentAppliedScholarshipFc extends Controller
         $id = session()->get('student_id');
         $student = Student::find($id);
 
-        $as = AppliedScholarship::with('getExam')->where('std_id', $id)->get();
-        // printArray($as);
+        $rows = AppliedScholarship::with('getExam')->where('std_id', $id)->get();
+        // printArray($rows);
         // die();
         if ($student->photo_path != '') {
             $avatar = $student->photo_path;
@@ -29,7 +29,9 @@ class StudentAppliedScholarshipFc extends Controller
                 $avatar = 'front/avatars/default.png';
             }
         }
-        $data = compact('student', 'as', 'avatar');
+        $ct = date('Y-m-d H:i:s');
+        $ctp = strtotime(date('Y-m-d H:i:s'));
+        $data = compact('student', 'rows', 'avatar', 'ct', 'ctp');
         return view('front.student.applied-scholarship')->with($data);
     }
 }
