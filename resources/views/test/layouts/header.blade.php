@@ -66,14 +66,15 @@
               </script>
               <script language="JavaScript" src="https://rhashemian.github.io/js/countdown.js"></script>
               <button type="button" class=" btn-dark start-record">
-     <div id="speech" class=" m-left type2">
-      <div class="pulse-ring"></div>
-      <span class="record-icon">
-    <!-- <i class="fa fa-circle" aria-hidden="true"></i> -->
+                <div id="speech" class=" m-left type2">
+                  <div class="pulse-ring"></div>
+                  <span class="record-icon">
+                    <!-- <i class="fa fa-circle" aria-hidden="true"></i> -->
 
-  </span>  </div>
-  REC
-</button>
+                  </span>
+                </div>
+                REC
+              </button>
             </div>
           @endif
           <div class="navbar-custom-menu r-side">

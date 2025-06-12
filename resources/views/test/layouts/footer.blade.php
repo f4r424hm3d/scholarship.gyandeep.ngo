@@ -67,6 +67,19 @@
   $(document).bind("contextmenu", function(e) {
     return false;
   });
+  // Disable specific key combinations
+  document.addEventListener('keydown', function(e) {
+    if (
+      (e.ctrlKey && e.key.toLowerCase() === 'u') || // Ctrl+U
+      (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i') || // Ctrl+Shift+I
+      (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'j') || // Ctrl+Shift+J
+      (e.ctrlKey && e.key.toLowerCase() === 's') || // Ctrl+S
+      (e.key === 'F12') // F12
+    ) {
+      e.preventDefault();
+      alert("This action is disabled on this page.");
+    }
+  });
 </script>
 </body>
 
