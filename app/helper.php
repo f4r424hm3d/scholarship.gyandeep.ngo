@@ -68,7 +68,7 @@ if (!function_exists('avatar')) {
                 $avatar = 'front/avatars/default.png';
             }
         }
-        return $avatar;
+        return asset($avatar);
     }
 }
 if (!function_exists('aurl')) {

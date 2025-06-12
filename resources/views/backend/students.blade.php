@@ -238,7 +238,7 @@
                               </span>
                             @endif
                             <a href="{{ url('admin/student/' . $row->id . '/profile') }}"
-                              class="waves-effect waves-light btn btn-sm btn-outline btn-info">
+                              class="waves-effect waves-light btn btn-sm btn-outline btn-info" target="_blank">
                               <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
                             @if ($row->called == 1)
