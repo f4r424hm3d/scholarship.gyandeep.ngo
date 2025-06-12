@@ -136,8 +136,15 @@ class StudentTestFc extends Controller
 
       $examsub = ExamQuestions::with('getSubject')->where('exam_id', $exam->id)->select('subject_id')->distinct('subject_id')->get();
       if ($section_id == null) {
-        $section_id = $examsub[0]->getSubject->id;
-        return redirect('test/' . $exam->token . '/' . $section_id);
+        $lastVisitQuestion = AnswerSheet::where(['exam_id' => $exam->id, 'student_id' => $student_id])->orderBy('id', 'desc')->first();
+        if ($lastVisitQuestion) {
+          $section_id = $lastVisitQuestion->subject_id;
+          $questionId = $lastVisitQuestion->question_id;
+          return redirect('test/' . $exam->token . '/' . $section_id . '/' . $questionId);
+        } else {
+          $section_id = $examsub[0]->getSubject->id;
+          return redirect('test/' . $exam->token . '/' . $section_id);
+        }
       }
       $ques_num = ExamQuestions::where(['exam_id' => $exam->id, 'subject_id' => $section_id])->get();
       $q_id = $ques_num[0]->id;
