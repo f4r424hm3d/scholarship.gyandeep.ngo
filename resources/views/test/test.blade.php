@@ -26,17 +26,14 @@ $jqendt = ($et - $ct) * 1000;
     // });
 </script>
 <!-- Button trigger modal -->
+<marquee class="marque-moved" behavior="" direction="right">
+        <ul class="new-offers">
+            <li>Recording in progress: <span class="new-spns">video</span><span class="new-spns">audio, and screen</span> </li>
+        </ul>
+        
+    </marquee>
 
 
-<button type="button" class=" btn-dark start-record">
-     <div id="speech" class=" m-left type2">
-      <div class="pulse-ring"></div>
-      <span class="record-icon">
-    <!-- <i class="fa fa-circle" aria-hidden="true"></i> -->
-
-  </span>  </div>
-  REC
-</button>
 
 
 
@@ -109,26 +106,26 @@ $jqendt = ($et - $ct) * 1000;
                                                         {{ $ques_det->question }}
                                                     </p>
 
-                                                    <div class="demo-radio-button mt-30 mb-15">
+                                                    <div class="demo-radio-button">
                                                         <div class="d-block">
                                                             <input name="answer" type="radio" id="a" class="with-gap"
                                                                 value="{{ $ques_det->a }}" {{ $ques_det->a ==
                                                             $AnswerSheet->answer ? 'checked' : '' }}><label for="a">{{
                                                                 $ques_det->a }}</label>
                                                         </div>
-                                                        <div class="d-block mt-15">
+                                                        <div class="d-block mt-5">
                                                             <input name="answer" type="radio" id="b" class="with-gap"
                                                                 value="{{ $ques_det->b }}" {{ $ques_det->b ==
                                                             $AnswerSheet->answer ? 'checked' : '' }}><label for="b">{{
                                                                 $ques_det->b }}</label>
                                                         </div>
-                                                        <div class="d-block mt-15">
+                                                        <div class="d-block mt-5">
                                                             <input name="answer" type="radio" id="c" class="with-gap"
                                                                 value="{{ $ques_det->c }}" {{ $ques_det->c ==
                                                             $AnswerSheet->answer ? 'checked' : '' }}><label for="c">{{
                                                                 $ques_det->c }}</label>
                                                         </div>
-                                                        <div class="d-block mt-15">
+                                                        <div class="d-block mt-5">
                                                             <input name="answer" type="radio" id="d" class="with-gap"
                                                                 value="{{ $ques_det->d }}" {{ $ques_det->d ==
                                                             $AnswerSheet->answer ? 'checked' : '' }}><label for="d">{{
@@ -315,8 +312,8 @@ $jqendt = ($et - $ct) * 1000;
         Are you sure to submit your test?
     </h3>
     <a onclick="saveAndNext('save','')" href="javascript:void()"
-        class="popup-with-form waves-effect waves-light btn btn-success mr-2">Yes</a>
-    <a class="mfp-close waves-effect waves-light btn btn-danger d-inline-block w-auto h-auto" style="opacity: 1">No</a>
+        class="btn btn-success mr-2">Yes</a>
+    <a class="btn btn-danger" style="opacity: 1">No</a>
 </form>
 
 <!-- summary -->
