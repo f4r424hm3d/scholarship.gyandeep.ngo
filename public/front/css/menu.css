@@ -223,13 +223,13 @@
  right: 0;
  float: none;
 }
- ul.mm-listview {
+ /* ul.mm-listview {
  line-height: 25px;
-}
- ul.mm-listview li a {
+} */
+ /* ul.mm-listview li a {
  color: #555 !important;
  display: block;
-}
+} */
 }
 
 

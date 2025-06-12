@@ -41,7 +41,7 @@
                         <th>Scholarship</th>
                         <th>Applied For</th>
                         <th>Exam Detail</th>
-                        <th>Status</th>
+                        {{-- <th>Status</th> --}}
                       </tr>
                     </thead>
                     <tbody>
@@ -72,13 +72,13 @@
                               @endif
                             @endif
                           </td>
-                          <td>
-                            @if ($as->getAsignExam->attended == 1 && $as->getAsignExam->submitted == 1)
+                          {{-- <td>
+                            @if ($row->submitted == 1 || $row->getExamDet->end_time < $ct || $end_time < $ctp)
                               <span class="text-success">Completed</span>
                             @else
                               <span class="text-danger">Pending</span>
                             @endif
-                          </td>
+                          </td> --}}
                         </tr>
                       @endforeach
                     </tbody>

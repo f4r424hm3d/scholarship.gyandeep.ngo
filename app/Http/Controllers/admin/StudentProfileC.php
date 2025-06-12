@@ -132,10 +132,12 @@ class StudentProfileC extends Controller
     } else {
       $categories = null;
     }
+    $ct = date('Y-m-d H:i:s');
+    $ctp = strtotime(date('Y-m-d H:i:s'));
     $page_title = 'Student Scholarship';
     $ft = 'edit';
     $page_route = 'scholarship';
-    $data = compact('student', 'page_title', 'ft', 'page_route', 'scholarships', 'categories', 'as');
+    $data = compact('student', 'page_title', 'ft', 'page_route', 'scholarships', 'categories', 'as', 'ct', 'ctp');
     return view('backend.student-scholarship', $data);
   }
   public function exams(Request $request, $studentId)
@@ -143,11 +145,12 @@ class StudentProfileC extends Controller
     $student = Student::find($studentId);
     $where = ['student_id' => $studentId, 'attended' => 1];
     $rows = AsignExam::where($where)->with('getExamDet', 'getApplication')->get();
-
+    $ct = date('Y-m-d H:i:s');
+    $ctp = strtotime(date('Y-m-d H:i:s'));
     $page_title = 'Student Exams';
     $ft = 'edit';
     $page_route = 'exams';
-    $data = compact('student', 'page_title', 'ft', 'page_route', 'rows');
+    $data = compact('student', 'page_title', 'ft', 'page_route', 'rows', 'ct', 'ctp');
     return view('backend.student-exams', $data);
   }
   public function examDetails(Request $request, $studentId, $examId)

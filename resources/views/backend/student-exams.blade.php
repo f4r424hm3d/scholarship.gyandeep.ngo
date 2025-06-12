@@ -51,9 +51,8 @@
                       @endphp
                       @foreach ($rows as $row)
                         @php
-                          // echo $attended_tp = strtotime($row->attended_at);
-                          // echo '<br>';
                           $end_time = strtotime($row->attended_at . '+' . $row->getExamDet->duration . ' minutes');
+
                         @endphp
                         <tr>
                           <td><b><a href="javascript:void()">{{ $row->getExamDet->getScholarship->name }}</a></b></td>
