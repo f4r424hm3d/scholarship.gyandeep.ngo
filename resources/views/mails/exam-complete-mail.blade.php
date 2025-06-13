@@ -67,26 +67,25 @@
           <tr>
             <td valign="top" class="content" style="background:white;padding:25px;">
               <p style="text-align: justify">
-                {{-- Subject: ✅ Scholarship Exam Registration Successful – Please Read Instructions & Start Your Exam --}}
-
                 Dear {{ $name }},
                 <br>
                 Congratulations! 🎉 <br>
-                Your scholarship registration form has been successfully submitted.<br>
-
-                You have chosen to take the exam on {{ $exam_date }}. <br>
-
-                Please click the button below to begin your exam: <br>
-
-                👉 <button class="blue-btn"><a href="{{ $login_link }}">Start Exam</a></button>
+                You have successfully completed the Online Scholarship Exam for the MBBS Scholarship 2025, organized by
+                Gyandeep Welfare & Rehabilitation Society in collaboration with the Embassy of Kyrgyzstan in India and
+                Eurasian International University (EIU), Kyrgyzstan.
                 <br>
-                Before starting, we strongly recommend you read all exam instructions carefully to ensure a smooth
-                experience.
+                Next Step: <br>
+                Your exam and documents are under review. If shortlisted, you’ll be contacted soon for the official
+                Embassy interview.
                 <br>
-                Wishing you all the best!
-                Give it your best shot and aim high — scholarships up to 100% are waiting for top performers!
+                Warm regards,
                 <br>
-                Best regards, <br>
+                Admissions Team
+                <br>
+                Gyandeep Welfare & Rehabilitation Society
+                <br>
+                www.gyandeep.ngo
+                <br>
                 {{ config('app.name') }} <br>
                 {{ config('app.support_email') }} | {{ config('app.contact_number') }} <br>
               </p>

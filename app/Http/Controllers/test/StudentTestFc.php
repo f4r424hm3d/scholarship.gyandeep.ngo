@@ -11,6 +11,7 @@ use App\Models\ExamQuestions;
 use App\Models\QuestionReport;
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class StudentTestFc extends Controller
 {
@@ -245,6 +246,23 @@ class StudentTestFc extends Controller
     $ae->submitted = 1;
     $ae->submitted_at = date('Y-m-d H:i:s');
     $ae->save();
+
+    $emaildata = [
+      'name' => $ae->getStudent->name,
+    ];
+
+    $dd = ['to' => $ae->getStudent->email, 'to_name' => $ae->getStudent->name, 'subject' => 'MBBS Scholarship 2025 – Exam Completed Successfully'];
+
+    Mail::send(
+      'mails.exam-complete-mail',
+      $emaildata,
+      function ($message) use ($dd) {
+        $message->to($dd['to'], $dd['to_name']);
+        $message->subject($dd['subject']);
+        $message->priority(1);
+      }
+    );
+
     session()->forget('student_test_start');
     session()->forget('end_time');
     session()->flash('smsg', 'Test ended. We will send your result on your registred email id. Thank You.');

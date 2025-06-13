@@ -203,7 +203,17 @@ class StudentFc extends Controller
         $assignExam->save();
       }
       $login_link = url('email-login/?uid=' . $field->id . '&token=' . $field->remember_token);
-      $emaildata = ['name' => $field->name, 'id' => $field->id, 'remember_token' => $field->remember_token, 'login_link' => $login_link, 'exam_date' => $request['exam_date'], 'scholarship_name' => $appliedScholarship->getScholarship->name, 'start_time' => $assignExam->getExamDet->start_time, 'end_time' => $assignExam->getExamDet->end_time, 'duration' => $assignExam->getExamDet->duration];
+      $emaildata = [
+        'name' => $field->name,
+        'id' => $field->id,
+        'remember_token' => $field->remember_token,
+        'login_link' => $login_link,
+        'exam_date' => $request['exam_date'],
+        'scholarship_name' => $appliedScholarship->getScholarship->name,
+        'start_time' => $assignExam->getExamDet->start_time,
+        'end_time' => $assignExam->getExamDet->end_time,
+        'duration' => $assignExam->getExamDet->duration
+      ];
 
       $dd = ['to' => $field->email, 'to_name' => $field->name, 'subject' => 'Scholarship Exam Registration Successful – Please Read Instructions & Start Your Exam'];
 
@@ -221,9 +231,6 @@ class StudentFc extends Controller
     session()->flash('smsg', 'Scholarship application has been submitted successfully.');
     return redirect('profile');
   }
-
-
-
 
   public function viewChangePassword()
   {

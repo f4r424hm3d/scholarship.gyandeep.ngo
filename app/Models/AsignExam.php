@@ -16,4 +16,8 @@ class AsignExam extends Model
   {
     return $this->hasOne(AppliedScholarship::class, 'id', 'application_id');
   }
+  public function getStudent()
+  {
+    return $this->hasOne(Student::class, 'id', 'student_id');
+  }
 }
