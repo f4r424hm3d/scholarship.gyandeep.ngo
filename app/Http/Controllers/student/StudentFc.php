@@ -83,11 +83,11 @@ class StudentFc extends Controller
         'zipcode' => 'required|numeric',
         // Newly added fields
         'passing_year_10' => 'required|numeric|digits:4',
-        'result_10' => 'required|string',
+        'result_10' => ['required', 'string', 'not_regex:/<script\b/i'],
         'passing_year_12' => 'required|numeric|digits:4',
-        'result_12' => 'required|string',
+        'result_12' => ['required', 'string', 'not_regex:/<script\b/i'],
         'neet_passing_year' => 'nullable|numeric|digits:4',
-        'neet_result' => 'nullable|string',
+        'neet_result' => ['required', 'string', 'not_regex:/<script\b/i'],
 
         'marksheet_10_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',
         'marksheet_12_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',

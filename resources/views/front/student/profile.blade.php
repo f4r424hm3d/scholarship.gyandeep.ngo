@@ -397,12 +397,12 @@
                         <h5 class="mt-4">Education Summary </h5>
                         <hr>
                       </div>
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="10th" class="form-label">Grade</label>
                         <input type="text" class="form-control" id="10th" placeholder="10th" value="10th"
                           disabled />
                       </div>
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="passing_year_10" class="form-label">Passing Year <span
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="passing_year_10" name="passing_year_10"
@@ -412,7 +412,7 @@
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="result_10" class="form-label">Result <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="result_10" name="result_10"
                           placeholder="Enter Result" value="{{ old('result_10') }}" />
@@ -421,12 +421,12 @@
                         @enderror
                       </div>
 
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="country_of_education" class="form-label">Grade</label>
                         <input type="text" class="form-control" id="12th" placeholder="12th" value="12th"
                           disabled />
                       </div>
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="passing_year_12" class="form-label">Passing Year <span
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="passing_year_12" name="passing_year_12"
@@ -436,7 +436,7 @@
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="result_12" class="form-label">Result <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="result_12" name="result_12"
                           placeholder="Enter Result" value="{{ old('result_12') }}" />
@@ -445,12 +445,12 @@
                         @enderror
                       </div>
 
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="country_of_education" class="form-label">Grade</label>
                         <input type="text" class="form-control" id="NEET" placeholder="NEET" value="NEET"
                           disabled />
                       </div>
-                      <div class="col-md-3 col-sm-12 mb-3">
+                      <div class="col-md-4 col-sm-12 mb-3">
                         <label for="neet_passing_year" class="form-label">Passing Year</label>
                         <input type="year" class="form-control" id="neet_passing_year" name="neet_passing_year"
                           placeholder="Enter Passing Year" max="{{ date('Y') }}"
