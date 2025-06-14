@@ -7759,3 +7759,80 @@ ul.min-flexs li {
 .wa-container, .wa-container .cancel, .whats-float, .whats-float img {
     transition: .5s ease-in-out;
 } */
+
+.eye-icon {
+     position: absolute;
+    top: 0;
+    right: 0px;
+    width: 33px;
+    color: #00548e;
+    font-size: 16px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width:576px){
+	.fixedss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.mainpars a  i {
+    display: none;
+}
+
+.main-acco .card a i {
+    display: none;
+}
+.strip_list {
+    padding: 7px;
+}
+
+#detail-title {
+    padding: 8px 0px;
+}
+
+#detail-title {
+    font-size: 14px;
+}
+
+.table-responsive tr, .table-responsive td, .table-responsive th {
+    font-size: 11px;
+    padding: 10px;
+}
+.main-acco .card a {
+    padding: 6px;
+}
+
+.strip_list {
+    padding: 7px;
+}
+.profile-imges {
+    width: 96px;
+    height: 96px;
+	margin: unset;
+}
+
+a {}
+
+.mainpars a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    align-items: center;
+}
+
+
+.profile-imges {
+    display: none;
+}
+
+.main-acco {
+    margin-top: 5px !important;
+}
+}
