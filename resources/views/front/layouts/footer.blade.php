@@ -215,7 +215,7 @@
       </div>
       <div class="col-12">
         <hr class="reverserd my-2" >
-          <div id="copy">Copyright © 2022 all rights reserved</div>
+          <div id="copy">Copyright © 2025 all rights reserved</div>
       </div>
      
     </div>

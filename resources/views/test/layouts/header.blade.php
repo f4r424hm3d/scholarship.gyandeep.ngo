@@ -28,7 +28,7 @@
     <header class="main-header instruction-header">
       <div class="container-fluid px-sm-5">
         <div class="d-flex align-items-center logo-box justify-content-start">
-          <a href="{{ url('testapp/') }}" class="logo">
+          <a href="#" class="logo">
             <div class="logo-lg">
               <div class="img-divs"><img src="https://gyandeep.ngo/front/assets/img/plant.png" alt="logo" /></div>
 

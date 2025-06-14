@@ -10,7 +10,6 @@
        <div class="row">
         <div class="col-12 col-sm-12 col-md-8 col-lg-6 mx-auto">
            <div id="login" class="login-forms">
-          <!-- <h4 class="" >Please Log In to continue</h4> -->
            <div class="main-background" ></div>
           @if (session()->has('smsg'))
             <div class="alert alert-success alert-dismissable">
@@ -41,13 +40,49 @@
                   value="{{ old('email') }}">
                 </div>
               </div>
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <div class="position-relative logiin-forma">
                   <i class="fa fa-lock mails-icons" aria-hidden="true"></i>
 
                   <input type="password" class="form-control" placeholder="Your password" id="password" name="password">
+                 <div class="eye-icon">
+                   <i class="fa fa-eye show-icon" aria-hidden="true"></i>
+                  <i class="fa fa-eye-slash hide-icon" aria-hidden="true"></i>
+                 </div>
+
                 </div>
-              </div>
+              </div> -->
+
+
+<div class="form-group">
+  <div class="position-relative logiin-forma">
+    <i class="fa fa-lock mails-icons" aria-hidden="true"></i>
+
+    <input type="password" class="form-control" placeholder="Your password" id="password" name="password">
+
+    <div class="eye-icon" onclick="togglePassword()">
+      <i id="eyeShow" class="fa fa-eye" aria-hidden="true" style="display: inline;"></i>
+      <i id="eyeHide" class="fa fa-eye-slash" aria-hidden="true" style="display: none;"></i>
+    </div>
+  </div>
+</div>
+
+<script>
+  function togglePassword() {
+    const passwordField = document.getElementById("password");
+    const eyeShow = document.getElementById("eyeShow");
+    const eyeHide = document.getElementById("eyeHide");
+
+    const isPassword = passwordField.type === "password";
+    passwordField.type = isPassword ? "text" : "password";
+
+    eyeShow.style.display = isPassword ? "none" : "inline";
+    eyeHide.style.display = isPassword ? "inline" : "none";
+  }
+</script>
+
+
+
               <a class="forgot-show" href="{{ url('forget-password') }}">Forgot password?</a>
              
               <div class="form-group text-center mt-3">
