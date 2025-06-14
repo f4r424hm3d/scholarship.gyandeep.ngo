@@ -212,6 +212,7 @@ class StudentTestFc extends Controller
       //     return redirect('run-test/complete?asign=' . $ae->id);
       // }
     } else {
+      //return "Faraz";
       return redirect('test/' . $token . '/instruction');
     }
   }
