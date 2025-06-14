@@ -192,25 +192,7 @@ Route::middleware([StudentLoggedIn::class])->group(function () {
   });
 
   Route::get('/get-course-categories/{scholarshipId}', [StudentFc::class, 'getCourseCategories'])->name('get-course-categories');
-  Route::prefix('scholarship')->group(function () {
-    Route::get('/application', [StudentApplicationFc::class, 'studentApplication']);
-    Route::get('/shortlist', [StudentApplicationFc::class, 'shortlist']);
-    Route::post('/apply', [StudentApplicationFc::class, 'applyScholarship']);
-    Route::get('/personal-details', [StudentApplicationFc::class, 'personalDetails']);
-    Route::post('/personal-details', [StudentApplicationFc::class, 'addPersonalDetails']);
-    Route::get('/contact-details', [StudentApplicationFc::class, 'contactDetails']);
-    Route::post('/contact-details', [StudentApplicationFc::class, 'addContactDetails']);
-    Route::get('/academics-details', [StudentApplicationFc::class, 'academicsDetails']);
-    Route::post('/academics-details', [StudentApplicationFc::class, 'addAcademicsDetails']);
-    Route::post('/academics-details/update', [StudentApplicationFc::class, 'updateAcademicsDetails']);
-    Route::get('/documents', [StudentApplicationFc::class, 'documents']);
-    Route::get('/upload-documents', [StudentApplicationFc::class, 'uploadDocuments']);
-    Route::post('/upload-documents', [StudentApplicationFc::class, 'uploadDocuments']);
 
-    Route::post('/check-eligibility', [StudentApplicationFc::class, 'checkEligibility']);
-
-    Route::get('/{scholarship_id}/{slug}/apply', [StudentApplicationFc::class, 'apply']);
-  });
   Route::get('/student-logout', function () {
     session()->forget('student_id');
     session()->forget('student_test_start');
