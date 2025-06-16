@@ -69,14 +69,14 @@ class StudentFc extends Controller
         'parents_mobile' => 'required|numeric',
         'nationality' => 'required',
         'gender' => 'required|in:male,female,other',
-        'occupation' => 'required|regex:/^[a-zA-Z ]*$/',
+        'parents_occupation' => 'required|regex:/^[a-zA-Z ]*$/',
         'dob' => 'required|date',
         'first_language' => 'required|regex:/^[a-zA-Z ]*$/',
         'marital_status' => 'required|regex:/^[a-zA-Z ]*$/',
-        'passport_number' => 'nullable|numeric',
+        'passport_number' => 'nullable|regex:/^[a-zA-Z0-9, ]*$/',
         'passport_expiry' => 'nullable|date',
         'religion' => 'required|regex:/^[a-zA-Z ]*$/',
-        'home_address' => 'required|regex:/^[a-zA-Z0-9, ]*$/',
+        'address' => 'required|regex:/^[a-zA-Z0-9, ]*$/',
         'city' => 'required|regex:/^[a-zA-Z ]*$/',
         'state' => 'required|regex:/^[a-zA-Z ]*$/',
         'country' => 'required|regex:/^[a-zA-Z ]*$/',
@@ -87,7 +87,7 @@ class StudentFc extends Controller
         'passing_year_12' => 'required|numeric|digits:4',
         'result_12' => ['required', 'string', 'not_regex:/<script\b/i'],
         'neet_passing_year' => 'nullable|numeric|digits:4',
-        'neet_result' => ['required', 'string', 'not_regex:/<script\b/i'],
+        'neet_result' => ['nullable', 'string', 'not_regex:/<script\b/i'],
 
         'marksheet_10_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',
         'marksheet_12_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',
@@ -110,14 +110,14 @@ class StudentFc extends Controller
     $field->parents_mobile = $request['parents_mobile'];
     $field->nationality = $request['nationality'];
     $field->gender = $request['gender'];
-    $field->parents_occupation = $request['occupation'];
+    $field->parents_occupation = $request['parents_occupation'];
     $field->dob = $request['dob'];
     $field->first_language = $request['first_language'];
     $field->marital_status = $request['marital_status'];
     $field->passport_number = $request['passport_number'];
     $field->passport_expiry_date = $request['passport_expiry'];
     $field->religion = $request['religion'];
-    $field->address = $request['home_address'];
+    $field->address = $request['address'];
     $field->city = $request['city'];
     $field->state = $request['state'];
     $field->country = $request['country'];

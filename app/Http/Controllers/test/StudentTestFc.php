@@ -10,6 +10,7 @@ use App\Models\ExamInstruction;
 use App\Models\ExamQuestions;
 use App\Models\QuestionReport;
 use App\Models\Student;
+use App\Models\Subjects;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -135,7 +136,7 @@ class StudentTestFc extends Controller
       // die;
       $ae = AsignExam::where(['exam_id' => $exam->id, 'student_id' => $student_id])->first();
 
-      $examsub = ExamQuestions::with('getSubject')->where('exam_id', $exam->id)->select('subject_id')->distinct('subject_id')->get();
+      $examsub = ExamQuestions::with('getSubject')->where('exam_id', $exam->id)->select('subject_id')->distinct('subject_id')->orderBy('id', 'asc')->get();
       if ($section_id == null) {
         $lastVisitQuestion = AnswerSheet::where(['exam_id' => $exam->id, 'student_id' => $student_id])->orderBy('id', 'desc')->first();
         if ($lastVisitQuestion) {
@@ -147,6 +148,7 @@ class StudentTestFc extends Controller
           return redirect('test/' . $exam->token . '/' . $section_id);
         }
       }
+      $currentSubject = Subjects::find($section_id);
       $ques_num = ExamQuestions::where(['exam_id' => $exam->id, 'subject_id' => $section_id])->get();
       $q_id = $ques_num[0]->id;
       if ($question_id == null) {
@@ -160,11 +162,11 @@ class StudentTestFc extends Controller
 
       // get next user id
       $next = ExamQuestions::where('exam_id', $exam->id)->where('id', '>', $q_id)->min('id');
-      if ($next != '') {
-        $nqd = ExamQuestions::where('id', $next)->select('subject_id')->first();
-      } else {
-        $nqd = '';
+      if ($next === NULL) {
+        $next = ExamQuestions::where('exam_id', $exam->id)->where('id', '<', $q_id)->min('id');
       }
+
+      $nqd = ExamQuestions::where('id', $next)->select('subject_id')->first();
       // printArray($next);
       // printArray($nqd->toArray());
       // die;
@@ -199,7 +201,7 @@ class StudentTestFc extends Controller
       //$not_visited = $total_question - $not_answered;
       $not_visited = $total_question - $total_visited;
 
-      $data = compact('exam', 'examsub', 'ques_num', 'ques_det', 'student_id', 'q_id', 'next', 'nqd', 'student', 'section_id', 'AnswerSheet', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered', 'ae');
+      $data = compact('exam', 'examsub', 'ques_num', 'ques_det', 'student_id', 'q_id', 'next', 'nqd', 'student', 'section_id', 'AnswerSheet', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered', 'ae', 'currentSubject');
 
       //if (session()->get('end_time') < $ct) {
       if ($ct > $exam->start_time && $ct < $exam->end_time) {

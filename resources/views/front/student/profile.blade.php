@@ -180,21 +180,21 @@
                         @enderror
                       </div>
 
-                      <div class="col-md-3 col-sm-12">
+                      <div class="col-md-2 col-sm-12">
                         <label class="form-label " for="c_code">Country Code <span
                             class="text-danger">*</span></label>
-                        <input type="number" min="0" class="form-control" name="c_code" id="c_code"
-                          placeholder="Enter country code" value="{{ old('c_code') }}">
+                        <input type="text" class="form-control" name="c_code" id="c_code"
+                          placeholder="Country code" value="{{ old('c_code') ?? $student->c_code }}">
                         @error('c_code')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
 
-                      <div class="col-md-3 col-sm-12">
+                      <div class="col-md-4 col-sm-12">
                         <label class="form-label " for="mobile">Phone Number <span
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="mobile" id="mobile"
-                          placeholder="Enter Phone Number" value="{{ old('mobile') }}">
+                          placeholder="Enter Phone Number" value="{{ old('mobile') ?? $student->mobile }}">
                         @error('mobile')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -204,7 +204,7 @@
                         <label class="form-label " for="father">Father's Name <span
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="father" id="father"
-                          placeholder="Enter Father Name" value="{{ old('father') }}">
+                          placeholder="Enter Father Name" value="{{ old('father') ?? $student->father }}">
                         @error('father')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -214,7 +214,7 @@
                         <label class="form-label " for="mother">Mother's Name <span
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="mother" id="mother"
-                          placeholder="Enter Mother Name" value="{{ old('mother') }}">
+                          placeholder="Enter Mother Name" value="{{ old('mother') ?? $student->mother }}">
                         @error('mother')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -224,7 +224,8 @@
                         <label class="form-label " for="parents_mobile">Parents Contact No <span
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="parents_mobile" id="parents_mobile"
-                          placeholder="Enter Mother Mobile" value="{{ old('parents_mobile') }}">
+                          placeholder="Enter Mother Mobile"
+                          value="{{ old('parents_mobile') ?? $student->parents_mobile }}">
                         @error('parents_mobile')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -237,7 +238,7 @@
                           <option value="">Select</option>
                           @foreach ($countries as $row)
                             <option value="{{ $row->name }}"
-                              {{ old('nationality') == $row->name ? 'selected' : '' }}>
+                              {{ old('nationality') == $row->name || $student->nationality == $row->name ? 'selected' : '' }}>
                               {{ $row->name }}</option>
                           @endforeach
                         </select>
@@ -250,21 +251,26 @@
                         <label class="form-label " for="gender">Gender <span class="text-danger">*</span></label>
                         <select id="gender" name="gender" class="form-select">
                           <option value="" selected>Select</option>
-                          <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Male</option>
-                          <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Female
+                          <option value="male"
+                            {{ old('gender') == 'male' || $student->gender == 'male' ? 'selected' : '' }}>Male</option>
+                          <option value="female"
+                            {{ old('gender') == 'female' || $student->gender == 'female' ? 'selected' : '' }}>Female
                           </option>
-                          <option value="other" {{ old('gender') == 'other' ? 'selected' : '' }}>Other</option>
+                          <option value="other"
+                            {{ old('gender') == 'other' || $student->gender == 'other' ? 'selected' : '' }}>Other
+                          </option>
                         </select>
                         @error('gender')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
                       <div class="col-md-3 col-sm-12">
-                        <label class="form-label " for="occupation">Parents Occupation <span
+                        <label class="form-label " for="parents_occupation">Parents Occupation <span
                             class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="occupation" id="occupation"
-                          placeholder="Enter Parents Occupation" value="{{ old('occupation') }}">
-                        @error('occupation')
+                        <input type="text" class="form-control" name="parents_occupation" id="parents_occupation"
+                          placeholder="Enter Parents Occupation"
+                          value="{{ old('parents_occupation') ?? $student->parents_occupation }}">
+                        @error('parents_occupation')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
@@ -272,7 +278,8 @@
                       <div class="col-md-3 col-sm-12">
                         <label class="form-label " for="dob">D.O.B <span class="text-danger">*</span></label>
                         <input type="date" class="form-control" name="dob" id="dob"
-                          placeholder="Enter date of birth" value="{{ old('dob') }}" max="2010-12-31">
+                          placeholder="Enter date of birth" value="{{ old('dob') ?? $student->dob }}"
+                          max="2010-12-31">
                         @error('dob')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -282,7 +289,8 @@
                         <label class="form-label " for="first_language">First Language <span
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="first_language" id="first_language"
-                          placeholder="Enter First Language" value="{{ old('first_language') }}">
+                          placeholder="Enter First Language"
+                          value="{{ old('first_language') ?? $student->first_language }}">
                         @error('first_language')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -293,10 +301,12 @@
                             class="text-danger">*</span></label>
                         <select name="marital_status" id="marital_status" class="form-select">
                           <option value="">Select</option>
-                          <option value="Single" {{ old('marital_status') == 'Single' ? 'selected' : '' }}>
+                          <option value="Single"
+                            {{ old('marital_status') == 'Single' || $student->marital_status == 'Single' ? 'selected' : '' }}>
                             Single
                           </option>
-                          <option value="Married" {{ old('marital_status') == 'Married' ? 'selected' : '' }}>
+                          <option value="Married"
+                            {{ old('marital_status') == 'Married' || $student->marital_status == 'Married' ? 'selected' : '' }}>
                             Married
                           </option>
                         </select>
@@ -308,7 +318,8 @@
                       <div class="col-md-3 col-sm-12">
                         <label class="form-label " for="passport_number">Passport Number</label>
                         <input type="text" class="form-control" name="passport_number" id="passport_number"
-                          placeholder="Enter Passport Number" value="{{ old('passport_number') }}">
+                          placeholder="Enter Passport Number"
+                          value="{{ old('passport_number') ?? $student->passport_number }}">
                         @error('passport_number')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -317,7 +328,8 @@
                       <div class="col-md-3 col-sm-12">
                         <label class="form-label " for="passport_expiry">Passport Expiry</label>
                         <input type="date" class="form-control" name="passport_expiry" id="passport_expiry"
-                          placeholder="Enter Passport Expiry date" value="{{ old('passport_expiry') }}"
+                          placeholder="Enter Passport Expiry date"
+                          value="{{ old('passport_expiry') ?? $student->passport_expiry }}"
                           min="{{ date('Y-m-d', strtotime('+1 day')) }}">
                         @error('passport_expiry')
                           <span class="text-danger">{{ $message }}</span>
@@ -327,7 +339,7 @@
                       <div class="col-md-3 col-sm-12">
                         <label class="form-label " for="religion">Religion <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="religion" id="religion"
-                          placeholder="Enter Religion" value="{{ old('religion') }}">
+                          placeholder="Enter Religion" value="{{ old('religion') ?? $student->religion }}">
                         @error('religion')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -340,10 +352,10 @@
                         <hr>
                       </div>
                       <div class="col-md-6 col-sm-12">
-                        <label class="form-label" for="home_address">Address <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="home_address" id="home_address"
-                          placeholder="Enter address" value="{{ old('home_address') }}">
-                        @error('home_address')
+                        <label class="form-label" for="address">Address <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="address" id="address"
+                          placeholder="Enter address" value="{{ old('address') ?? $student->address }}">
+                        @error('address')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
                       </div>
@@ -351,7 +363,7 @@
                       <div class="col-md-3 col-sm-12">
                         <label class="form-label" for="city">City <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="city" id="city"
-                          placeholder="Enter city" value="{{ old('city') }}">
+                          placeholder="Enter city" value="{{ old('city') ?? $student->city }}">
                         @error('city')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -360,7 +372,7 @@
                       <div class="col-md-3 col-sm-12">
                         <label class="form-label" for="state">State <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="state" id="state"
-                          placeholder="Enter state" value="{{ old('state') }}">
+                          placeholder="Enter state" value="{{ old('state') ?? $student->state }}">
                         @error('state')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -371,7 +383,8 @@
                         <select class="form-select" id="country" name="country" aria-label="Select Country">
                           <option value="">Select</option>
                           @foreach ($countries as $row)
-                            <option value="{{ $row->name }}" {{ old('country') == $row->name ? 'selected' : '' }}>
+                            <option value="{{ $row->name }}"
+                              {{ old('country') == $row->name || $student->country == $row->name ? 'selected' : '' }}>
                               {{ $row->name }}</option>
                           @endforeach
                         </select>
@@ -384,7 +397,7 @@
                         <label class="form-label" for="zipcode">Postal/Zipcode <span
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" name="zipcode" id="zipcode"
-                          placeholder="Enter Postal/Zipcode" value="{{ old('zipcode') }}">
+                          placeholder="Enter Postal/Zipcode" value="{{ old('zipcode') ?? $student->zipcode }}">
                         @error('zipcode')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -407,7 +420,7 @@
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="passing_year_10" name="passing_year_10"
                           placeholder="Enter Passing Year" max="{{ date('Y') }}"
-                          value="{{ old('passing_year_10') }}" />
+                          value="{{ old('passing_year_10') ?? $student->passing_year_10 }}" />
                         @error('passing_year_10')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -415,7 +428,7 @@
                       <div class="col-md-4 col-sm-12 mb-3">
                         <label for="result_10" class="form-label">Result <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="result_10" name="result_10"
-                          placeholder="Enter Result" value="{{ old('result_10') }}" />
+                          placeholder="Enter Result" value="{{ old('result_10') ?? $student->result_10 }}" />
                         @error('result_10')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -431,7 +444,7 @@
                             class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="passing_year_12" name="passing_year_12"
                           placeholder="Enter Passing Year" max="{{ date('Y') }}"
-                          value="{{ old('passing_year_12') }}" />
+                          value="{{ old('passing_year_12') ?? $student->passing_year_12 }}" />
                         @error('passing_year_12')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -439,7 +452,7 @@
                       <div class="col-md-4 col-sm-12 mb-3">
                         <label for="result_12" class="form-label">Result <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" id="result_12" name="result_12"
-                          placeholder="Enter Result" value="{{ old('result_12') }}" />
+                          placeholder="Enter Result" value="{{ old('result_12') ?? $student->result_12 }}" />
                         @error('result_12')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -454,7 +467,7 @@
                         <label for="neet_passing_year" class="form-label">Passing Year</label>
                         <input type="year" class="form-control" id="neet_passing_year" name="neet_passing_year"
                           placeholder="Enter Passing Year" max="{{ date('Y') }}"
-                          value="{{ old('neet_passing_year') }}" />
+                          value="{{ old('neet_passing_year') ?? $student->neet_passing_year }}" />
                         @error('neet_passing_year')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
@@ -462,7 +475,7 @@
                       <div class="col-md-3 col-sm-12 mb-3">
                         <label for="neet_result" class="form-label">Result</label>
                         <input type="text" class="form-control" id="neet_result" name="neet_result"
-                          placeholder="Enter Result" value="{{ old('neet_result') }}" />
+                          placeholder="Enter Result" value="{{ old('neet_result') ?? $student->neet_result }}" />
                         @error('neet_result')
                           <span class="text-danger">{{ $message }}</span>
                         @enderror
