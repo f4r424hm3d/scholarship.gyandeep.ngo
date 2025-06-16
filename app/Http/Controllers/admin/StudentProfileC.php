@@ -180,7 +180,7 @@ class StudentProfileC extends Controller
     $page_route = 'exam-details';
 
     //printArray($user_info->toArray());
-    $data = compact('student', 'row', 'total_question', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered', 'sectionDet', 'studentId', 'page_title', 'ft', 'page_route');
+    $data = compact('student', 'row', 'total_question', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered', 'sectionDet', 'studentId', 'page_title', 'ft', 'page_route', 'examId');
     return view('backend.attended-test-details')->with($data);
   }
 }

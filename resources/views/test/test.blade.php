@@ -382,7 +382,8 @@
                 window.open(path, "_self");
               }
             } else {
-              window.open("{{ url('run-test/complete?asign=' . $ae->id) }}", "_self");
+              window.location.href = "{{ url('run-test/complete?asign=' . $ae->id) }}";
+              // window.open("{{ url('run-test/complete?asign=' . $ae->id) }}", "_self");
             }
           }
         });

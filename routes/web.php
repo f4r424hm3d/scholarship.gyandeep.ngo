@@ -39,6 +39,7 @@ use App\Http\Controllers\admin\StudentC;
 use App\Http\Controllers\admin\StudentFollowUpC;
 use App\Http\Controllers\admin\StudentProfileC;
 use App\Http\Controllers\admin\TestimonialC;
+use App\Http\Controllers\common\StudentResultController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\employee\EmpDashboardC;
 use App\Http\Controllers\employee\EmpLoginC;
@@ -640,4 +641,6 @@ Route::prefix('common')->group(function () {
   Route::get('/asign-leads', [StudentFollowUpC::class, 'asignLeads']);
   Route::get('/unasign-leads', [StudentFollowUpC::class, 'unAsignLeads']);
   Route::get('/get-course-categories/{scholarshipId}', [StudentFc::class, 'getCourseCategories'])->name('get-course-categories')->name('common.get.categories');
+
+  Route::get('/send-result-to-student/{studentId}/{examId}', [StudentResultController::class, 'index'])->name('common.send.result');
 });

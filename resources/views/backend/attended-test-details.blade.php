@@ -173,13 +173,48 @@
                       </table>
                     </div>
                   </div>
-
                 </div>
               </div>
+
+              <button class="btn btn-sm btn-info" type="button"
+                onclick="sendResultToStudent('{{ $student->id }}','{{ $examId }}')">
+                Send Result
+              </button>
             </div>
           </div>
         </div>
       </section>
     </div>
   </div>
+  <script>
+    function sendResultToStudent(studentId, examId) {
+      //alert(studentId);
+      var cd = confirm("Are you sure ?");
+      if (cd == true) {
+        $.ajax({
+          url: "{{ url('common/send-result-to-student') }}" + "/" + studentId + "/" + examId,
+          success: function(result) {
+            if (result == '1') {
+              var h = 'Success';
+              var msg = 'Record deleted successfully';
+              var type = 'success';
+              showToastr(h, msg, type);
+            }
+          }
+        });
+      }
+    }
+
+    function showToastr(h, msg, type) {
+      $.toast({
+        heading: h,
+        text: msg,
+        position: 'top-right',
+        loaderBg: '#ff6849',
+        icon: type,
+        hideAfter: 3000,
+        stack: 6
+      });
+    }
+  </script>
 @endsection
