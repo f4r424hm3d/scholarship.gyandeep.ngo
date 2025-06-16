@@ -75,7 +75,7 @@ class ProviderLoginFc extends Controller
       return redirect('provider/signup');
     } else {
       $field->save();
-      session()->flash('smsg', 'An OTP has been send to your registered email address.');
+      session()->flash('smsg', 'An OTP has been sent to your registered email address.');
       $data->session()->put('last_id', $field->id);
       return redirect('provider/confirmed-email');
     }
@@ -102,7 +102,7 @@ class ProviderLoginFc extends Controller
         $result->otp = $new_otp;
         $result->otp_expire_at = $otp_expire_at;
         $result->save();
-        session()->flash('smsg', 'OTP expired. New OTP has been send to your email id.');
+        session()->flash('smsg', 'OTP expired. New OTP has been sent to your email id.');
         return redirect('provider/confirmed-email');
       } else {
         $result->otp = null;
