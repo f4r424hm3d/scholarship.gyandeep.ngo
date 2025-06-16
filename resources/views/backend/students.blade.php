@@ -307,7 +307,15 @@
                             Application : {!! $row->submit_application == true
                                 ? '<span class="badge bg-success">Submitted</span>'
                                 : '<span class="badge bg-danger">Not Submitted</span>' !!} <br>
-
+                            @if ($row->lastAttendedExam)
+                              Exam : <a
+                                href="{{ url('admin/student/' . $row->id . '/exams/' . $row->lastAttendedExam->id) }}"
+                                class="btn btn-xs btn-primary" target="_blank">View Result</a> <br>
+                              <button class="btn btn-xs btn-info" type="button"
+                                onclick="sendResultToStudent('{{ $row->id }}','{{ $row->lastAttendedExam->id }}')">
+                                Send Result
+                              </button>
+                            @endif
                           </td>
                         </tr>
                         @php
@@ -388,6 +396,37 @@
       @include('common.view-all-follow-up')
     </div>
   </div>
+  <script>
+    function sendResultToStudent(studentId, examId) {
+      //alert(studentId);
+      var cd = confirm("Are you sure ?");
+      if (cd == true) {
+        $.ajax({
+          url: "{{ url('common/send-result-to-student') }}" + "/" + studentId + "/" + examId,
+          success: function(result) {
+            if (result == '1') {
+              var h = 'Success';
+              var msg = 'Record deleted successfully';
+              var type = 'success';
+              showToastr(h, msg, type);
+            }
+          }
+        });
+      }
+    }
+
+    function showToastr(h, msg, type) {
+      $.toast({
+        heading: h,
+        text: msg,
+        position: 'top-right',
+        loaderBg: '#ff6849',
+        icon: type,
+        hideAfter: 3000,
+        stack: 6
+      });
+    }
+  </script>
   <script>
     $(document).ready(function() {
       $('#f_lead_status').on('change', function(event) {
