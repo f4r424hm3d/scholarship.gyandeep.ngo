@@ -45,7 +45,7 @@
               <div id="tp">
                 <div class="head">
                   <ul class="nav nav-tabs customtab2" role="tablist">
-                    <li class="pl-10 pr-15 new-sections">Sections {{ $next ?? 'null' }}:</li>
+                    <li class="pl-10 pr-15 new-sections">Sections:</li>
                     <ul class="main-flexs">
                       @foreach ($examsub as $row)
                         <li class="nav-item">
