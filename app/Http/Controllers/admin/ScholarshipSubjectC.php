@@ -29,7 +29,7 @@ class ScholarshipSubjectC extends Controller
       $sd = '';
     }
     $data = compact('rows', 'sd', 'ft', 'url', 'title', 'sch');
-    return view('backend.scholarship-subject')->with($data);
+    return view('admin.scholarship-subject')->with($data);
   }
   public function store(Request $request)
   {

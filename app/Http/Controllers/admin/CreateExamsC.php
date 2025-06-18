@@ -36,7 +36,7 @@ class CreateExamsC extends Controller
     $cc = CourseCategory::all();
 
     $data = compact('rows', 'sd', 'ft', 'url', 'title', 'scholarships', 'cc');
-    return view('backend.create-exams')->with($data);
+    return view('admin.create-exams')->with($data);
   }
   public function store(Request $request)
   {
@@ -101,6 +101,6 @@ class CreateExamsC extends Controller
     $today = date('Y-m-d h:i:s');
     $rows = CreateExams::where('end_time', '<', $today)->get();
     $data = compact('rows');
-    return view('backend.expired-exams')->with($data);
+    return view('admin.expired-exams')->with($data);
   }
 }

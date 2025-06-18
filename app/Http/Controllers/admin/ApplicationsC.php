@@ -38,7 +38,7 @@ class ApplicationsC extends Controller
     $i = ($cp - 1) * $pp + 1;
 
     $data = compact('rows', 'i');
-    return view('backend.applications')->with($data);
+    return view('admin.applications')->with($data);
   }
   public function submitPayment(Request $request)
   {

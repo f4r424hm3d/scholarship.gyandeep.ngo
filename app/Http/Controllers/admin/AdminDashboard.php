@@ -10,13 +10,13 @@ class AdminDashboard extends Controller
 {
   public function index()
   {
-    return view('backend.index');
+    return view('admin.index');
   }
   public function profile()
   {
     $profile = User::find(session()->get('adminLoggedIn')['user_id']);
     $data = compact('profile');
-    return view('backend.profile')->with($data);
+    return view('admin.profile')->with($data);
   }
   public function updateProfile(Request $data)
   {

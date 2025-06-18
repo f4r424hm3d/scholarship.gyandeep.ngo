@@ -49,7 +49,7 @@ class CreateUserC extends Controller
       $sd = '';
     }
     $data = compact('rows', 'sd', 'ft', 'url', 'title');
-    return view('backend.employees')->with($data);
+    return view('admin.employees')->with($data);
   }
   public function store(Request $request)
   {

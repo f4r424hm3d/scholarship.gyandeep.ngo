@@ -29,7 +29,7 @@ class ScholarshipLevelC extends Controller
       $sd = '';
     }
     $data = compact('rows', 'sd', 'ft', 'url', 'title', 'sch');
-    return view('backend.scholarship-level')->with($data);
+    return view('admin.scholarship-level')->with($data);
   }
   public function store(Request $request)
   {

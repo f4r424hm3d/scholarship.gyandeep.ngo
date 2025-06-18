@@ -29,7 +29,7 @@ class BlogC extends Controller
     }
     $bc = BlogCategory::all();
     $data = compact('rows', 'sd', 'ft', 'url', 'title', 'bc');
-    return view('backend.blogs')->with($data);
+    return view('admin.blogs')->with($data);
   }
   public function store(Request $request)
   {

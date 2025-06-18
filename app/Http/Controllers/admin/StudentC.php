@@ -115,7 +115,7 @@ class StudentC extends Controller
     $ls = LeadStatus::all();
     $counsellor = User::where('role', '=', 'Counsellor')->where('status', '=', '1')->get();
     $data = compact('rows', 'cc', 'lvl', 'nat', 'i', 'lt', 'alt', 'fuptype', 'fupstatus', 'ls', 'counsellor');
-    return view('backend.students')->with($data);
+    return view('admin.students')->with($data);
   }
   public function trash(Request $request)
   {
@@ -146,7 +146,7 @@ class StudentC extends Controller
     $nat = Student::select('nationality')->where('nationality', '!=', '')->distinct()->get();
 
     $data = compact('rows', 'cc', 'lvl', 'nat', 'i');
-    return view('backend.students-trash')->with($data);
+    return view('admin.students-trash')->with($data);
   }
   public function delete($id)
   {
@@ -203,7 +203,7 @@ class StudentC extends Controller
     $levels = Level::all();
     $cc = CourseCategory::all();
     $data = compact('sd', 'ft', 'url', 'title', 'country', 'levels', 'cc');
-    return view('backend.add-students')->with($data);
+    return view('admin.add-students')->with($data);
   }
   public function store(Request $request)
   {

@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 class StudentProfileC extends Controller
 {
-  public function index(Request $request, $studentId)
+  public function index(Request $request, $role, $studentId)
   {
     $countries = Country::all();
     $student = Student::find($studentId);
@@ -30,10 +30,10 @@ class StudentProfileC extends Controller
     } else {
       $categories = null;
     }
-    $data = compact('student', 'page_title', 'ft', 'page_route', 'countries', 'maritulStatuses', 'scholarships', 'categories');
-    return view('backend.student-profile', $data);
+    $data = compact('student', 'page_title', 'ft', 'page_route', 'countries', 'maritulStatuses', 'scholarships', 'categories', 'role');
+    return view('common.student-profile', $data);
   }
-  public function update(Request $request)
+  public function update(Request $request, $role)
   {
     // printArray($request->all());
     // die;
@@ -120,9 +120,9 @@ class StudentProfileC extends Controller
     $field->submit_application = 1;
     $field->save();
     session()->flash('smsg', 'New record has been added successfully.');
-    return redirect('admin/student/' . $field->id . '/profile');
+    return redirect($role . '/student/' . $field->id . '/profile');
   }
-  public function scholarship(Request $request, $studentId)
+  public function scholarship(Request $request, $role, $studentId)
   {
     $student = Student::find($studentId);
     $as = AppliedScholarship::with('getExam')->where('std_id', $studentId)->get();
@@ -137,10 +137,10 @@ class StudentProfileC extends Controller
     $page_title = 'Student Scholarship';
     $ft = 'edit';
     $page_route = 'scholarship';
-    $data = compact('student', 'page_title', 'ft', 'page_route', 'scholarships', 'categories', 'as', 'ct', 'ctp');
-    return view('backend.student-scholarship', $data);
+    $data = compact('student', 'page_title', 'ft', 'page_route', 'scholarships', 'categories', 'as', 'ct', 'ctp', 'role');
+    return view('common.student-scholarship', $data);
   }
-  public function exams(Request $request, $studentId)
+  public function exams(Request $request, $role, $studentId)
   {
     $student = Student::find($studentId);
     $where = ['student_id' => $studentId, 'attended' => 1];
@@ -150,10 +150,10 @@ class StudentProfileC extends Controller
     $page_title = 'Student Exams';
     $ft = 'edit';
     $page_route = 'exams';
-    $data = compact('student', 'page_title', 'ft', 'page_route', 'rows', 'ct', 'ctp');
-    return view('backend.student-exams', $data);
+    $data = compact('student', 'page_title', 'ft', 'page_route', 'rows', 'ct', 'ctp', 'role');
+    return view('common.student-exams', $data);
   }
-  public function examDetails(Request $request, $studentId, $examId)
+  public function examDetails(Request $request, $role, $studentId, $examId)
   {
     $student = Student::find($studentId);
     $where = ['student_id' => $studentId, 'id' => $examId];
@@ -180,7 +180,7 @@ class StudentProfileC extends Controller
     $page_route = 'exam-details';
 
     //printArray($user_info->toArray());
-    $data = compact('student', 'row', 'total_question', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered', 'sectionDet', 'studentId', 'page_title', 'ft', 'page_route', 'examId');
-    return view('backend.attended-test-details')->with($data);
+    $data = compact('student', 'row', 'total_question', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered', 'sectionDet', 'studentId', 'page_title', 'ft', 'page_route', 'examId', 'role');
+    return view('common.attended-test-details')->with($data);
   }
 }

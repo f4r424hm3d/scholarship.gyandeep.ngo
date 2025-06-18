@@ -1,14 +1,14 @@
 @php
-use App\Models\Country;
-use App\Models\CourseCategory;
-use App\Models\Specialization;
-use App\Models\Level;
-use App\Models\Student;
-use App\Models\AsignLeads;
-$clt = Request::segment(3) ?? 'new';
-unset($_GET['page']);
-$url_arr = array_filter($_GET);
-$qs = http_build_query($url_arr);
+  use App\Models\Country;
+  use App\Models\CourseCategory;
+  use App\Models\Specialization;
+  use App\Models\Level;
+  use App\Models\Student;
+  use App\Models\AsignLeads;
+  $clt = Request::segment(3) ?? 'new';
+  unset($_GET['page']);
+  $url_arr = array_filter($_GET);
+  $qs = http_build_query($url_arr);
 @endphp
 @extends('employee.layouts.main')
 @push('title')
@@ -134,7 +134,9 @@ $qs = http_build_query($url_arr);
               <div class="box-body">
                 @foreach ($lt as $lt)
                   @php
-                    $allSi = AsignLeads::where('user_id', session()->get('userLoggedIn')['user_id'])->with('getStudent');
+                    $allSi = AsignLeads::where('user_id', session()->get('userLoggedIn')['user_id'])->with(
+                        'getStudent',
+                    );
                     $allSi = $allSi->whereHas('getStudent', function ($query) use ($lt) {
                         $query->where('lead_type', $lt->slug);
                     });
@@ -198,7 +200,7 @@ $qs = http_build_query($url_arr);
                             {{ getFormattedDate($row->created_at, 'd M Y h:i A') }}
                           </td>
                           <td>
-                            <a href="{{ url('employee/student/' . $row->id . '/profile') }}"
+                            <a href="{{ url('employee/student/' . $row->student_id . '/profile') }}"
                               class="waves-effect waves-light btn btn-sm btn-outline btn-info">
                               <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
@@ -263,7 +265,7 @@ $qs = http_build_query($url_arr);
                             Gender : {{ $row->getStudent->gender }}<br>
                             DOB : {{ $row->getStudent->dob }}<br>
                           </td>
-                           <td>{{ $row->getStudent->getLevel->name ?? '' }}</td>
+                          <td>{{ $row->getStudent->getLevel->name ?? '' }}</td>
                           <td>
                             Application : {!! $row->getStudent->submit_application == true
                                 ? '<span class="badge bg-success">Submitted</span>'

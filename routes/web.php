@@ -66,6 +66,7 @@ use App\Http\Middleware\StudentLoggedIn;
 use App\Http\Middleware\StudentLoggedOut;
 use App\Http\Middleware\AdminLoggedIn;
 use App\Http\Middleware\AdminLoggedOut;
+use App\Http\Middleware\CommonAuth;
 use App\Http\Middleware\EmployeeLoggedIn;
 use App\Http\Middleware\EmployeeLoggedOut;
 use App\Http\Middleware\ProviderLoggedIn;
@@ -528,13 +529,13 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
       Route::get('/bulk-force-delete', [StudentC::class, 'bulkForceDelete']);
       Route::get('/bulk-restore', [StudentC::class, 'bulkRestore']);
 
-      Route::post('/update/', [StudentProfileC::class, 'update']);
-      Route::prefix('/{student_id}/')->group(function () {
-        Route::get('/profile/', [StudentProfileC::class, 'index']);
-        Route::get('/scholarship/', [StudentProfileC::class, 'scholarship']);
-        Route::get('/exams/', [StudentProfileC::class, 'exams']);
-        Route::get('/exams/{exam_id}', [StudentProfileC::class, 'examDetails']);
-      });
+      // Route::post('/update/', [StudentProfileC::class, 'update']);
+      // Route::prefix('/{student_id}/')->group(function () {
+      //   Route::get('/profile/', [StudentProfileC::class, 'index']);
+      //   Route::get('/scholarship/', [StudentProfileC::class, 'scholarship']);
+      //   Route::get('/exams/', [StudentProfileC::class, 'exams']);
+      //   Route::get('/exams/{exam_id}', [StudentProfileC::class, 'examDetails']);
+      // });
     });
     Route::get('/add-student-follow-up', [StudentFollowUpC::class, 'addFollowup']);
     Route::get('/get-last-follow-up', [StudentFollowUpC::class, 'getLastFollowUp']);
@@ -619,6 +620,14 @@ Route::middleware([EmployeeLoggedIn::class])->group(function () {
       Route::get('/force-delete/{id}', [StudentC::class, 'forceDelete']);
       Route::get('/bulk-delete', [StudentC::class, 'bulkDelete']);
     });
+    // Route::prefix('/student/')->group(function () {
+    //   Route::prefix('/{student_id}/')->group(function () {
+    //     Route::get('/profile/', [StudentProfileC::class, 'index']);
+    //     Route::get('/scholarship/', [StudentProfileC::class, 'scholarship']);
+    //     Route::get('/exams/', [StudentProfileC::class, 'exams']);
+    //     Route::get('/exams/{exam_id}', [StudentProfileC::class, 'examDetails']);
+    //   });
+    // });
     Route::prefix('/applications')->group(function () {
       Route::get('', [ApplicationsC::class, 'index']);
       Route::post('/submit-payment', [ApplicationsC::class, 'submitPayment']);
@@ -643,4 +652,16 @@ Route::prefix('common')->group(function () {
   Route::get('/get-course-categories/{scholarshipId}', [StudentFc::class, 'getCourseCategories'])->name('get-course-categories')->name('common.get.categories');
 
   Route::get('/send-result-to-student/{studentId}/{examId}', [StudentResultController::class, 'index'])->name('common.send.result');
+});
+
+Route::middleware([CommonAuth::class])->group(function () {
+  Route::group(['prefix' => '{role}', 'where' => ['role' => 'admin|employee']], function () {
+    Route::post('student/update/', [StudentProfileC::class, 'update']);
+    Route::prefix('student/{student_id}')->group(function () {
+      Route::get('/profile/', [StudentProfileC::class, 'index']);
+      Route::get('/scholarship/', [StudentProfileC::class, 'scholarship']);
+      Route::get('/exams/', [StudentProfileC::class, 'exams']);
+      Route::get('/exams/{exam_id}', [StudentProfileC::class, 'examDetails']);
+    });
+  });
 });

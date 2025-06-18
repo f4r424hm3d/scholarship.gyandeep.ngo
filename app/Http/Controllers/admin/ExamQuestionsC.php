@@ -36,7 +36,7 @@ class ExamQuestionsC extends Controller
     $subjects = Subjects::all();
     $examDet = CreateExams::find($exam_id);
     $data = compact('rows', 'sd', 'ft', 'url', 'title', 'subjects', 'examDet');
-    return view('backend.exam-questions')->with($data);
+    return view('admin.exam-questions')->with($data);
   }
   public function store($exam_id, Request $request)
   {
