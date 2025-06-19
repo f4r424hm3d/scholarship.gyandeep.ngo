@@ -68,9 +68,9 @@ class CompanyProfileC extends Controller
       </td>
       <td>' . $row->address . '</td>
       <td>
-        Logo : <a href="' . url($row->logo_path) . '" target="_blank">Logo</a><br>
-        Stamp : <a href="' . url($row->stamp_path) . '" target="_blank">Stamp</a><br>
-        Signature : <a href="' . url($row->signature_path) . '" target="_blank">Signature</a><br>
+        Logo : ' . (!empty($row->logo_path) ? '<a href="' . url($row->logo_path) . '" target="_blank">Logo</a>' : 'N/A') . '<br>
+        Stamp : ' . (!empty($row->stamp_path) ? '<a href="' . url($row->stamp_path) . '" target="_blank">Stamp</a>' : 'N/A') . '<br>
+        Signature : ' . (!empty($row->signature_path) ? '<a href="' . url($row->signature_path) . '" target="_blank">Signature</a>' : 'N/A') . '
       </td>
       <td>
         ' . Blade::render('<x-delete-button :id="$id" />', ['id' => $row->id]) . '
@@ -157,9 +157,15 @@ class CompanyProfileC extends Controller
   {
     if ($id) {
       $row = CompanyProfile::findOrFail($id);
-      //   if ($row->photo_path != null) {
-      //     unlink($row->photo_path);
-      //   }
+      if ($row->logo_path != null) {
+        unlink($row->logo_path);
+      }
+      if ($row->stamp_path != null) {
+        unlink($row->stamp_path);
+      }
+      if ($row->signature_path != null) {
+        unlink($row->signature_path);
+      }
       $result = $row->delete();
       return response()->json(['success' => true]);
     }
