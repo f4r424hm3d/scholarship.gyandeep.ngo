@@ -222,14 +222,14 @@
           <div class="main">
             <div class="content-area">
               <br>
-              {{ $letter->letter_description }}
+              {!! $letter->letter_description !!}
               <br><br>
               @if ($letter->signature == 1 || $letter->stamp == 1)
                 <div class="sign-stamp">
-                  @if ($letter->signature == 1)
+                  @if ($letter->signature == 1 && $letter->company->signature_path != null)
                     <div class="sign"><img src="{{ asset($letter->company->signature_path) }}" /></div>
                   @endif
-                  @if ($letter->stamp == 1)
+                  @if ($letter->stamp == 1 && $letter->company->stamp_path != null)
                     <div class="stamp"><img src="{{ asset($letter->company->stamp_path) }}" /></div>
                   @endif
                 </div>
