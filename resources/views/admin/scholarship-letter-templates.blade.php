@@ -34,10 +34,6 @@
               <div class="box-header">
                 <h4 class="box-title">
                   {{ $title }} Record
-                  <span style="float:right;">
-                    <button class="btn btn-xs btn-info tglBtn">+</button>
-                    <button class="btn btn-xs btn-info tglBtn hide-this">-</button>
-                  </span>
                 </h4>
               </div>
               <div class="box-body" id="tblCDiv">
@@ -46,35 +42,11 @@
                   @csrf
                   <div class="row">
                     <div class="col-md-3 col-sm-12 mb-3">
-                      <x-input-field type="text" label="Company Name" name="company_name" id="company_name"
-                        :ft="$ft" :sd="$sd" />
-                    </div>
-                    <div class="col-md-3 col-sm-12 mb-3">
-                      <x-input-field type="text" label="Company Email" name="email" id="email" :ft="$ft"
-                        :sd="$sd" />
-                    </div>
-                    <div class="col-md-3 col-sm-12 mb-3">
-                      <x-input-field type="text" label="Company Mobile" name="mobile" id="mobile" :ft="$ft"
-                        :sd="$sd" />
-                    </div>
-                    <div class="col-md-3 col-sm-12 mb-3">
-                      <x-input-field type="text" label="Website" name="website_address" id="website_address"
+                      <x-input-field type="text" label="Template Name" name="template_name" id="template_name"
                         :ft="$ft" :sd="$sd" />
                     </div>
                     <div class="col-md-12 col-sm-12 mb-3">
-                      <x-textarea-field label="address" name="address" id="address" :ft="$ft"
-                        :sd="$sd" />
-                    </div>
-                    <div class="col-md-3 col-sm-12 mb-3">
-                      <x-input-field type="file" label="Logo" name="logo" id="logo" :ft="$ft"
-                        :sd="$sd" />
-                    </div>
-                    <div class="col-md-3 col-sm-12 mb-3">
-                      <x-input-field type="file" label="Stamp" name="stamp" id="stamp" :ft="$ft"
-                        :sd="$sd" />
-                    </div>
-                    <div class="col-md-3 col-sm-12 mb-3">
-                      <x-input-field type="file" label="Signature" name="signature" id="signature" :ft="$ft"
+                      <x-textarea-field label="Template" name="template" id="template" :ft="$ft"
                         :sd="$sd" />
                     </div>
                   </div>
@@ -106,5 +78,18 @@
       </section>
     </div>
   </div>
+  <script>
+    function setEditorBlank() {
+      CKEDITOR.instances.template.setData('');
+    }
+
+    $(function() {
+      var $template = CKEDITOR.replace('template');
+
+      $template.on('change', function() {
+        $template.updateElement();
+      });
+    });
+  </script>
   @include('admin.js.common-ajax-page')
 @endsection

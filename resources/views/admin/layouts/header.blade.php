@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="{{ url('backend/main/css/skin_color.css') }}">
   <script src="{{ url('/') }}/ckeditor/ckeditor.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     .hide-this {
       display: none
@@ -261,6 +261,27 @@
               <a href="{{ url('admin/subjects/create') }}">
                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
                 Subjects
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="{{ $seg2 == 'company-profiles' || $seg2 == 'scholarship-letter-templates' ? 'current' : '' }}">
+          <a href="#">
+            <i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
+            Company Profiles
+            <i class="fa fa-angle-right"></i>
+          </a>
+          <ul>
+            <li class="{{ $seg2 == 'company-profiles' ? 'current' : '' }}">
+              <a href="{{ url('admin/company-profiles') }}">
+                <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+                Company Profile
+              </a>
+            </li>
+            <li class="{{ $seg2 == 'scholarship-letter-templates' ? 'current' : '' }}">
+              <a href="{{ url('admin/scholarship-letter-templates') }}">
+                <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>
+                Scholarship Letter Templates
               </a>
             </li>
           </ul>

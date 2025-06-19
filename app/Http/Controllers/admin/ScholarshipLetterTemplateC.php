@@ -50,9 +50,8 @@ class ScholarshipLetterTemplateC extends Controller
     <thead>
       <tr>
         <th>Sr. No.</th>
-        <th>Company</th>
-        <th>Address</th>
-        <th>Files</th>
+        <th>Template Name</th>
+        <th>Template</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -61,18 +60,8 @@ class ScholarshipLetterTemplateC extends Controller
       foreach ($rows as $row) {
         $output .= '<tr id="row' . $row->id . '">
       <td>' . $i . '</td>
-      <td>
-        Name : ' . $row->company_name . ' <br>
-        Email : ' . $row->email . ' <br>
-        Mobile : ' . $row->mobile . ' <br>
-        website : ' . $row->website_address . ' <br>
-      </td>
-      <td>' . $row->address . '</td>
-      <td>
-        Logo : <a href="' . url($row->logo_path) . '" target="_blank">Logo</a> : <input class="form-control form-group" type="text" value="' . $row->logo_path . '" /> <br>
-        Stamp : <a href="' . url($row->stamp_path) . '" target="_blank">Stamp</a> : <input class="form-control form-group" type="text" value="' . $row->stamp_path . '" /> <br>
-        Signature : <a href="' . url($row->signature_path) . '" target="_blank">Signature</a> : <input class="form-control form-group" type="text" value="' . $row->signature_path . '" />
-      </td>
+      <td>' . $row->template_name . '</td>
+      <td>' . Blade::render('<x-content-view-modal :row="$row" field="template" title="Template" />', ['row' => $row]) . '</td>
       <td>
         ' . Blade::render('<x-delete-button :id="$id" />', ['id' => $row->id]) . '
         ' . Blade::render('<x-edit-button :url="$url" />', ['url' => url("admin/" . $this->page_route . "/update/" . $row->id)]) . '
@@ -90,14 +79,8 @@ class ScholarshipLetterTemplateC extends Controller
   public function store(Request $request)
   {
     $validator = Validator::make($request->all(), [
-      'company_name' => 'required',
-      'email' => 'required',
-      'mobile' => 'required',
-      'website_address' => 'required',
-      'address' => 'required',
-      'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-      'stamp' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-      'signature' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+      'template_name' => 'required',
+      'template' => 'required',
     ]);
 
     if ($validator->fails()) {
@@ -107,50 +90,8 @@ class ScholarshipLetterTemplateC extends Controller
     }
 
     $field = new ScholarshipLetterTemplate;
-    $field->company_name = $request['company_name'];
-    $field->email = $request['email'];
-    $field->mobile = $request['mobile'];
-    $field->website_address = $request['website_address'];
-    $field->address = $request['address'];
-    if ($request->hasFile('logo')) {
-      $fileOriginalName = $request->file('logo')->getClientOriginalName();
-      $fileNameWithoutExtention = pathinfo($fileOriginalName, PATHINFO_FILENAME);
-      $file_name_slug = slugify($fileNameWithoutExtention);
-      $fileExtention = $request->file('logo')->getClientOriginalExtension();
-      $file_name = $file_name_slug . '_' . time() . '.' . $fileExtention;
-      $move = $request->file('logo')->move('uploads/logo/', $file_name);
-      if ($move) {
-        $field->logo_path = 'uploads/logo/' . $file_name;
-      } else {
-        session()->flash('emsg', 'Some problem occured. File not uploaded.');
-      }
-    }
-    if ($request->hasFile('stamp')) {
-      $fileOriginalName = $request->file('stamp')->getClientOriginalName();
-      $fileNameWithoutExtention = pathinfo($fileOriginalName, PATHINFO_FILENAME);
-      $file_name_slug = slugify($fileNameWithoutExtention);
-      $fileExtention = $request->file('stamp')->getClientOriginalExtension();
-      $file_name = $file_name_slug . '_' . time() . '.' . $fileExtention;
-      $move = $request->file('stamp')->move('uploads/stamp/', $file_name);
-      if ($move) {
-        $field->stamp_path = 'uploads/stamp/' . $file_name;
-      } else {
-        session()->flash('emsg', 'Some problem occured. File not uploaded.');
-      }
-    }
-    if ($request->hasFile('signature')) {
-      $fileOriginalName = $request->file('signature')->getClientOriginalName();
-      $fileNameWithoutExtention = pathinfo($fileOriginalName, PATHINFO_FILENAME);
-      $file_name_slug = slugify($fileNameWithoutExtention);
-      $fileExtention = $request->file('signature')->getClientOriginalExtension();
-      $file_name = $file_name_slug . '_' . time() . '.' . $fileExtention;
-      $move = $request->file('signature')->move('uploads/signature/', $file_name);
-      if ($move) {
-        $field->signature_path = 'uploads/signature/' . $file_name;
-      } else {
-        session()->flash('emsg', 'Some problem occured. File not uploaded.');
-      }
-    }
+    $field->template_name = $request['template_name'];
+    $field->template = $request['template'];
     $field->save();
     return response()->json(['success' => 'Record has been added successfully.']);
   }
@@ -169,13 +110,13 @@ class ScholarshipLetterTemplateC extends Controller
   {
     $request->validate(
       [
-        'old_url' => 'required',
-        'new_url' => 'required',
+        'template_name' => 'required',
+        'template' => 'required',
       ]
     );
     $field = ScholarshipLetterTemplate::find($id);
-    $field->old_url = $request['old_url'];
-    $field->new_url = $request['new_url'];
+    $field->template_name = $request['template_name'];
+    $field->template = $request['template'];
     $field->save();
     session()->flash('smsg', 'Record has been updated successfully.');
     return redirect('admin/' . $this->page_route);

@@ -34,10 +34,6 @@
               <div class="box-header">
                 <h4 class="box-title">
                   {{ $title }} Record
-                  <span style="float:right;">
-                    <button class="btn btn-xs btn-info tglBtn">+</button>
-                    <button class="btn btn-xs btn-info tglBtn hide-this">-</button>
-                  </span>
                 </h4>
               </div>
               <div class="box-body" id="tblCDiv">
