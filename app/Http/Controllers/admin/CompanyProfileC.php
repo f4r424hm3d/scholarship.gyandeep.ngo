@@ -75,6 +75,7 @@ class CompanyProfileC extends Controller
       <td>
         ' . Blade::render('<x-delete-button :id="$id" />', ['id' => $row->id]) . '
         ' . Blade::render('<x-edit-button :url="$url" />', ['url' => url("admin/" . $this->page_route . "/update/" . $row->id)]) . '
+        ' . Blade::render('<x-custom-button :url="$url" label="Letters" :count="$count" />', ['url' => url('admin/student-scholarship-letters/' . $row->id), 'count' => $row->letters->count()]) . '
       </td>
     </tr>';
         $i++;

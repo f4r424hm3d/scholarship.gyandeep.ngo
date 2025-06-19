@@ -81,7 +81,9 @@ class StudentTestFc extends Controller
     $exam = CreateExams::with('getScholarship')->where('token', $request->token)->first();
     $duration = '+' . $exam->duration . ' Minutes';
     $examsub = ExamQuestions::with('getSubject')->where('exam_id', $exam->id)->select('subject_id')->distinct('subject_id')->first();
-
+    // session()->put('student_test_start', true);
+    // $end_time = date("Y-m-d H:i:s", strtotime($duration));
+    // session()->put('end_time', $end_time);
     $ae = AsignExam::where(['exam_id' => $exam->id, 'student_id' => $student_id])->first();
     if ($ae->attended == 0) {
       session()->put('student_test_start', true);

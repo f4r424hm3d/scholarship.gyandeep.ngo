@@ -40,6 +40,7 @@ use App\Http\Controllers\admin\SpecializationC;
 use App\Http\Controllers\admin\StudentC;
 use App\Http\Controllers\admin\StudentFollowUpC;
 use App\Http\Controllers\admin\StudentProfileC;
+use App\Http\Controllers\admin\StudentScholarshipLetterC;
 use App\Http\Controllers\admin\TestimonialC;
 use App\Http\Controllers\common\StudentResultController;
 use App\Http\Controllers\CommonController;
@@ -545,6 +546,15 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
       Route::post('/update/{id}', [ScholarshipLetterTemplateC::class, 'update']);
       Route::get('/delete/{id}', [ScholarshipLetterTemplateC::class, 'delete']);
     });
+    Route::prefix('/student-scholarship-letters')->group(function () {
+      Route::get('/get-data', [StudentScholarshipLetterC::class, 'getData']);
+      Route::get('/delete/{id}', [StudentScholarshipLetterC::class, 'delete']);
+      Route::post('/store', [StudentScholarshipLetterC::class, 'store']);
+      Route::get('/{company_id}/', [StudentScholarshipLetterC::class, 'index']);
+      Route::get('{company_id}/update/{id}', [StudentScholarshipLetterC::class, 'index']);
+      Route::post('{company_id}/update/{id}', [StudentScholarshipLetterC::class, 'update']);
+    });
+    Route::get('get-template', [StudentScholarshipLetterC::class, 'getTemplate']);
   });
 });
 

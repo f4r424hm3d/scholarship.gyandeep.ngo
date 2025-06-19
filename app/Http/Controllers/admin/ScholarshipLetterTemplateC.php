@@ -92,6 +92,7 @@ class ScholarshipLetterTemplateC extends Controller
     $field = new ScholarshipLetterTemplate;
     $field->template_name = $request['template_name'];
     $field->template = $request['template'];
+    $field->user_id = session('adminLoggedIn')['user_id'] ?? 0;
     $field->save();
     return response()->json(['success' => 'Record has been added successfully.']);
   }
