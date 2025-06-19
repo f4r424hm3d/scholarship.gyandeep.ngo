@@ -7,6 +7,8 @@ use App\Models\AnswerSheet;
 use App\Models\AsignExam;
 use App\Models\ExamQuestions;
 use App\Models\Student;
+use App\Models\StudentScholarshipLetter;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -18,19 +20,21 @@ class StudentResultController extends Controller
     $where = ['student_id' => $studentId, 'id' => $examId];
     $row = AsignExam::where($where)->with('getExamDet')->firstOrFail();
 
-    $total_question = ExamQuestions::where(['exam_id' => $row->exam_id])->count();
+    $letter = StudentScholarshipLetter::where('student_id', $studentId)->first();
 
-    $total_visited = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id])->count();
+    // $total_question = ExamQuestions::where(['exam_id' => $row->exam_id])->count();
 
-    $answered_question = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 0])->where('answer', '!=', '')->count();
+    // $total_visited = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id])->count();
 
-    $not_answered = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 0, 'answer' => null])->count();
+    // $answered_question = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 0])->where('answer', '!=', '')->count();
 
-    $marked_question = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 1, 'answer' => null])->count();
+    // $not_answered = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 0, 'answer' => null])->count();
 
-    $marked_and_answered = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 1])->where('answer', '!=', '')->count();
+    // $marked_question = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 1, 'answer' => null])->count();
 
-    $not_visited = $total_question - $total_visited;
+    // $marked_and_answered = AnswerSheet::where(['student_id' => $studentId, 'exam_id' => $row->exam_id, 'marked' => 1])->where('answer', '!=', '')->count();
+
+    // $not_visited = $total_question - $total_visited;
 
     $sectionDet = ExamQuestions::with('getSubject')->where(['exam_id' => $row->exam_id])->groupBy('subject_id')->select('subject_id')->get();
 
@@ -71,6 +75,17 @@ class StudentResultController extends Controller
       $grandTotal += $totalQuestion;
       $grandCorrect += $correct;
     }
+    $pdfPath = null;
+    if ($letter) {
+      // Build the PDF
+      $pdf = Pdf::loadView('pdf.scholarship-letter', [
+        'letter' => $letter,
+      ])->setPaper('A4', 'portrait');
+
+      // Save PDF to a file
+      $pdfPath = storage_path("app/public/scholarship_letter_{$student->id}.pdf");
+      $pdf->save($pdfPath);
+    }
 
     $emaildata = [
       'name'        => $student->name,
@@ -84,12 +99,22 @@ class StudentResultController extends Controller
     Mail::send(
       'mails.exam-result-mail',
       $emaildata,
-      function ($message) use ($dd) {
+      function ($message) use ($dd, $pdfPath) {
         $message->to($dd['to'], $dd['to_name']);
         $message->subject($dd['subject']);
         $message->priority(1);
+        if ($pdfPath && file_exists($pdfPath)) {
+          $message->attach($pdfPath, [
+            'as' => 'Scholarship-Letter.pdf',
+            'mime' => 'application/pdf',
+          ]);
+        }
       }
     );
+    // Clean up file if created
+    if ($pdfPath && file_exists($pdfPath)) {
+      unlink($pdfPath);
+    }
     return 1;
   }
 }
