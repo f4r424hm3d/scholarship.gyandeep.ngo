@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\AdminLogin;
 use App\Http\Controllers\admin\ApplicationsC;
 use App\Http\Controllers\admin\BlogC;
 use App\Http\Controllers\admin\BlogCategoryC;
+use App\Http\Controllers\admin\CompanyProfileC;
 use App\Http\Controllers\admin\CourseCategoryC;
 use App\Http\Controllers\admin\CreateExamsC;
 use App\Http\Controllers\admin\CreateUserC;
@@ -31,6 +32,7 @@ use App\Http\Controllers\admin\ScholarshipC;
 use App\Http\Controllers\admin\ScholarshipContentC;
 use App\Http\Controllers\admin\ScholarshipCustomEligibilityC;
 use App\Http\Controllers\admin\ScholarshipEligibilityC;
+use App\Http\Controllers\admin\ScholarshipLetterTemplateC;
 use App\Http\Controllers\admin\ScholarshipLevelC;
 use App\Http\Controllers\admin\ScholarshipSubjectC;
 use App\Http\Controllers\admin\ServicesC;
@@ -218,68 +220,6 @@ Route::middleware([StudentLoggedIn::class])->group(function () {
     Route::get('/save-answer', [StudentTestFc::class, 'saveAnswer']);
     Route::get('/complete', [StudentTestFc::class, 'complete']);
     Route::get('/report', [StudentTestFc::class, 'report']);
-  });
-});
-
-/* PROVIDER ROUTES BEFORE LOGIN */
-Route::middleware([ProviderLoggedOut::class])->group(function () {
-  Route::prefix('provider')->group(function () {
-    Route::get('/login', [ProviderLoginFc::class, 'login']);
-    Route::post('/login', [ProviderLoginFc::class, 'signin']);
-    Route::get('/signup', [ProviderLoginFc::class, 'signup']);
-    Route::post('/signup', [ProviderLoginFc::class, 'register']);
-    Route::get('/confirmed-email', [ProviderLoginFc::class, 'confirmedEmail']);
-    Route::post('/submit-email-otp', [ProviderLoginFc::class, 'submitOtp']);
-    Route::get('/forget-password', [ProviderLoginFc::class, 'viewForgetPassword']);
-    Route::post('/forget-password', [ProviderLoginFc::class, 'forgetPassword']);
-    Route::get('/forget-password/email-sent', [ProviderLoginFc::class, 'emailSent']);
-    Route::get('/email-login', [ProviderLoginFc::class, 'emailLogin']);
-    Route::get('/profile/password/reset', [ProviderLoginFc::class, 'viewResetPassword']);
-    Route::get('/account/invalid_link', [ProviderLoginFc::class, 'invalidLink']);
-    Route::post('/reset-password', [ProviderLoginFc::class, 'resetPassword']);
-  });
-});
-/* PROVIDER ROUTES AFTER LOGIN */
-Route::middleware([ProviderLoggedIn::class])->group(function () {
-  Route::prefix('provider')->group(function () {
-    Route::get('/', [ProviderAccountFc::class, 'profile']);
-    Route::prefix('/profile')->group(function () {
-      Route::get('', [ProviderAccountFc::class, 'profile']);
-      Route::get('/edit', [ProviderAccountFc::class, 'editProfile']);
-      Route::post('/update', [ProviderAccountFc::class, 'updateProfile']);
-      Route::post('/update-logo', [ProviderAccountFc::class, 'updateLogo']);
-      Route::get('/change-password', [ProviderAccountFc::class, 'viewChangePassword']);
-      Route::post('/change-password', [ProviderAccountFc::class, 'changePassword']);
-    });
-    Route::prefix('/scholarship')->group(function () {
-      Route::get('', [PostScholarshipFc::class, 'index']);
-      Route::get('add', [PostScholarshipFc::class, 'add']);
-      Route::post('store', [PostScholarshipFc::class, 'store']);
-      Route::get('/delete/{id}', [PostScholarshipFc::class, 'delete']);
-      Route::get('/{id}', [PostScholarshipFc::class, 'viewFullScholarship']);
-      Route::post('/update', [PostScholarshipFc::class, 'update']);
-
-      Route::prefix('/level')->group(function () {
-        Route::post('store', [PostScholarshipFc::class, 'storeLevel']);
-        Route::get('/delete/{id}', [PostScholarshipFc::class, 'deleteLevel']);
-      });
-      Route::prefix('/subject')->group(function () {
-        Route::post('store', [PostScholarshipFc::class, 'storeSubject']);
-        Route::get('/delete/{id}', [PostScholarshipFc::class, 'deleteSubject']);
-      });
-      Route::prefix('/country')->group(function () {
-        Route::post('store', [PostScholarshipFc::class, 'storeCountry']);
-        Route::get('/delete/{id}', [PostScholarshipFc::class, 'deleteCountry']);
-      });
-      Route::prefix('/custom-eligibility')->group(function () {
-        Route::post('store', [PostScholarshipFc::class, 'storeCustomEligibility']);
-        Route::get('/delete/{id}', [PostScholarshipFc::class, 'deleteCustomEligibility']);
-      });
-    });
-    Route::get('/logout', function () {
-      session()->forget('provider_id');
-      return redirect('provider/login');
-    });
   });
 });
 
@@ -587,6 +527,23 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
       Route::get('/delete/{id}', [ExamSubjectsC::class, 'delete']);
       Route::get('/update/{id}', [ExamSubjectsC::class, 'index']);
       Route::post('/update/{id}', [ExamSubjectsC::class, 'update']);
+    });
+
+    Route::prefix('/company-profiles')->group(function () {
+      Route::get('/', [CompanyProfileC::class, 'index']);
+      Route::get('/get-data', [CompanyProfileC::class, 'getData']);
+      Route::post('/store', [CompanyProfileC::class, 'store']);
+      Route::get('/update/{id}', [CompanyProfileC::class, 'index']);
+      Route::post('/update/{id}', [CompanyProfileC::class, 'update']);
+      Route::get('/delete/{id}', [CompanyProfileC::class, 'delete']);
+    });
+    Route::prefix('/scholarship-letter-templates')->group(function () {
+      Route::get('/', [ScholarshipLetterTemplateC::class, 'index']);
+      Route::get('/get-data', [ScholarshipLetterTemplateC::class, 'getData']);
+      Route::post('/store', [ScholarshipLetterTemplateC::class, 'store']);
+      Route::get('/update/{id}', [ScholarshipLetterTemplateC::class, 'index']);
+      Route::post('/update/{id}', [ScholarshipLetterTemplateC::class, 'update']);
+      Route::get('/delete/{id}', [ScholarshipLetterTemplateC::class, 'delete']);
     });
   });
 });
