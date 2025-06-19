@@ -36,7 +36,7 @@ class ScholarshipLetterTemplateC extends Controller
       $sd = '';
     }
 
-    $page_title = "Url Redirections";
+    $page_title = "Scholarship Letter Templates";
     $page_route = $this->page_route;
     $data = compact('rows', 'sd', 'ft', 'url', 'title', 'page_title', 'page_route', 'page_no');
     return view('admin.scholarship-letter-templates')->with($data);
