@@ -42,6 +42,7 @@ use App\Http\Controllers\admin\StudentFollowUpC;
 use App\Http\Controllers\admin\StudentProfileC;
 use App\Http\Controllers\admin\StudentScholarshipLetterC;
 use App\Http\Controllers\admin\TestimonialC;
+use App\Http\Controllers\common\ScholarshipLetterController;
 use App\Http\Controllers\common\StudentResultController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\employee\EmpDashboardC;
@@ -554,7 +555,8 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
       Route::get('{company_id}/update/{id}', [StudentScholarshipLetterC::class, 'index']);
       Route::post('{company_id}/update/{id}', [StudentScholarshipLetterC::class, 'update']);
     });
-    Route::get('get-template', [StudentScholarshipLetterC::class, 'getTemplate']);
+    Route::get('view-scholarship-letter/{id}', [ScholarshipLetterController::class, 'view']);
+    Route::get('print-scholarship-letter/{id}', [ScholarshipLetterController::class, 'print']);
   });
 });
 
