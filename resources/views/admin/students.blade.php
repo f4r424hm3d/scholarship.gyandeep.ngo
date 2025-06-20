@@ -67,7 +67,7 @@
                         </span>
                       </div>
                     </div>
-                    <div class="col-md-3 col-sm-12 mb-3">
+                    <div class="col-md-6 col-sm-12 mb-3">
                       <button class="btn btn-sm btn-primary setBtn" type="submit">Search</button>
                       <a href="{{ aurl('students') }}" class="btn btn-sm btn-warning setBtn"><i class="ti-trash"></i>
                         Reset</a>

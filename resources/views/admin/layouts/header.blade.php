@@ -40,6 +40,10 @@
       text-align: justify;
       text-justify: inter-word;
     }
+
+    .setBtn {
+      margin-top: 28px;
+    }
   </style>
 </head>
 
