@@ -51,90 +51,116 @@
             @endif
           </div>
           <div class="col-lg-12 col-md-12 col-12">
-            <div class="box hide-thi hideDiv">
-              <div class="box-body">
-                <h4 class="box-title text-info"> Filter</h4>
-                <form method="get" class="form" enctype="multipart/form-data">
-                  <hr class="my-15">
+            <div class="box">
+              <div class="box-body" id="tblCDiv">
+                <form class="needs-validation" method="get" enctype="multipart/form-data" novalidate>
                   <div class="row">
-                    <div class="form-group col-md-3 col-sm-12">
-                      <label>Nationality</label>
-                      <select name="nationality" id="nationality" class="form-control select2">
-                        <option value="">Select</option>
-                        @foreach ($nat as $na)
-                          <option value="{{ $na->nationality }}"
-                            {{ isset($_GET['nationality']) && $_GET['nationality'] == $na->nationality ? 'Selected' : '' }}>
-                            {{ $na->nationality }}</option>
-                        @endforeach
-                      </select>
+                    <div class="col-md-6 col-sm-12 mb-3">
+                      <div class="form-group">
+                        <label>Search Student by Name</label>
+                        <input name="search" id="search" type="text" class="form-control"
+                          placeholder="Search Student by Name" value="{{ $_GET['search'] ?? '' }}" required>
+                        <span class="text-danger" id="search-err">
+                          @error('search')
+                            {{ $message }}
+                          @enderror
+                        </span>
+                      </div>
                     </div>
-                    <div class="form-group col-md-3 col-sm-12">
-                      <label>Level</label>
-                      <select name="level" id="level" class="form-control select2">
-                        <option value="">Select</option>
-                        @foreach ($lvl as $l)
-                          <option value="{{ $l->current_qualification_level }}"
-                            {{ isset($_GET['level']) && $_GET['level'] == $l->current_qualification_level ? 'Selected' : '' }}>
-                            {{ $l->getLevel->name ?? '' }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3 col-sm-12">
-                      <label>Course</label>
-                      <select name="course" id="course" class="form-control select2">
-                        <option value="">Select</option>
-                        @foreach ($cc as $c)
-                          <option value="{{ $c->intrested_course_category }}"
-                            {{ isset($_GET['course']) && $_GET['course'] == $c->intrested_course_category ? 'Selected' : '' }}>
-                            {{ $c->getCourse->category ?? '' }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3 col-sm-12">
-                      <label>Asigned</label>
-                      <select name="asign" id="asign" class="form-control select2">
-                        <option value="">Select</option>
-                        @foreach ($counsellor as $row)
-                          <option value="{{ $row->id }}"
-                            {{ isset($_GET['asign']) && $_GET['asign'] == $row->id ? 'Selected' : '' }}>
-                            {{ $row->name ?? '' }}</option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3 col-sm-12">
-                      <label>From</label>
-                      <input type="date" name="from" id="from"
-                        value="{{ isset($_GET['from']) ? $_GET['from'] : '' }}" class="form-control">
-                    </div>
-                    <div class="form-group col-md-3 col-sm-12">
-                      <label>To</label>
-                      <input type="date" name="to" id="to"
-                        value="{{ isset($_GET['to']) ? $_GET['to'] : '' }}" class="form-control">
-                    </div>
-                    <div class="form-group col-md-3">
-                      <label>Lead Status <span class="text-danger">*</span></label>
-                      <select name="lead_status" id="f_lead_status" class="form-control select2">
-                        <option value="">Select...</option>
-                        @foreach ($ls as $row)
-                          <option value="<?php echo $row->id; ?>"><?php echo $row->title; ?></option>
-                        @endforeach
-                      </select>
-                    </div>
-                    <div class=" form-group col-md-3">
-                      <label>Lead Sub Status</label>
-                      <select name="lead_sub_status" id="f_lead_sub_status" class="form-control select2">
-                        <option value="">Select...</option>
-                      </select>
-                    </div>
-                    <div class="form-group col-md-3 col-sm-12">
-                      <button type="submit" class="btn btn-sm  btn-primary ">Apply</button>
-                      &nbsp;
-                      <a href="{{ url('admin/students') }}" class="btn btn-sm  btn-info ">
-                        <i class="ti-trash"></i> Clear All
+                    <div class="col-md-3 col-sm-12 mb-3">
+                      <button class="btn btn-sm btn-primary setBtn" type="submit">Search</button>
+                      <a href="{{ aurl('students') }}" class="btn btn-sm btn-warning setBtn"><i class="ti-trash"></i>
+                        Reset</a>
+                      <a href="javascript:void(0)" class="btn btn-sm btn-info setBtn" id="advSearchBtn">
+                        <i class="ti-trash"></i> Advance Search
                       </a>
                     </div>
                   </div>
                 </form>
+                <div class="{{ $filterApplied == true ? '' : 'hide-this' }}" id="advSearchForm">
+                  <hr>
+                  <form method="get" class="form" enctype="multipart/form-data">
+                    <hr class="my-15">
+                    <div class="row">
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>Nationality</label>
+                        <select name="nationality" id="nationality" class="form-control select2">
+                          <option value="">Select</option>
+                          @foreach ($nat as $na)
+                            <option value="{{ $na->nationality }}"
+                              {{ isset($_GET['nationality']) && $_GET['nationality'] == $na->nationality ? 'Selected' : '' }}>
+                              {{ $na->nationality }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>Level</label>
+                        <select name="level" id="level" class="form-control select2">
+                          <option value="">Select</option>
+                          @foreach ($lvl as $l)
+                            <option value="{{ $l->current_qualification_level }}"
+                              {{ isset($_GET['level']) && $_GET['level'] == $l->current_qualification_level ? 'Selected' : '' }}>
+                              {{ $l->getLevel->name ?? '' }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>Course</label>
+                        <select name="course" id="course" class="form-control select2">
+                          <option value="">Select</option>
+                          @foreach ($cc as $c)
+                            <option value="{{ $c->intrested_course_category }}"
+                              {{ isset($_GET['course']) && $_GET['course'] == $c->intrested_course_category ? 'Selected' : '' }}>
+                              {{ $c->getCourse->category ?? '' }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>Asigned</label>
+                        <select name="asign" id="asign" class="form-control select2">
+                          <option value="">Select</option>
+                          @foreach ($counsellor as $row)
+                            <option value="{{ $row->id }}"
+                              {{ isset($_GET['asign']) && $_GET['asign'] == $row->id ? 'Selected' : '' }}>
+                              {{ $row->name ?? '' }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>From</label>
+                        <input type="date" name="from" id="from"
+                          value="{{ isset($_GET['from']) ? $_GET['from'] : '' }}" class="form-control">
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>To</label>
+                        <input type="date" name="to" id="to"
+                          value="{{ isset($_GET['to']) ? $_GET['to'] : '' }}" class="form-control">
+                      </div>
+                      <div class="form-group col-md-3">
+                        <label>Lead Status <span class="text-danger">*</span></label>
+                        <select name="lead_status" id="f_lead_status" class="form-control select2">
+                          <option value="">Select...</option>
+                          @foreach ($ls as $row)
+                            <option value="<?php echo $row->id; ?>"><?php echo $row->title; ?></option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class=" form-group col-md-3">
+                        <label>Lead Sub Status</label>
+                        <select name="lead_sub_status" id="f_lead_sub_status" class="form-control select2">
+                          <option value="">Select...</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
+                        <button type="submit" class="btn btn-sm  btn-primary ">Apply</button>
+                        &nbsp;
+                        <a href="{{ url('admin/students') }}" class="btn btn-sm  btn-info ">
+                          <i class="ti-trash"></i> Clear All
+                        </a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
@@ -188,7 +214,27 @@
           <div class="col-lg-12 col-md-12 col-12">
             <div class="box">
               <div class="box-header">
-                <h4 class="box-title">Students List</h4>
+                <div style="float:left;">
+                  <label>
+                    Show
+                    <select name="limit_per_page" id="limit_per_page" class="">
+                      @foreach ($lpp as $lpp)
+                        <option value="{{ $lpp }}" {{ $limit_per_page == $lpp ? 'selected' : '' }}>
+                          {{ $lpp }}</option>
+                      @endforeach
+                    </select>
+                    entries
+                  </label>
+                  <select name="order_by" id="order_by">
+                    @foreach ($orderColumns as $key => $value)
+                      <option value="{{ $value }}" <?php echo $order_by == $value ? 'selected' : ''; ?>>{{ $key }}</option>
+                    @endforeach
+                  </select>
+                  <select name="order_in" id="order_in">
+                    <option value="ASC" {{ $order_in == 'ASC' ? 'selected' : '' }}>ASC</option>
+                    <option value="DESC" {{ $order_in == 'DESC' ? 'selected' : '' }}>DESC</option>
+                  </select>
+                </div>
                 <div style="float:right;" class="mb-0">
                   <input class="form-control" onkeyup="myNewF()" type="text" id="search" placeholder="Search">
                 </div>
@@ -406,7 +452,7 @@
           success: function(result) {
             if (result == '1') {
               var h = 'Success';
-              var msg = 'Record deleted successfully';
+              var msg = 'Mail has been sent successfully';
               var type = 'success';
               showToastr(h, msg, type);
             }
@@ -701,5 +747,44 @@
         });
       }
     }
+    // ORDER BY, LIMIT PER PAGE
+    $(document).ready(function() {
+      $('#limit_per_page').change(function() {
+        var selectedValue = $(this).val(); // Get the selected value
+        var currentUrl = new URL(window.location.href); // Get the current URL
+        var searchParams = currentUrl.searchParams;
+        // Update or set the 'limit_per_page' query parameter
+        searchParams.set('limit_per_page', selectedValue);
+        // Update the URL by replacing the existing query string
+        currentUrl.search = searchParams.toString();
+        // Reload the page with the updated URL
+        window.location.href = currentUrl.href;
+      });
+      $('#order_by').change(function() {
+        var selectedValue = $(this).val(); // Get the selected value
+        var currentUrl = new URL(window.location.href); // Get the current URL
+        var searchParams = currentUrl.searchParams;
+        // Update or set the 'order_by' query parameter
+        searchParams.set('order_by', selectedValue);
+        // Update the URL by replacing the existing query string
+        currentUrl.search = searchParams.toString();
+        // Reload the page with the updated URL
+        window.location.href = currentUrl.href;
+      });
+      $('#order_in').change(function() {
+        var selectedValue = $(this).val(); // Get the selected value
+        var currentUrl = new URL(window.location.href); // Get the current URL
+        var searchParams = currentUrl.searchParams;
+        // Update or set the 'order_in' query parameter
+        searchParams.set('order_in', selectedValue);
+        // Update the URL by replacing the existing query string
+        currentUrl.search = searchParams.toString();
+        // Reload the page with the updated URL
+        window.location.href = currentUrl.href;
+      });
+      $('#advSearchBtn').click(function() {
+        $('#advSearchForm').toggle();
+      });
+    });
   </script>
 @endsection

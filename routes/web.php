@@ -555,6 +555,7 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
       Route::get('{company_id}/update/{id}', [StudentScholarshipLetterC::class, 'index']);
       Route::post('{company_id}/update/{id}', [StudentScholarshipLetterC::class, 'update']);
     });
+    Route::get('get-template', [StudentScholarshipLetterC::class, 'getTemplate']);
     Route::get('view-scholarship-letter/{id}', [ScholarshipLetterController::class, 'view']);
     Route::get('print-scholarship-letter/{id}', [ScholarshipLetterController::class, 'print']);
   });

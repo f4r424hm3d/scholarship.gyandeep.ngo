@@ -196,7 +196,7 @@
           success: function(result) {
             if (result == '1') {
               var h = 'Success';
-              var msg = 'Record deleted successfully';
+              var msg = 'Mail has been sent successfully';
               var type = 'success';
               showToastr(h, msg, type);
             }

@@ -27,40 +27,54 @@ class StudentC extends Controller
       $clt = $request->segment(3);
     }
 
-    $rows = Student::with('getLevel', 'getCourse', 'getLastFup', 'getAC');
-
-    if ($request->has('nationality') && $request->nationality != '') {
-      $rows = $rows->where('nationality', $request->nationality);
-    }
-    if ($request->has('level') && $request->level != '') {
-      $rows = $rows->where('current_qualification_level', $request->level);
-    }
-    if ($request->has('course') && $request->course != '') {
-      $rows = $rows->where('intrested_course_category', $request->course);
-    }
-    if ($request->has('asign') && $request->asign != '') {
-      $rows = $rows->whereHas('getAC', function ($query) use ($request) {
-        $query->where('user_id', $request->asign);
-      });
-    }
-    if ($request->has('from') && $request->from != '') {
-      $from = date('Y-m-d', strtotime($request->from . '-1 days'));
-      $rows = $rows->whereDate('created_at', '>', $from);
-    }
-    if ($request->has('to') && $request->to != '') {
-      $to = date('Y-m-d', strtotime($request->to . '+1 days'));
-      $rows = $rows->whereDate('created_at', '<', $to);
-    }
-    if ($request->has('lead_status') && $request->lead_status != '') {
-      $rows = $rows->where('lead_status', $request->lead_status);
-    }
-    if ($request->has('lead_sub_status') && $request->lead_sub_status != '') {
-      $rows = $rows->where('lead_sub_status', $request->lead_sub_status);
+    $limit_per_page = $request->limit_per_page ?? 25;
+    $order_by = $request->order_by ?? 'id';
+    $order_in = $request->order_in ?? 'DESC';
+    $rows = Student::with('getLevel', 'getCourse', 'getLastFup', 'getAC')->orderBy($order_by, $order_in);
+    $filterApplied = false;
+    if ($request->has('search') && $request->search != '') {
+      $rows = $rows->where('name', 'like', '%' . $request->search . '%')->orWhere('city', 'like', '%' . $request->search . '%')->orWhere('state', 'like', '%' . $request->search . '%');
+    } else {
+      if ($request->has('nationality') && $request->nationality != '') {
+        $rows = $rows->where('nationality', $request->nationality);
+        $filterApplied = true;
+      }
+      if ($request->has('level') && $request->level != '') {
+        $rows = $rows->where('current_qualification_level', $request->level);
+        $filterApplied = true;
+      }
+      if ($request->has('course') && $request->course != '') {
+        $rows = $rows->where('intrested_course_category', $request->course);
+        $filterApplied = true;
+      }
+      if ($request->has('asign') && $request->asign != '') {
+        $rows = $rows->whereHas('getAC', function ($query) use ($request) {
+          $query->where('user_id', $request->asign);
+        });
+        $filterApplied = true;
+      }
+      if ($request->has('from') && $request->from != '') {
+        $from = date('Y-m-d', strtotime($request->from . '-1 days'));
+        $rows = $rows->whereDate('created_at', '>', $from);
+        $filterApplied = true;
+      }
+      if ($request->has('to') && $request->to != '') {
+        $to = date('Y-m-d', strtotime($request->to . '+1 days'));
+        $rows = $rows->whereDate('created_at', '<', $to);
+        $filterApplied = true;
+      }
+      if ($request->has('lead_status') && $request->lead_status != '') {
+        $rows = $rows->where('lead_status', $request->lead_status);
+        $filterApplied = true;
+      }
+      if ($request->has('lead_sub_status') && $request->lead_sub_status != '') {
+        $rows = $rows->where('lead_sub_status', $request->lead_sub_status);
+        $filterApplied = true;
+      }
     }
 
     $rows = $rows->where('lead_type', $clt);
-
-    $rows = $rows->orderBy('id', 'desc')->paginate(20)->withQueryString();
+    $rows = $rows->paginate($limit_per_page)->withQueryString();
     // printArray($rows->toArray());
     // die;
 
@@ -68,45 +82,15 @@ class StudentC extends Controller
     $pp = $rows->perPage();
     $i = ($cp - 1) * $pp + 1;
 
+    $lpp = ['25', '50', '100'];
+    $orderColumns = ['Name' => 'name', 'Date' => 'id'];
+
     $cc = Student::with('getCourse')->where('intrested_course_category', '!=', '')->select('intrested_course_category')->distinct()->get();
 
     $lvl = Student::with('getLevel')->where('current_qualification_level', '!=', '')->select('current_qualification_level')->distinct()->get();
 
     $nat = Student::select('nationality')->where('nationality', '!=', '')->distinct()->get();
 
-    // $lt = LeadType::with(['getLeadCount' => function ($query) use ($request) {
-    //     if ($request->has('nationality') && $request->nationality != '') {
-    //         $query->where('nationality', $request->nationality);
-    //     }
-    //     if ($request->has('level') && $request->level != '') {
-    //         $query->where('current_qualification_level', $request->level);
-    //     }
-    //     if ($request->has('course') && $request->course != '') {
-    //         $query->where('intrested_course_category', $request->course);
-    //     }
-    //     if ($request->has('from') && $request->from != '') {
-    //         $from = date('Y-m-d', strtotime($request->from . '-1 days'));
-    //         $query->whereDate('created_at', '>', $from);
-    //     }
-    //     if ($request->has('to') && $request->to != '') {
-    //         $to = date('Y-m-d', strtotime($request->to . '+1 days'));
-    //         $query->whereDate('created_at', '<', $to);
-    //     }
-    //     if ($request->has('lead_status') && $request->lead_status != '') {
-    //         $query->where('lead_status', $request->lead_status);
-    //     }
-    //     if ($request->has('lead_sub_status') && $request->lead_sub_status != '') {
-    //         $query->where('lead_sub_status', $request->lead_sub_status);
-    //     }
-
-    // }]);
-    // $lt = $lt->with(['getAsignLead' => function ($query) use ($request) {
-    //     if ($request->has('asign') && $request->asign != '') {
-    //         $query->where('user_id', $request->asign);
-    //     }
-    // }]);
-    // $lt = $lt->get();
-    //printArray($lt->toArray());
     $lt = LeadType::all();
     //die;
     $alt = LeadType::all();
@@ -114,7 +98,7 @@ class StudentC extends Controller
     $fupstatus = FollowUpStatus::all();
     $ls = LeadStatus::all();
     $counsellor = User::where('role', '=', 'Counsellor')->where('status', '=', '1')->get();
-    $data = compact('rows', 'cc', 'lvl', 'nat', 'i', 'lt', 'alt', 'fuptype', 'fupstatus', 'ls', 'counsellor');
+    $data = compact('rows', 'cc', 'lvl', 'nat', 'i', 'lt', 'alt', 'fuptype', 'fupstatus', 'ls', 'counsellor', 'clt', 'lpp', 'orderColumns', 'filterApplied', 'order_by', 'order_in', 'limit_per_page');
     return view('admin.students')->with($data);
   }
   public function trash(Request $request)
