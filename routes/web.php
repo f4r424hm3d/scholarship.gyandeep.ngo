@@ -556,7 +556,6 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
       Route::get('{company_id}/update/{id}', [StudentScholarshipLetterC::class, 'index']);
       Route::post('{company_id}/update/{id}', [StudentScholarshipLetterC::class, 'update']);
     });
-    Route::get('get-template', [StudentScholarshipLetterC::class, 'getTemplate']);
     Route::get('view-scholarship-letter/{id}', [ScholarshipLetterController::class, 'view']);
     Route::get('print-scholarship-letter/{id}', [ScholarshipLetterController::class, 'print']);
   });
@@ -625,6 +624,8 @@ Route::prefix('common')->group(function () {
   Route::get('/send-result-to-student/{studentId}/{examId}', [StudentResultController::class, 'index'])->name('common.send.result');
   Route::get('/test-mail/{studentId}/{examId}', [StudentResultController::class, 'test'])->name('common.test.mail');
   Route::post('/student/send-mail', [StudentMailController::class, 'sendMail'])->name('common.send.mail');
+
+  Route::get('get-template', [StudentScholarshipLetterC::class, 'getTemplate']);
 });
 
 Route::middleware([CommonAuth::class])->group(function () {

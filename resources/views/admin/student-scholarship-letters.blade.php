@@ -147,7 +147,7 @@
       $('#template_id').on('change', function(event) {
         var template_id = $('#template_id').val();
         $.ajax({
-          url: "{{ url('admin/get-template') }}",
+          url: "{{ url('common/get-template') }}",
           method: "GET",
           data: {
             template_id: template_id
