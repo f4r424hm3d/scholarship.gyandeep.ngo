@@ -178,68 +178,48 @@
         </div>
       </div>
       <hr>
-      <table align="center" width="700" cellpadding="0" cellspacing="0" border="0"
-        style="border-collapse: collapse; font-family: Arial, sans-serif; border:1px solid #0000002e; padding:5px; background-color: #fff;">
-        <tr>
-          <td style="text-align:left; padding:10px; padding-bottom: 0px;">
-            <span style="font-size:12px; font-weight:bold; ">Reg. No. 92/2014 - 15</span>
-          </td>
-          <td style="text-align:right; padding:10px; padding-bottom: 0px;">
-            &nbsp;
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align:left; padding:10px; width: 10%;">
-            <img src="{{ asset($letter->company->logo_path) }}" alt="GAYANDEEP WELFARE & REHABILITATION SOCIETY"
-              style="display:block;width: 232px;" />
-          </td>
-
-          <td style="width: 80%; padding: 10px;">
-            <p
-              style="text-align:center;font-size: 36px;font-weight:bold;margin: 0px;color: #dd3333;font-family: 'OnStage Regular', Arial, sans-serif;">
-              GAYANDEEP WELFARE & REHABILITATION SOCIETY</p>
-            <p style="text-align:center;font-size:14px;font-weight:normal;margin: 2px;">
-              RUNNING : DEEP SPECIAL SCHOOL
-            </p>
-          </td>
-        </tr>
-
-        <tr>
-          <td colspan="2"
-            style="background-color:#3d2a8c !important; color:#fff !important; text-align:center; padding:8px; font-size:16px; -webkit-print-color-adjust: exact; print-color-adjust: exact;">
-            Dasuya District Hoshiarpur Punjab - 144205
-          </td>
-        </tr>
-        <tr>
-          <td style="font-size:14px; padding:15px;" align="left">
-            Ref. No. .................
-          </td>
-          <td style="font-size:14px; padding:15px;" align="right">
-            Date: ....................
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" style="border-bottom:1px solid #000;"></td>
-        </tr>
-        <tr>
-          <td colspan="2" style="font-size:14px; padding:20px;" align="left">
-            <p style="margin:0 0 15px 0; font-size:14px; color:#333;">
-              {!! $letter->letter_description !!}
-            </p>
-          </td>
-        </tr>
-
-        <tr>
-          <td colspan="2" style="border-bottom:1px solid #000;"></td>
-        </tr>
-        <tr>
-          <td colspan="2" style="font-size:12px; padding:10px;" align="center">
-            📱 +91711908590 | +918882662310 | +919870406867<br />
-            📧 info@gyandeep.ngo
-            &nbsp; 🌐 www.gyandeep.ngo
-          </td>
-        </tr>
-      </table>
+      <page size="A4">
+        <header>
+          <div class="logo"><img src="{{ asset($letter->company->logo_path) }}" /></div>
+          <div class="right-links">
+            <div class="mobile"><img src="https://www.crm.britannicaoverseas.com/uploads/letterhead/images/mobile.jpg" />
+              {{ $letter->company->mobile }}</div>
+            <div class="email"><img src="https://www.crm.britannicaoverseas.com/uploads/letterhead/images/email.jpg" />
+              {{ $letter->company->email }}</div>
+            <div class="website"><img
+                src="https://www.crm.britannicaoverseas.com/uploads/letterhead/images/website.jpg" />
+              {{ $letter->company->website_address }}
+            </div>
+          </div>
+        </header>
+        <div class="header-line"><span></span></div>
+        <div class="content-area">
+          {!! $letter->letter_description !!}
+          @if ($letter->signature == 1 || $letter->stamp == 1)
+            <div class="sign-stamp">
+              @if ($letter->signature == 1 && $letter->company->signature_path != null)
+                <div class="sign"><img src="{{ asset($letter->company->signature_path) }}" /></div>
+              @endif
+              @if ($letter->stamp == 1 && $letter->company->stamp_path != null)
+                <div class="stamp"><img src="{{ asset($letter->company->stamp_path) }}" /></div>
+              @endif
+            </div>
+            <br><br>
+          @endif
+        </div>
+        <footer>
+          <div class="footer-line"><span></span></div>
+          <div class="footer-links">
+            <img src="https://www.crm.britannicaoverseas.com/uploads/letterhead/images/marker.jpg" />
+            {{ $letter->company->address }}
+          </div>
+        </footer>
+        <br><br>
+        <br><br>
+        <br><br>
+        <br><br>
+        <div class="footer-stripe"></div>
+      </page>
       <hr>
       <div class="letter">
         <div class="col-12">

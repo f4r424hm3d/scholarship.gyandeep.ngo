@@ -622,6 +622,7 @@ Route::prefix('common')->group(function () {
   Route::get('/get-course-categories/{scholarshipId}', [StudentFc::class, 'getCourseCategories'])->name('get-course-categories')->name('common.get.categories');
 
   Route::get('/send-result-to-student/{studentId}/{examId}', [StudentResultController::class, 'index'])->name('common.send.result');
+  Route::get('/test-mail/{studentId}/{examId}', [StudentResultController::class, 'test'])->name('common.test.mail');
 });
 
 Route::middleware([CommonAuth::class])->group(function () {
