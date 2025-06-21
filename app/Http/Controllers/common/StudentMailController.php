@@ -38,7 +38,11 @@ class StudentMailController extends Controller
     );
     $field = new StudentMail;
     $field->student_id = $request['student_id'];
-    $field->sender = session('adminLoggedIn')['user_id'];
+    if ($request->role == 'admin') {
+      $field->sender = session('adminLoggedIn')['user_id'];
+    } else {
+      $field->sender = session('userLoggedIn')['user_id'];
+    }
     $field->sent_to = $request['sent_to'];
     $field->cc = $request['cc'];
     $field->subject = $request['subject'];
