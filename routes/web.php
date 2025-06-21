@@ -43,6 +43,7 @@ use App\Http\Controllers\admin\StudentProfileC;
 use App\Http\Controllers\admin\StudentScholarshipLetterC;
 use App\Http\Controllers\admin\TestimonialC;
 use App\Http\Controllers\common\ScholarshipLetterController;
+use App\Http\Controllers\common\StudentMailController;
 use App\Http\Controllers\common\StudentResultController;
 use App\Http\Controllers\CommonController;
 use App\Http\Controllers\employee\EmpDashboardC;
@@ -623,6 +624,7 @@ Route::prefix('common')->group(function () {
 
   Route::get('/send-result-to-student/{studentId}/{examId}', [StudentResultController::class, 'index'])->name('common.send.result');
   Route::get('/test-mail/{studentId}/{examId}', [StudentResultController::class, 'test'])->name('common.test.mail');
+  Route::post('/student/send-mail', [StudentMailController::class, 'sendMail'])->name('common.send.mail');
 });
 
 Route::middleware([CommonAuth::class])->group(function () {
@@ -633,6 +635,7 @@ Route::middleware([CommonAuth::class])->group(function () {
       Route::get('/scholarship/', [StudentProfileC::class, 'scholarship']);
       Route::get('/exams/', [StudentProfileC::class, 'exams']);
       Route::get('/exams/{exam_id}', [StudentProfileC::class, 'examDetails']);
+      Route::get('/mails/', [StudentMailController::class, 'index']);
     });
   });
 });

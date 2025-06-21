@@ -14,6 +14,8 @@
         <a href="{{ url($role . '/student/' . $student->id . '/exams') }}"
           class="btn btn-xs btn{{ $page_route == 'exams' ? '' : ' btn-outline' }} btn-info">Exams</a>
 
+        <a href="{{ url($role . '/student/' . $student->id . '/mails') }}"
+          class="btn btn-xs btn{{ $page_route == 'mails' ? '' : ' btn-outline' }} btn-info">Mails</a>
       </span>
     </div>
   </div>
