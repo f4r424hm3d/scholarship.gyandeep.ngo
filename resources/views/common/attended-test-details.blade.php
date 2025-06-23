@@ -36,7 +36,7 @@
             <x-result-notification-field />
             <!-- NOTIFICATION FIELD END -->
           </div>
-          <div class="col-lg-12 col-md-12 col-12">
+          <div class="col-lg-7 col-md-6 col-7">
             <div class="box">
               <div class="box-body">
                 <div class="table-responsive">
@@ -47,6 +47,8 @@
                       <th>Exam Date</th>
                       <td>{{ getFormattedDate($row->getExamDet->exam_date, 'd M Y') }}
                       </td>
+                    </tr>
+                    <tr>
                       <th>Attended At</th>
                       <td>{{ getFormattedDate($row->attended_at, 'd M Y  h:i A') }}
                       </td>
@@ -185,100 +187,110 @@
                 data-target="#updateScholarshipModal">Update</a> --}}
             </div>
           </div>
-          <div class="col-lg-12 col-md-12 col-12">
-            <div class="box">
-              <div class="box-body">
-                <form action="{{ url('common/student/send-letter') }}" class="needs-validation" method="post"
-                  enctype="multipart/form-data" novalidate>
-                  @csrf
-                  <input type="hidden" name="exam_id" value="{{ $examId }}">
-                  <input type="hidden" name="role" value="{{ $role }}">
-                  <div class="row">
-                    <div class="col-md-4 col-sm-12 mb-3">
-                      <div class="form-group">
-                        <label>Sent to</label>
-                        <input name="sent_to" id="sent_to" type="text" class="form-control"
-                          placeholder="Enter recipient email" value="{{ old('sent_to') ?? $student->email }}" required />
-                        <span class="text-danger" id="sent_to-err">
-                          @error('sent_to')
-                            {{ $message }}
-                          @enderror
-                        </span>
+          <div class="col-lg-5 col-md-6 col-5">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-12">
+                <div class="box">
+                  <div class="box-body">
+                    <h4 class="mb-sm-0 font-size-18">Send Offer Letter</h4>
+                  </div>
+                  <div class="box-body">
+                    <form action="{{ url('common/student/send-letter') }}" class="needs-validation" method="post"
+                      enctype="multipart/form-data" novalidate>
+                      @csrf
+                      <input type="hidden" name="exam_id" value="{{ $examId }}">
+                      <input type="hidden" name="role" value="{{ $role }}">
+                      <div class="row">
+                        <div class="col-md-6 col-sm-12 mb-3">
+                          <div class="form-group">
+                            <label>Sent to</label>
+                            <input name="sent_to" id="sent_to" type="text" class="form-control"
+                              placeholder="Enter recipient email" value="{{ old('sent_to') ?? $student->email }}"
+                              required />
+                            <span class="text-danger" id="sent_to-err">
+                              @error('sent_to')
+                                {{ $message }}
+                              @enderror
+                            </span>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mb-3">
+                          <label>CC</label>
+                          <input name="cc" id="cc" type="text" class="form-control"
+                            placeholder="Enter recipient email" value="{{ old('cc') }}" />
+                          <span class="text-danger" id="cc-err">
+                            @error('cc')
+                              {{ $message }}
+                            @enderror
+                          </span>
+                        </div>
+                        <div class="col-md-6 col-sm-12 mb-3">
+                          <label>Attach File</label>
+                          <input name="attach" id="attach" type="file" class="form-control"
+                            placeholder="Attach File" required />
+                          <span class="text-danger" id="attach-err">
+                            @error('attach')
+                              {{ $message }}
+                            @enderror
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12 mb-3">
-                      <label>CC</label>
-                      <input name="cc" id="cc" type="text" class="form-control"
-                        placeholder="Enter recipient email" value="{{ old('cc') }}" />
-                      <span class="text-danger" id="cc-err">
-                        @error('cc')
-                          {{ $message }}
-                        @enderror
-                      </span>
-                    </div>
-                    <div class="col-md-3 col-sm-12 mb-3">
-                      <label>Attach File</label>
-                      <input name="attach" id="attach" type="file" class="form-control" placeholder="Attach File"
-                        required />
-                      <span class="text-danger" id="attach-err">
-                        @error('attach')
-                          {{ $message }}
-                        @enderror
-                      </span>
+                      @if ($ft == 'add')
+                        <button type="reset" class="btn btn-sm btn-warning  mr-1"><i class="ti-trash"></i>
+                          Reset</button>
+                      @endif
+                      @if ($ft == 'edit')
+                        <a href="{{ aurl($page_route) }}" class="btn btn-sm btn-info "><i class="ti-trash"></i>
+                          Cancel</a>
+                      @endif
+                      <button class="btn btn-sm btn-primary" type="submit">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-12">
+                <div class="box">
+                  <div class="box-body">
+                    <div class="table-responsive">
+                      <table id="exampl" class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th>Sr. No</th>
+                            <th>Date</th>
+                            <th>Letter</th>
+                            <th>Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          @php
+                            $i = 1;
+                          @endphp
+                          @foreach ($studentExamOfferLetter as $row)
+                            <tr>
+                              <td>{{ $i }}</td>
+                              <td>{{ getFormattedDate($row->created_at, 'd M Y - h:i A') }}</td>
+                              <td>
+                                @if ($row->letter_path)
+                                  <a href="{{ asset($row->letter_path) }}" target="_blank">View Letter</a>
+                                @else
+                                  No Letter
+                                @endif
+                              </td>
+                              <td>{{ $row->is_sent == 1 ? 'Sent' : 'Not Sent' }}</td>
+                            </tr>
+                            @php
+                              $i++;
+                            @endphp
+                          @endforeach
+                        </tbody>
+                      </table>
                     </div>
                   </div>
-                  @if ($ft == 'add')
-                    <button type="reset" class="btn btn-sm btn-warning  mr-1"><i class="ti-trash"></i>
-                      Reset</button>
-                  @endif
-                  @if ($ft == 'edit')
-                    <a href="{{ aurl($page_route) }}" class="btn btn-sm btn-info "><i class="ti-trash"></i> Cancel</a>
-                  @endif
-                  <button class="btn btn-sm btn-primary" type="submit">Submit</button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-12 col-md-12 col-12">
-            <div class="box">
-              <div class="box-body">
-                <div class="table-responsive">
-                  <table id="exampl" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Sr. No</th>
-                        <th>Date</th>
-                        <th>Letter</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      @php
-                        $i = 1;
-                      @endphp
-                      @foreach ($studentExamOfferLetter as $row)
-                        <tr>
-                          <td>{{ $i }}</td>
-                          <td>{{ getFormattedDate($row->created_at, 'd M Y - h:i A') }}</td>
-                          <td>
-                            @if ($row->letter_path)
-                              <a href="{{ asset($row->letter_path) }}" target="_blank">View Letter</a>
-                            @else
-                              No Letter
-                            @endif
-                          </td>
-                          <td>{{ $row->is_sent == 1 ? 'Sent' : 'Not Sent' }}</td>
-                        </tr>
-                        @php
-                          $i++;
-                        @endphp
-                      @endforeach
-                    </tbody>
-                  </table>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </section>
     </div>

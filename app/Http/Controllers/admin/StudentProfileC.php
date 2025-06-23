@@ -178,7 +178,7 @@ class StudentProfileC extends Controller
 
     $page_title = 'Attended Test Details';
     $ft = 'edit';
-    $page_route = 'exam-details';
+    $page_route = 'exams';
 
     $studentExamOfferLetter = StudentExamOfferLatter::where('exam_id', $examId)->get();
 
