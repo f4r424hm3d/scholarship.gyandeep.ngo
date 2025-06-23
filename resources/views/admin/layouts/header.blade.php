@@ -56,8 +56,8 @@
           <a href="{{ url('/admin/') }}" class="logo">
             <!-- logo-->
             <div class="logo-lg">
-              <span class="light-logo"><img src="https://gyandeep.ngo/front/assets/img/plant.png" alt="logo"></span>
-              <span class="dark-logo"><img src="https://gyandeep.ngo/front/assets/img/plant.png" alt="logo"></span>
+              <span class="light-logo"><img src="{{ asset('logo/plant.png') }}" alt="logo"></span>
+              <span class="dark-logo"><img src="{{ asset('logo/plant.png') }}" alt="logo"></span>
             </div>
           </a>
         </div>
