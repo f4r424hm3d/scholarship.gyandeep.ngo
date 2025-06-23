@@ -176,10 +176,10 @@
                 </div>
               </div>
 
-              <button class="btn btn-sm btn-info" type="button"
+              {{-- <button class="btn btn-sm btn-info" type="button"
                 onclick="sendResultToStudent('{{ $student->id }}','{{ $examId }}')">
                 Send Result
-              </button>
+              </button> --}}
             </div>
           </div>
         </div>

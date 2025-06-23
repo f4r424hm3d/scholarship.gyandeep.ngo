@@ -276,10 +276,12 @@
                             @if ($row->getAC->count() > 0)
                               @php
                                 $alto = '';
-                                foreach ($row->getAC as $ac) {
-                                    $alto .= $ac->getUser->name . ' , ';
-                                }
                               @endphp
+                              @foreach ($row->getAC as $ac)
+                                @php
+                                  $alto .= $ac->getUser->name . ' , ';
+                                @endphp
+                              @endforeach
                               <span class="badge badge-primary" title="{{ $alto }}">{{ $row->getAC->count() }}
                               </span>
                             @endif
@@ -347,6 +349,7 @@
                             Email : {{ $row->email }}<br>
                             Gender : {{ $row->gender }}<br>
                             DOB : {{ $row->dob }}<br>
+                            <b>Password</b> : {{ $row->password }}
                           </td>
                           <td>{{ $row->getLevel->name ?? '' }}</td>
                           <td>
@@ -357,10 +360,10 @@
                               Exam : <a
                                 href="{{ url('admin/student/' . $row->id . '/exams/' . $row->lastAttendedExam->id) }}"
                                 class="btn btn-xs btn-primary" target="_blank">View Result</a> <br>
-                              <button class="btn btn-xs btn-info" type="button"
+                              {{-- <button class="btn btn-xs btn-info" type="button"
                                 onclick="sendResultToStudent('{{ $row->id }}','{{ $row->lastAttendedExam->id }}')">
                                 Send Result
-                              </button>
+                              </button> --}}
                             @endif
                           </td>
                         </tr>
