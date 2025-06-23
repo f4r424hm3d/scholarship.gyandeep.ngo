@@ -624,8 +624,11 @@ Route::prefix('common')->group(function () {
   Route::get('/send-result-to-student/{studentId}/{examId}', [StudentResultController::class, 'index'])->name('common.send.result');
   Route::get('/test-mail/{studentId}/{examId}', [StudentResultController::class, 'test'])->name('common.test.mail');
   Route::post('/student/send-mail', [StudentMailController::class, 'sendMail'])->name('common.send.mail');
+  Route::post('/student/send-letter', [StudentMailController::class, 'sendLetter'])->name('common.send.letter');
 
   Route::get('get-template', [StudentScholarshipLetterC::class, 'getTemplate']);
+
+  Route::post('student-scholarship-update', [StudentProfileC::class, 'updateScholarship'])->name('common.student.scholarship.update');
 });
 
 Route::middleware([CommonAuth::class])->group(function () {

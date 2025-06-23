@@ -80,7 +80,7 @@
         <td colspan="2" style="font-size:14px; padding:20px; vertical-align: super;" align="left">
           <div class="main">
             <div class="content-area">
-              <br>
+              Dear {{ $letter->student->name }},<br>
               {!! $letter->letter_description !!}
               <br><br>
             </div>

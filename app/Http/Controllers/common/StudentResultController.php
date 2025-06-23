@@ -160,7 +160,7 @@ class StudentResultController extends Controller
       ])->setPaper('A4', 'portrait');
 
       // Save PDF to a file
-      $pdfPath = storage_path("app/public/scholarship_letter_{$student->id}.pdf");
+      $pdfPath = public_path("uploads/scholarship_letter_{$student->id}_" . date('YmdHis') . ".pdf");
       $pdf->save($pdfPath);
     }
 

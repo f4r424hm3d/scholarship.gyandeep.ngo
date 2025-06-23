@@ -52,21 +52,39 @@
                         </span>
                       </div>
                     </div>
-                    <div class="col-md-4 col-sm-12 mb-3">
+                    <div class="col-md-3 col-sm-12 mb-3">
                       <x-input-field type="text" label="CC" name="cc" id="cc" :ft="$ft"
                         :sd="$sd" value="{{ old('cc') }}" />
                     </div>
-                    <div class="col-md-4 col-sm-12 mb-3">
+                    <div class="col-md-3 col-sm-12 mb-3">
                       <x-input-field type="file" label="Attach File" name="attach" id="attach" :ft="$ft"
                         :sd="$sd" value="{{ old('attach') }}" />
+                    </div>
+                    {{-- <div class="col-md-2 col-sm-12 mb-3">
+                      <div class="form-group">
+                        <label>Mail Type</label>
+                        <select name="mail_type" id="mail_type" class="form-control js-example-basic-singl" required>
+                          <option value="">Select</option>
+                          <option value="letter_head"
+                            {{ $ft == 'edit' && old('mail_type') == 'letter_head' ? 'selected' : '' }}>
+                            Letter Head</option>
+                          <option value="custom" {{ $ft == 'edit' && old('mail_type') == 'custom' ? 'selected' : '' }}>
+                            Custom</option>
+                        </select>
+                        <span class="text-danger">
+                          @error('mail_type')
+                            {{ $message }}
+                          @enderror
+                        </span>
+                      </div>
+                    </div> --}}
+                    <div class="col-md-4 col-sm-12 mb-3">
+                      <x-select-field label="Select Template" name="template_id" id="template_id" :ft="$ft"
+                        :sd="$sd" :list="$templates" savev="id" showv="template_name" />
                     </div>
                     <div class="col-md-8 col-sm-12 mb-3">
                       <x-input-field type="text" label="Subject" name="subject" id="subject" :ft="$ft"
                         :sd="$sd" value="{{ old('subject') }}" />
-                    </div>
-                    <div class="col-md-4 col-sm-12 mb-3">
-                      <x-select-field label="Select Template" name="template_id" id="template_id" :ft="$ft"
-                        :sd="$sd" :list="$templates" savev="id" showv="template_name" />
                     </div>
                     <div class="col-md-12 col-sm-12 mb-3">
                       <x-textarea-field label="Email Description" name="message" id="message" :ft="$ft"
@@ -127,6 +145,32 @@
     </div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // $(document).ready(function() {
+    //   function toggleFields() {
+    //     var mailType = $('#mail_type').val();
+
+    //     if (mailType === 'custom') {
+    //       $('#template_id').closest('.col-md-4').show();
+    //       $('#subject').closest('.col-md-8').show();
+    //       $('#message').closest('.col-md-12').show();
+    //     } else {
+    //       $('#template_id').closest('.col-md-4').hide();
+    //       $('#subject').closest('.col-md-8').hide();
+    //       $('#message').closest('.col-md-12').hide();
+    //     }
+    //   }
+
+    //   // Initial check on page load
+    //   toggleFields();
+
+    //   // When mail_type changes
+    //   $('#mail_type').change(function() {
+    //     toggleFields();
+    //   });
+    // });
+  </script>
+
   <script>
     CKEDITOR.replace('message');
 

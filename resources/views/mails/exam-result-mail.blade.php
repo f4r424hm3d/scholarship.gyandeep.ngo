@@ -1,8 +1,3 @@
-@php
-  use App\Models\ExamQuestions;
-  use App\Models\AnswerSheet;
-  $ct = date('Y-m-d H:i:s');
-@endphp
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
