@@ -124,7 +124,8 @@ class StudentScholarshipLetterC extends Controller
             <td>' . ($row->stamped == 1 ? '<span class="badge bg-success">On</span>' : '<span class="badge bg-danger">Off</span>') . '</td>
             <td>
               <a target="_blank" href="' . url('admin/view-scholarship-letter/' . $row->id) . '" data-toggle="tooltip" class="btn btn-info btn-xs" title="Preview">Preview</a>
-              <a target="_blank" href="' . url('admin/view-scholarship-letter/' . $row->id . '?download') . '" data-toggle="tooltip" class="btn btn-info btn-xs" title="Download">Download</a>
+              <a target="_blank" href="' . url('admin/view-scholarship-letter/' . $row->id . '?download') . '" data-toggle="tooltip" class="btn btn-info btn-xs hide-this" title="Download">Download</a>
+              <a target="_blank" href="' . url('admin/print-scholarship-letter/' . $row->id) . '" data-toggle="tooltip" class="btn btn-info btn-xs" title="Print">Print</a>
             </td>
             <td>
               ' . Blade::render('<x-delete-button :id="$id" />', ['id' => $row->id]) . '

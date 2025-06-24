@@ -3,7 +3,6 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width" />
-
   <style>
     .pink-btn {
       font-weight: bold;
@@ -75,8 +74,8 @@
 
                 We’re pleased to share your exam results below: <br>
 
-              <table border="1" cellpadding="10">
-                <thead>
+              <table border="1" style="width: 100%">
+                <thead style="background-color: #30a2e9;">
                   <tr>
                     <th>Subject</th>
                     <th>Correct</th>
@@ -87,10 +86,10 @@
                 <tbody>
                   @foreach ($scores as $score)
                     <tr>
-                      <td>{{ $score['subject'] }}</td>
-                      <td>{{ $score['correct'] }}</td>
-                      <td>{{ $score['attempted'] }}</td>
-                      <td>{{ $score['total'] }}</td>
+                      <td style="text-align: center">{{ $score['subject'] }}</td>
+                      <td style="text-align: center">{{ $score['correct'] }}</td>
+                      <td style="text-align: center">{{ $score['attempted'] }}</td>
+                      <td style="text-align: center">{{ $score['total'] }}</td>
                     </tr>
                   @endforeach
                   <tr>

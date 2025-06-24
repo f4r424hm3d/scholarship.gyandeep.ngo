@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 
 class ScholarshipLetterController extends Controller
 {
-  public function view_x($id)
+  public function view($id)
   {
     $letter = StudentScholarshipLetter::find($id);
     $page_title = 'View Letter';
     $data = compact('letter', 'id', 'page_title');
     return view('admin.view-letter')->with($data);
   }
-  public function view(Request $request, $id)
+  public function view_y(Request $request, $id)
   {
     $letter = StudentScholarshipLetter::find($id);
     $page_title = 'Print Letter';

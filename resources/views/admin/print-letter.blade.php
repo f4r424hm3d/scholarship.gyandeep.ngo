@@ -54,8 +54,7 @@
       </tr>
       <tr>
         <td style="text-align:left; padding:10px; width: 10%;">
-          <img src="{{ public_path($letter->company->logo_path) }}" alt="GAYANDEEP"
-            style="display:block;width: 232px;" />
+          <img src="{{ asset($letter->company->logo_path) }}" alt="GAYANDEEP" style="display:block;width: 232px;" />
         </td>
         <td style="width: 80%; padding: 10px;">
           <p
@@ -107,7 +106,7 @@
   </table>
   <script>
     window.print();
-    window.onafterprint = window.close;
+    //window.onafterprint = window.close;
   </script>
 </body>
 
