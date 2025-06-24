@@ -5,8 +5,8 @@
   <style>
     @font-face {
       font-family: 'GyanDeepFont';
-      src: url('{{ asset('/fonts/OnStage-Regular.woff2') }}') format('woff2'),
-        url('{{ asset('/fonts/OnStage-Regular.ttf') }}') format('truetype');
+      src: url('{{ asset('/fonts/OnStage-Regular/OnStage-Regular.woff2') }}') format('woff2'),
+        url('{{ asset('/fonts/OnStage-Regular/OnStage-Regular.ttf') }}') format('truetype');
     }
 
     body {
@@ -58,7 +58,7 @@
         </td>
         <td style="width: 80%; padding: 10px;">
           <p
-            style="text-align:center;font-size: 30px;font-weight:bold;margin: 0px;color: #dd3333;font-family: 'OnStage Regular', Arial, sans-serif;">
+            style="text-align:center;font-size: 30px;font-weight:bold;margin: 0px;color: #dd3333;font-family: 'GyanDeepFont', Arial, sans-serif;">
             GAYANDEEP WELFARE & REHABILITATION SOCIETY</p>
           <p style="text-align:center;font-size:14px;font-weight:normal;margin: 2px;">RUNNING : DEEP SPECIAL SCHOOL</p>
         </td>
