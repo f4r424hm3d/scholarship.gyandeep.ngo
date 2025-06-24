@@ -5,8 +5,8 @@
   <style>
     @font-face {
       font-family: 'GyanDeepFont';
-      src: url('https://yourwebsite.com/fonts/OnStage-Regular.woff2') format('woff2'),
-        url('https://yourwebsite.com/fonts/OnStage-Regular.ttf') format('truetype');
+      src: url('{{ asset('/fonts/OnStage-Regular.woff2') }}') format('woff2'),
+        url('{{ asset('/fonts/OnStage-Regular.ttf') }}') format('truetype');
     }
 
     body {
@@ -44,7 +44,7 @@
 
 <body style="margin:0;padding:0; background-color: #ffffff;">
   <table align="center" cellpadding="0" cellspacing="0" border="0"
-    style="border-collapse: collapse; font-family: Arial, sans-serif; border:1px solid #0000002e; padding:5px; background-color: #fff;">
+    style="border-collapse: collapse; font-family: Arial, sans-serif; padding:5px; background-color: #fff;">
     <thead class="header">
       <tr>
         <td style="text-align:left; padding:10px; padding-bottom: 0px;">
@@ -58,7 +58,7 @@
         </td>
         <td style="width: 80%; padding: 10px;">
           <p
-            style="text-align:center;font-size: 36px;font-weight:bold;margin: 0px;color: #dd3333;font-family: 'OnStage Regular', Arial, sans-serif;">
+            style="text-align:center;font-size: 30px;font-weight:bold;margin: 0px;color: #dd3333;font-family: 'OnStage Regular', Arial, sans-serif;">
             GAYANDEEP WELFARE & REHABILITATION SOCIETY</p>
           <p style="text-align:center;font-size:14px;font-weight:normal;margin: 2px;">RUNNING : DEEP SPECIAL SCHOOL</p>
         </td>
