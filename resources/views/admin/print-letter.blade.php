@@ -58,7 +58,7 @@
         </td>
         <td style="width: 80%; padding: 10px;">
           <p
-            style="text-align:center;font-size: 30px;font-weight:bold;margin: 0px;color: #dd3333;font-family: 'GyanDeepFont', Arial, sans-serif;">
+            style="text-align:center;font-size: 36px;font-weight:bold;margin: 0px;color: #dd3333;font-family: 'GyanDeepFont', Arial, sans-serif;">
             GAYANDEEP WELFARE & REHABILITATION SOCIETY</p>
           <p style="text-align:center;font-size:14px;font-weight:normal;margin: 2px;">RUNNING : DEEP SPECIAL SCHOOL</p>
         </td>
@@ -66,7 +66,7 @@
       <tr>
         <td colspan="2"
           style="background-color:#3d2a8c !important; color:#fff !important; text-align:center; padding:8px; font-size:16px; -webkit-print-color-adjust: exact; print-color-adjust: exact;">
-          Dasuya District Hoshiarpur Punjab - 144205
+          Dasuya, District Hoshiarpur, Punjab - 144205
         </td>
       </tr>
       <tr>
@@ -85,7 +85,21 @@
             <div class="content-area">
               Dear {{ $letter->student->name }},<br>
               {!! $letter->letter_description !!}
-              <br><br>
+              <br>
+              @if ($letter->company->signature_path || $letter->company->stamp_path)
+                <div class="sign-stamp">
+                  @if ($letter->company->signature_path)
+                    <div class="signature" style="margin-top: -150px;float: right; ">
+                      <img src="{{ asset($letter->company->signature_path) }}" height="80" width="auto" />
+                    </div>
+                  @endif
+                  @if ($letter->company->stamp_path)
+                    <div class="stamp">
+                      <img src="{{ asset($letter->company->stamp_path) }}" height="100" width="auto" />
+                    </div>
+                  @endif
+                </div>
+              @endif
             </div>
           </div>
         </td>
@@ -98,7 +112,7 @@
       </tr>
       <tr>
         <td colspan="2" style="font-size:12px; padding:10px;" align="center">
-          📱 +91711908590 | +918882662310 | +919870406867<br />
+          📱 +91711908590 | +919870406867<br />
           📧 info@gyandeep.ngo &nbsp; 🌐 www.gyandeep.ngo
         </td>
       </tr>

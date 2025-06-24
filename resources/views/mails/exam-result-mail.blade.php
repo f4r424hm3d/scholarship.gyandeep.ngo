@@ -47,9 +47,9 @@
 </head>
 
 <body
-  style="width:100%;height:100%;background:#efefef;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:none;color:#3E3E3E;font-family:Helvetica, Arial, sans-serif;line-height:1.65;margin:0;padding:0;">
+  style="width:100%;height:100%;background:#efefef;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:none;color:#3E3E3E;font-family:poppins, Arial, sans-serif;line-height:1.65;margin:0;padding:0;">
   <table border="0" cellpadding="0" cellspacing="0"
-    style="width:100%;background:#efefef;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:none;color:#3E3E3E;font-family:Helvetica, Arial, sans-serif;line-height:1.65;margin:0;padding:0;">
+    style="width:100%;background:#efefef;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:none;color:#3E3E3E;font-family:poppins, Arial, sans-serif;line-height:1.65;margin:0;padding:0;">
     <tr>
       <td valign="top" style="display:block;clear:both;margin:0 auto;max-width:580px;">
         <table border="0" cellpadding="0" cellspacing="0" style="width:100%;border-collapse:collapse;">
@@ -66,61 +66,78 @@
           <tr>
             <td valign="top" class="content" style="background:white;padding:25px;">
               <p style="text-align: justify">
-                Dear {{ $name }}, <br>
+                <b>Dear {{ $name }}</b>, <br> <br>
 
                 Thank you for participating in the Online Scholarship Exam for the MBBS Scholarship 2025, organized by
-                Gyandeep Welfare & Rehabilitation Society in collaboration with the Embassy of Kyrgyzstan in India and
-                Eurasian International University (EIU), Kyrgyzstan. <br>
+                Gyandeep Welfare & Rehabilitation Society in collaboration with the <b>Embassy of Kyrgyzstan in
+                  India</b> and
+                Eurasian International University (EIU), Kyrgyzstan. <br> <br>
 
-                We’re pleased to share your exam results below: <br>
+                We’re pleased to share your exam results below: <br> <br>
 
-              <table border="1" style="width: 100%">
-                <thead style="background-color: #30a2e9;">
+              <table border="1" style="width: 100%; border-spacing: 0px; margin: 10px 0px;">
+                <thead style="background-color: #3f4079;color: #fff;font-size: 14px;">
                   <tr>
-                    <th>Subject</th>
-                    <th>Correct</th>
-                    <th>Attempted</th>
-                    <th>Total</th>
+                    <th style="text-align: center; padding:6px; ">Subject</th>
+                    <th style="text-align: center; padding:6px; ">Correct</th>
+                    <th style="text-align: center; padding:6px; ">Attempted</th>
+                    <th style="text-align: center; padding:6px; ">Total</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach ($scores as $score)
                     <tr>
-                      <td style="text-align: center">{{ $score['subject'] }}</td>
-                      <td style="text-align: center">{{ $score['correct'] }}</td>
-                      <td style="text-align: center">{{ $score['attempted'] }}</td>
-                      <td style="text-align: center">{{ $score['total'] }}</td>
+                      <td style="text-align: center; padding:6px; text-transform: capitalize; ">{{ $score['subject'] }}
+                      </td>
+                      <td style="text-align: center; padding:6px; text-transform: capitalize; ">{{ $score['correct'] }}
+                      </td>
+                      <td style="text-align: center; padding:6px; text-transform: capitalize; ">
+                        {{ $score['attempted'] }}</td>
+                      <td style="text-align: center; padding:6px; text-transform: capitalize; ">{{ $score['total'] }}
+                      </td>
                     </tr>
                   @endforeach
                   <tr>
-                    <th>Total</th>
-                    <th>{{ $grandCorrect }}</th>
-                    <th>{{ count($scores) ? array_sum(array_column($scores, 'attempted')) : 0 }}</th>
-                    <th>{{ $grandTotal }}</th>
+                    <th
+                      style="text-align: center; padding:6px;font-size: 14px; text-transform: capitalize; background-color: #3f4079; color: #fff; ">
+                      Total</th>
+                    <th
+                      style="text-align: center; padding:6px;font-size: 14px; text-transform: capitalize; background-color: #3f4079; color: #fff; ">
+                      {{ $grandCorrect }}</th>
+                    <th
+                      style="text-align: center; padding:6px;font-size: 14px; text-transform: capitalize; background-color: #3f4079; color: #fff; ">
+                      {{ count($scores) ? array_sum(array_column($scores, 'attempted')) : 0 }}</th>
+                    <th
+                      style="text-align: center; padding:6px;font-size: 14px; text-transform: capitalize; background-color: #3f4079; color: #fff; ">
+                      {{ $grandTotal }}</th>
                   </tr>
                 </tbody>
               </table>
+              <br> <br>
+              🟢 <b>Result: Shortlisted for Interview</b> <br><br>
 
-              🟢 Result: Shortlisted for Interview <br>
-              Based on your total score, you have been shortlisted for the next stage of the process — an official
-              interview coordinated by the Embassy of Kyrgyzstan in India. <br>
+              Based on your total score, you have been <b>shortlisted for the next stage</b> of the process — <b>an
+                official
+                interview</b> coordinated by the <b>Embassy of Kyrgyzstan in India</b>. <br> <br>
+
+              <b>Your scholarship letter is attached to this email</b>. Please read it carefully. <br> <br>
 
               We will contact you shortly with interview details and document submission guidelines. Please keep your
-              documents ready. <br>
+              documents ready. <br><br>
 
               If you have any queries, feel free to reach out: <br>
-              📧 info@gyandeep.ngo <br>
-              📞 +91 9711908590 <br>
+              📧 Email : info@gyandeep.ngo <br>
+              📞 Phone : <b>+91-92893-33536</b> <br><br>
 
-              Warm regards, <br>
+              <b>Warm Regards,</b> <br>
               Admissions Team <br>
-              Gyandeep Welfare & Rehabilitation Society <br>
-              www.gyandeep.ngo
+              <b>Gyandeep Welfare & Rehabilitation Society</b> <br>
+              🌐 <a href="https://www.gyandeep.ngo">www.gyandeep.ngo</a>
               </p>
             </td>
           </tr>
           <tr>
-            <td valign="top" align="center" class="masthead" style="padding:20px 0;background:#e74e84;color:white;">
+            <td valign="top" align="center" class="masthead" style="padding:20px 0;background:#3f4079;color:white;">
               <h1 style="font-size:32px;margin:0 auto;max-width:90%;line-height:1.25;">
               </h1>
             </td>

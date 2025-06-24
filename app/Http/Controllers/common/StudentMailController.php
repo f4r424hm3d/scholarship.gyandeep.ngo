@@ -92,7 +92,7 @@ class StudentMailController extends Controller
       [
         'sent_to' => 'required|email',
         'cc' => 'nullable|email',
-        'attach' => 'required|file|mimes:pdf,jpg,jpeg,png,doc,docx,xls,xlsx|max:2048',
+        'attach' => 'nullable|file|mimes:pdf,jpg,jpeg,png,doc,docx,xls,xlsx|max:2048',
       ]
     );
     $field = new StudentExamOfferLatter();
