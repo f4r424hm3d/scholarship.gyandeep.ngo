@@ -1,113 +1,167 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <title>Print Letter</title>
   <style>
     @font-face {
       font-family: 'GyanDeepFont';
-      src: url('https://yourwebsite.com/fonts/OnStage-Regular.woff2') format('woff2'),
-        url('https://yourwebsite.com/fonts/OnStage-Regular.ttf') format('truetype');
+      src: url("{{ asset('fonts/OnStage-Regular/OnStage-Regular.woff2') }}") format('woff2'),
+        url("{{ asset('fonts/OnStage-Regular/OnStage-Regular.ttf') }}") format('truetype');
     }
 
     body {
-      position: relative;
-      height: 100vh;
-      min-height: 100vh;
-      width: 100%;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      font-size: 14px;
     }
 
-    @media print {
-      table {
-        height: 100vh;
-        min-height: 100vh;
-        width: 100%;
-      }
+    @page {
+      margin: 130px 40px 100px 40px;
+    }
 
-      header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-      }
+    header {
+      position: fixed;
+      top: -110px;
+      left: 0;
+      right: 0;
+      text-align: center;
+    }
 
-      footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-      }
+    footer {
+      position: fixed;
+      bottom: -80px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 12px;
+      color: #000;
+    }
+
+    .letter-content {
+      padding: 10px 0;
+    }
+
+    .logo {
+      width: 220px;
+    }
+
+    .signature-area {
+      text-align: right;
+      margin-top: 50px;
+    }
+
+    .stamp {
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    .title {
+      font-size: 36px;
+      font-weight: bold;
+      color: #dd3333;
+      font-family: 'GyanDeepFont', Arial, sans-serif;
+      margin: 5px 0;
+    }
+
+    .sub-title {
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .address-bar {
+      background-color: #3d2a8c;
+      color: #fff;
+      padding: 6px;
+      font-size: 15px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .meta-info {
+      padding: 10px 0;
+    }
+
+    .divider {
+      border-bottom: 1px solid #000;
+      margin: 10px 0;
     }
   </style>
 </head>
 
-<body style="margin:0;padding:0; background-color: #ffffff;">
-  <table align="center" cellpadding="0" cellspacing="0" border="0"
-    style="border-collapse: collapse; font-family: Arial, sans-serif; border:1px solid #0000002e; padding:5px; background-color: #fff;">
-    <thead class="header">
-      <tr>
-        <td style="text-align:left; padding:10px; padding-bottom: 0px;">
-          <span style="font-size:12px; font-weight:bold;">Reg. No. 92/2014 - 15</span>
-        </td>
-        <td style="text-align:right; padding:10px; padding-bottom: 0px;">&nbsp;</td>
-      </tr>
-      <tr>
-        <td style="text-align:left; padding:10px; width: 10%;">
-          <img src="{{ public_path('uploads/logo/plant.png') }}" alt="GAYANDEEP" style="display:block;width: 232px;" />
-        </td>
-        <td style="width: 80%; padding: 10px;">
-          <p
-            style="text-align:center;font-size: 36px;font-weight:bold;margin: 0px;color: #dd3333;font-family: 'OnStage Regular', Arial, sans-serif;">
-            GAYANDEEP WELFARE & REHABILITATION SOCIETY</p>
-          <p style="text-align:center;font-size:14px;font-weight:normal;margin: 2px;">RUNNING : DEEP SPECIAL SCHOOL</p>
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2"
-          style="background-color:#3d2a8c !important; color:#fff !important; text-align:center; padding:8px; font-size:16px; -webkit-print-color-adjust: exact; print-color-adjust: exact;">
-          Dasuya District Hoshiarpur Punjab - 144205
-        </td>
-      </tr>
-      <tr>
-        <td style="font-size:14px; padding:15px;" align="left">Ref. No. .................</td>
-        <td style="font-size:14px; padding:15px;" align="right">Date: ....................</td>
-      </tr>
-      <tr>
-        <td colspan="2" style="border-bottom:1px solid #000;"></td>
-      </tr>
-    </thead>
+<body>
 
-    <tbody>
+  {{-- Header --}}
+  <header>
+    <table width="100%">
       <tr>
-        <td colspan="2" style="font-size:14px; padding:20px; vertical-align: super;" align="left">
-          <div class="main">
-            <div class="content-area">
-              Dear {{ $letter->student->name }},<br>
-              {!! $letter->letter_description !!}
-              <br><br>
-            </div>
-          </div>
+        <td style="text-align: left; font-size: 12px; font-weight: bold;">Reg. No. 92/2014 - 15</td>
+        <td style="text-align: right;"></td>
+      </tr>
+      <tr>
+        <td style="width: 20%;">
+          <img src="{{ public_path($letter->company->logo_path) }}" alt="Logo" class="logo">
+        </td>
+        <td style="width: 80%;">
+          <div class="title">GAYANDEEP WELFARE & REHABILITATION SOCIETY</div>
+          <div class="sub-title">RUNNING : DEEP SPECIAL SCHOOL</div>
         </td>
       </tr>
-    </tbody>
+      <tr>
+        <td colspan="2" class="address-bar" align="center">
+          Dasuya, District Hoshiarpur, Punjab - 144205
+        </td>
+      </tr>
+      <tr class="meta-info">
+        <td align="left">Ref. No. ....................</td>
+        <td align="right">Date: ....................</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="divider"></td>
+      </tr>
+    </table>
+  </header>
 
-    <tfoot class="footer">
-      <tr>
-        <td colspan="2" style="border-bottom:1px solid #000;"></td>
-      </tr>
-      <tr>
-        <td colspan="2" style="font-size:12px; padding:10px;" align="center">
-          📱 +91711908590 | +918882662310 | +919870406867<br />
-          📧 info@gyandeep.ngo &nbsp; 🌐 www.gyandeep.ngo
-        </td>
-      </tr>
-    </tfoot>
-  </table>
-  <script>
-    window.print();
-    window.onafterprint = window.close;
-  </script>
+  {{-- Footer --}}
+  <footer>
+    📱 +91711908590 | +919870406867<br>
+    📧 info@gyandeep.ngo &nbsp; 🌐 www.gyandeep.ngo
+  </footer>
+
+  {{-- Body --}}
+  <main>
+    <div class="letter-content">
+      <p>Dear {{ $letter->student->name }},</p>
+
+      <div>{!! $letter->letter_description !!}</div>
+
+      {{-- Stamp and Signature --}}
+      @if ($letter->company->signature_path || $letter->company->stamp_path)
+        <table width="100%" style="margin-top: 50px;">
+          <tr>
+            <td style="width: 50%;">
+              @if ($letter->company->stamp_path)
+                <div class="stamp">
+                  <img src="{{ public_path($letter->company->stamp_path) }}" height="100">
+                </div>
+              @endif
+            </td>
+            <td style="width: 50%;">
+              @if ($letter->company->signature_path)
+                <div class="signature-area">
+                  <img src="{{ public_path($letter->company->signature_path) }}" height="80">
+                </div>
+              @endif
+            </td>
+          </tr>
+        </table>
+      @endif
+    </div>
+  </main>
+
 </body>
 
 </html>

@@ -16,6 +16,14 @@ class ScholarshipLetterController extends Controller
     $data = compact('letter', 'id', 'page_title');
     return view('admin.view-letter')->with($data);
   }
+  public function print($id)
+  {
+    $letter = StudentScholarshipLetter::find($id);
+    $page_title = 'Print Letter';
+    $data = compact('letter', 'id', 'page_title');
+    return view('admin.print-letter')->with($data);
+  }
+
   public function view_y(Request $request, $id)
   {
     $letter = StudentScholarshipLetter::find($id);
@@ -47,12 +55,5 @@ class ScholarshipLetterController extends Controller
     } else {
       return $pdf->stream($file_name);
     }
-  }
-  public function print($id)
-  {
-    $letter = StudentScholarshipLetter::find($id);
-    $page_title = 'Print Letter';
-    $data = compact('letter', 'id', 'page_title');
-    return view('admin.print-letter')->with($data);
   }
 }
