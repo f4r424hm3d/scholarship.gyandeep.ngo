@@ -276,7 +276,12 @@
                                   No Letter
                                 @endif
                               </td>
-                              <td>{{ $row->is_sent == 1 ? 'Sent' : 'Not Sent' }}</td>
+                              <td>
+                                <span class="badge bg-success">{{ $row->is_sent == 1 ? 'Sent' : 'Not Sent' }}</span> <br>
+                                @if ($row->send_by !== null)
+                                  Sent By: {{ $row->user->name ?? 'N/A' }} <br>
+                                @endif
+                              </td>
                             </tr>
                             @php
                               $i++;

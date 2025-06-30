@@ -180,7 +180,7 @@ class StudentProfileC extends Controller
     $ft = 'edit';
     $page_route = 'exams';
 
-    $studentExamOfferLetter = StudentExamOfferLatter::where('exam_id', $examId)->get();
+    $studentExamOfferLetter = StudentExamOfferLatter::orderBy('created_at', 'desc')->where('exam_id', $examId)->get();
 
     //printArray($user_info->toArray());
     $data = compact('student', 'row', 'total_question', 'answered_question', 'not_answered', 'not_visited', 'marked_question', 'marked_and_answered', 'sectionDet', 'studentId', 'page_title', 'ft', 'page_route', 'examId', 'role', 'studentExamOfferLetter');
