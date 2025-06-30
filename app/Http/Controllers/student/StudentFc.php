@@ -22,7 +22,7 @@ class StudentFc extends Controller
   public function profile()
   {
     $id = session()->get('student_id');
-    $student = Student::find($id);
+    $student = Student::findOrFail($id);
     $countries = Country::all();
     $scholarships = Scholarship::where('deadline', '>=', date('Y-m-d'))->get();
     if (old('scholarship')) {
@@ -31,7 +31,7 @@ class StudentFc extends Controller
       $categories = null;
     }
 
-    if ($student->photo_path != '') {
+    if ($student->photo_path != null && $student->photo_path != '') {
       $avatar = $student->photo_path;
     } else {
       if ($student->gender == 'Male' || $student->gender == 'male') {

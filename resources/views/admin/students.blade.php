@@ -349,6 +349,7 @@
                             Email : {{ $row->email }}<br>
                             Gender : {{ $row->gender }}<br>
                             DOB : {{ $row->dob }}<br>
+                            Referred By : <b>{{ $row->referred_by }}</b><br>
                             <b>Password</b> : {{ $row->password }}
                           </td>
                           <td>{{ $row->getLevel->name ?? '' }}</td>
