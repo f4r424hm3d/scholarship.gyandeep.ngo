@@ -97,16 +97,14 @@ class StudentMailController extends Controller
     );
     $field = new StudentExamOfferLatter();
     $field->exam_id = $request['exam_id'];
-    // if ($request->role == 'admin') {
-    //   $field->sender = session('adminLoggedIn')['user_id'];
-    // } else {
-    //   $field->sender = session('userLoggedIn')['user_id'];
-    // }
-    //$field->sent_to = $request['sent_to'];
-    // $field->cc = $request['cc'];
-    // $field->subject = $request['subject'];
-    // $field->message = $request['message'];
-    // $field->token = Str::random(20);
+    if ($request->role == 'admin') {
+      $field->send_by = session('adminLoggedIn')['user_id'];
+    } else {
+      $field->send_by = session('userLoggedIn')['user_id'];
+    }
+    $field->sent_to = $request['sent_to'];
+    $field->cc_email = $request['cc'];
+    $field->token = Str::random(20);
 
 
     $examId = $request->input('exam_id');
