@@ -317,8 +317,8 @@
                                     class="float-right">{{ getFormattedDate($row->getLastFup->created_at, 'd M Y | h:i A') }}</span>
                                 </span>
                                 <hr class="chr">
-                                <span class="text-info">{{ $row->getLastFup->getLS->title }} |
-                                  {{ $row->getLastFup->getLSS->sub_status }}</span>
+                                <span class="text-info">{{ $row->getLastFup->getLS->title ?? '' }} |
+                                  {{ $row->getLastFup->getLSS->sub_status ?? '' }}</span>
                                 <hr class="chr">
                                 <b>{{ getFormattedDate($row->getLastFup->next_followup_date, 'd M Y') }}</b>
                                 @if ($row->getLastFup->followup_type != '' && $row->getLastFup->followup_status != '')
