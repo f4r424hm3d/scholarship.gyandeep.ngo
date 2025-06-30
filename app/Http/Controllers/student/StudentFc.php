@@ -89,12 +89,12 @@ class StudentFc extends Controller
         'neet_passing_year' => 'nullable|numeric|digits:4',
         'neet_result' => ['nullable', 'string', 'not_regex:/<script\b/i'],
 
-        'marksheet_10_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',
-        'marksheet_12_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',
-        'aadhar_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:1025',
-        'photo_copy' => 'required|mimes:jpg,jpeg,png|max:1025',
-        'neet_result_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
-        'passport_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:1025',
+        'marksheet_10_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:4100',
+        'marksheet_12_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:4100',
+        'aadhar_copy' => 'required|mimes:pdf,jpg,jpeg,png|max:4100',
+        'photo_copy' => 'required|mimes:jpg,jpeg,png|max:4100',
+        'neet_result_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:4100',
+        'passport_copy' => 'nullable|mimes:pdf,jpg,jpeg,png|max:4100',
 
         'scholarship' => 'required',
         'course_category' => 'required',
