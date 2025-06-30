@@ -115,9 +115,14 @@ class StudentScholarshipLetterC extends Controller
     </thead>
     <tbody>';
     foreach ($rows as $row) {
+      if ($row->student->lastAttendedExam) {
+        $link = url('admin/student/' . $row->student->id . '/exams/' . $row->student->lastAttendedExam->id);
+      } else {
+        $link = url('admin/student/' . $row->student->id . '/profile');
+      }
       $output .= '<tr id="row' . $row->id . '">
             <td>' . $i . '</td>
-            <td>' . $row->student->name . '</td>
+            <td><a href="' . $link . '" target="_blank">' . $row->student->name . '</a></td>
             <td>' . Blade::render('<x-content-view-modal :row="$row" field="letter_description" title="Description" />', ['row' => $row]) . '</a>
             </td>
             <td>' . ($row->signature == 1 ? '<span class="badge bg-success">On</span>' : '<span class="badge bg-danger">Off</span>') . '</td>
