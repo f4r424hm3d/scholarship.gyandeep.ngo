@@ -17,16 +17,16 @@
               <div class="signup-detials">
 
                 <h3>Apply for MBBS Scholarship in Kyrgyzstan
-Offered by Gyandeep Welfare & Rehabilitation Society</h3>
-                <p class="lead">In collaboration with the <span class="rep" >Embassy  of Kyrgyzstan in India</span> 
-Study at the prestigious Eurasian International University
-Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
-                  
+                  Offered by Gyandeep Welfare & Rehabilitation Society</h3>
+                <p class="lead">In collaboration with the <span class="rep">Embassy of Kyrgyzstan in India</span>
+                  Study at the prestigious Eurasian International University
+                  Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
 
                 <div class="box_feat_2">
                   <i class="icon_globe"></i>
                   <h3>Over ₹2.43 Crores of Scholarships.</h3>
-                  <p>The Gyandeep MBBS Scholarship Program, in collaboration with the Kyrgyzstan Embassy in India, offers ₹2.43+ Crores worth of tuition fee waivers to 100 deserving students.</p>
+                  <p>The Gyandeep MBBS Scholarship Program, in collaboration with the Kyrgyzstan Embassy in India, offers
+                    ₹2.43+ Crores worth of tuition fee waivers to 100 deserving students.</p>
                 </div>
                 <div class="box_feat_2">
                   <i class="pe-7s-date"></i>
@@ -41,7 +41,8 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
                 <div class="box_feat_2">
                   <i class="pe-7s-phone"></i>
                   <h3>A Trusted & Transparent Platform.</h3>
-                  <p> Empowered by Embassy collaboration and supported by regulatory bodies, ensuring a secure and verified admission process.</p>
+                  <p> Empowered by Embassy collaboration and supported by regulatory bodies, ensuring a secure and
+                    verified admission process.</p>
                 </div>
               </div>
             </div>
@@ -62,7 +63,7 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
               <div class="box_form">
                 <form method="post" action="{{ url('student-signup') }}" enctype="multipart/form-data">
                   @csrf
-                <div class="row">
+                  <div class="row">
                     <h5 class="text-center mb-3">Apply Now</h5>
                     <div class="col-md-12">
                       <div class="form-group">
@@ -75,7 +76,7 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
                         </span>
                       </div>
                     </div>
-                  
+
                     <div class="col-lg-12">
                       <div class="form-group">
                         <input name="email" type="email" class="form-control" placeholder="Enter Email Address"
@@ -120,7 +121,7 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
                         </span>
                       </div>
                     </div>
-                  
+
                     <div class="col-md-6">
                       <div class="form-group">
                         <select name="current_qualification_level" id="current_qualification_level" class="form-control"
@@ -157,7 +158,7 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
                         </span>
                       </div>
                     </div>
-               
+
                     <div class="col-md-6">
                       <div class="form-group">
                         <input type="password" class="form-control" placeholder="Enter password" id="password"
@@ -180,8 +181,21 @@ Recognized by: WHO, WFME, ECFMG, FAIMER, and NMC.</p>
                         </span>
                       </div>
                     </div>
-                </div>
-                
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="form-group">
+                        <input name="referred_by" type="text" class="form-control"
+                          placeholder="Referred By (If Any)" value="{{ old('referred_by') }}">
+                        <span class="text-danger">
+                          @error('referred_by')
+                            {{ $message }}
+                          @enderror
+                        </span>
+                        <small><b>Referred By : Google, Social, Company, Person Name</b></small>
+                      </div>
+                    </div>
+                  </div>
+
                   <a class="forgot-show mb-3" href="{{ url('forget-password') }}">Forgot password?</a>
                   <p class="text-center add_top_30">
                     <input type="submit" class="login-input medium w-100" value="Submit">

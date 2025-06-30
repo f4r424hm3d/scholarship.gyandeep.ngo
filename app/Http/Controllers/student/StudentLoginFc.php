@@ -27,6 +27,7 @@ class StudentLoginFc extends Controller
     $otp_expire_at = date("YmdHis", strtotime("+15 minutes"));
     $request->validate(
       [
+        'referred_by' => 'nullable|regex:/^[a-zA-Z ]*$/',
         'name' => 'required|regex:/^[a-zA-Z ]*$/',
         'email' => 'required|email|unique:students,email',
         'c_code' => 'required|numeric',
@@ -39,6 +40,7 @@ class StudentLoginFc extends Controller
     );
     $field = new Student;
     $field->name = $request['name'];
+    $field->referred_by = $request['referred_by'];
     $field->email = $request['email'];
     $field->current_qualification_level = $request['current_qualification_level'];
     $field->neet_status = $request['neet_status'];

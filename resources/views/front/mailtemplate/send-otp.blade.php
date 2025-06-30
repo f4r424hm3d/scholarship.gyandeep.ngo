@@ -36,7 +36,7 @@
               <hr>
               <p style="text-align: justify">
                 <b>Our mailing address is:</b><br>
-                B-16 ground floor Gurugram, Mayfield Garden,<br>Sector 50, Gurugram
+                H.No. 538/1, Ward 7, Kirpal Colony, Dasuya, District Hoshiarpur, Punjab – 144205
               </p>
             </td>
           </tr>
