@@ -23,7 +23,7 @@ class StudentScholarshipLetterC extends Controller
     $company = CompanyProfile::find($company_id);
     $page_no = $_GET['page'] ?? 1;
     $rows = StudentScholarshipLetter::where('company_id', $company_id)->get();
-    $students = Student::all();
+    $students = Student::whereHas('lastAttendedExam')->orderBy('name')->get();
     $templates = ScholarshipLetterTemplate::all();
     if ($id != null) {
       $sd = StudentScholarshipLetter::find($id);
