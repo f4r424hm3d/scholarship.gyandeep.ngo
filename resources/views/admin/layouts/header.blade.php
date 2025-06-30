@@ -290,12 +290,7 @@
             </li>
           </ul>
         </li>
-        <li class="{{ $seg2 == 'levels' ? 'current' : '' }}">
-          <a href="{{ url('/admin/levels') }}">
-            <i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>
-            Levels
-          </a>
-        </li>
+
         <li class="{{ $seg2 == 'course-category' || $seg2 == 'course-specialization' ? 'current' : '' }}">
           <a href="#">
             <i class="icon-Layout-4-blocks"><span class="path1"></span><span class="path2"></span></i>Course <i
@@ -310,6 +305,11 @@
             <li class="{{ $seg2 == 'course-specialization' ? 'current' : '' }}">
               <a href="{{ url('admin/course-specialization/') }}">
                 <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Specialization
+              </a>
+            </li>
+            <li class="{{ $seg2 == 'levels' ? 'current' : '' }}">
+              <a href="{{ url('admin/levels/') }}">
+                <i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Levels
               </a>
             </li>
           </ul>

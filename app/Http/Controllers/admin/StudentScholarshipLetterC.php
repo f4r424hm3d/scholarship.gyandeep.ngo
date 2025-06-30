@@ -101,7 +101,7 @@ class StudentScholarshipLetterC extends Controller
     // die;
     $rows = StudentScholarshipLetter::where('company_id', $request->company_id)->paginate(10)->withPath('/admin/' . $this->page_route . '/' . $request->company_id);
     $i = 1;
-    $output = '<table id="" class="table table-bordered table-striped">
+    $output = '<table id="exampl" class="table table-bordered table-striped">
     <thead>
       <tr>
         <th>Sr. No.</th>
