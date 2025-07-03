@@ -30,7 +30,7 @@
       <td style="width: 80%; padding: 10px;">
         <p
           style="text-align:center;font-size: 36px;font-weight:bold;margin: 0px;color: #dd3333;font-family: 'OnStage Regular', Arial, sans-serif;">
-          GAYANDEEP WELFARE & REHABILITATION SOCIETY</p>
+          GYANDEEP WELFARE & REHABILITATION SOCIETY</p>
         <p style="text-align:center;font-size:14px;font-weight:normal;margin: 2px;">
           RUNNING : DEEP SPECIAL SCHOOL
         </p>

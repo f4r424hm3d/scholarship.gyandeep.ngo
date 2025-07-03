@@ -106,7 +106,7 @@
           <img src="{{ public_path($letter->company->logo_path) }}" alt="Logo" class="logo">
         </td>
         <td style="width: 80%;">
-          <div class="title">GAYANDEEP WELFARE & REHABILITATION SOCIETY</div>
+          <div class="title">GYANDEEP WELFARE & REHABILITATION SOCIETY</div>
           <div class="sub-title">RUNNING : DEEP SPECIAL SCHOOL</div>
         </td>
       </tr>

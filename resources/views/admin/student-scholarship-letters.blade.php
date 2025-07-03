@@ -91,6 +91,32 @@
         <div class="row">
           <div class="col-12">
             <div class="box">
+              <div class="box-header">
+                {{-- <div style="float:left;">
+                  <label>
+                    Show
+                    <select name="limit_per_page" id="limit_per_page" class="">
+                      @foreach ($lpp as $lpp)
+                        <option value="{{ $lpp }}" {{ $limit_per_page == $lpp ? 'selected' : '' }}>
+                          {{ $lpp }}</option>
+                      @endforeach
+                    </select>
+                    entries
+                  </label>
+                  <select name="order_by" id="order_by">
+                    @foreach ($orderColumns as $key => $value)
+                      <option value="{{ $value }}" <?php echo $order_by == $value ? 'selected' : ''; ?>>{{ $key }}</option>
+                    @endforeach
+                  </select>
+                  <select name="order_in" id="order_in">
+                    <option value="ASC" {{ $order_in == 'ASC' ? 'selected' : '' }}>ASC</option>
+                    <option value="DESC" {{ $order_in == 'DESC' ? 'selected' : '' }}>DESC</option>
+                  </select>
+                </div> --}}
+                {{-- <div style="float:right;" class="mb-0">
+                  <input class="form-control" onkeyup="getData('')" type="text" id="search" placeholder="Search">
+                </div> --}}
+              </div>
               <div class="box-body">
                 <div class="table-responsive" id="trdata">
 
