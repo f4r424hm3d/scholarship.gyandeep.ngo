@@ -226,6 +226,10 @@
                     <x-input-field type="text" label="Parents Occupation" name="parents_occupation"
                       id="parents_occupation" :ft="$ft" :sd="$student" readonly="readonl" />
                   </div>
+                  <div class="col-md-3 col-sm-12 mb-3">
+                    <x-input-field type="text" label="Referred By" name="referred_by" id="referred_by"
+                      :ft="$ft" :sd="$student" readonly="readonl" />
+                  </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6 col-sm-12 mb-3">
