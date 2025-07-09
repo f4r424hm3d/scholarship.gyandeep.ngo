@@ -50,6 +50,7 @@ class StudentLoginFc extends Controller
     $field->otp = $otp;
     $field->otp_expire_at = $otp_expire_at;
     $field->status = 0;
+    $field->lead_type = 'new';
 
     $maildata = ['otp' => $otp, 'name' => $request['name']];
 
