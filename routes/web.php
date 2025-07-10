@@ -614,6 +614,7 @@ Route::prefix('common')->group(function () {
   Route::get('/change-status', [CommonController::class, 'changeStatus']);
   Route::get('/', [CommonController::class, 'updateField']);
   Route::get('/update-field', [CommonController::class, 'updateFieldById']);
+  Route::get('/update-bulk-field', [CommonController::class, 'bulkUpdate']);
   Route::get('/get-lead-sub-status-by-status', [CommonController::class, 'getSubStatusByStatus']);
   Route::get('/add-student-follow-up', [StudentFollowUpC::class, 'addFollowup']);
   Route::get('/get-last-follow-up', [StudentFollowUpC::class, 'getLastFollowUp']);
