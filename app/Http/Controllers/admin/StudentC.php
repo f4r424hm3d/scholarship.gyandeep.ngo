@@ -39,17 +39,29 @@ class StudentC extends Controller
         $rows = $rows->where('nationality', $request->nationality);
         $filterApplied = true;
       }
+      if ($request->has('country') && $request->country != '') {
+        $rows = $rows->where('country', $request->country);
+        $filterApplied = true;
+      }
+      if ($request->has('state') && $request->state != '') {
+        $rows = $rows->where('state', $request->state);
+        $filterApplied = true;
+      }
+      if ($request->has('city') && $request->city != '') {
+        $rows = $rows->where('city', $request->city);
+        $filterApplied = true;
+      }
       if ($request->has('level') && $request->level != '') {
         $rows = $rows->where('current_qualification_level', $request->level);
         $filterApplied = true;
       }
-      if ($request->has('course') && $request->course != '') {
-        $rows = $rows->where('intrested_course_category', $request->course);
+      if ($request->has('application_submitted') && $request->application_submitted != '') {
+        $rows = $rows->where('submit_application', $request->application_submitted);
         $filterApplied = true;
       }
-      if ($request->has('asign') && $request->asign != '') {
-        $rows = $rows->whereHas('getAC', function ($query) use ($request) {
-          $query->where('user_id', $request->asign);
+      if ($request->has('exam_attended') && $request->exam_attended != '') {
+        $rows = $rows->whereHas('lastAttendedExam', function ($query) use ($request) {
+          $query->where('attended', $request->exam_attended);
         });
         $filterApplied = true;
       }
@@ -63,20 +75,20 @@ class StudentC extends Controller
         $rows = $rows->whereDate('created_at', '<', $to);
         $filterApplied = true;
       }
-      if ($request->has('lead_status') && $request->lead_status != '') {
-        $rows = $rows->where('lead_status', $request->lead_status);
-        $filterApplied = true;
-      }
-      if ($request->has('lead_sub_status') && $request->lead_sub_status != '') {
-        $rows = $rows->where('lead_sub_status', $request->lead_sub_status);
-        $filterApplied = true;
-      }
+      // if ($request->has('lead_status') && $request->lead_status != '') {
+      //   $rows = $rows->where('lead_status', $request->lead_status);
+      //   $filterApplied = true;
+      // }
+      // if ($request->has('lead_sub_status') && $request->lead_sub_status != '') {
+      //   $rows = $rows->where('lead_sub_status', $request->lead_sub_status);
+      //   $filterApplied = true;
+      // }
     }
 
     $rows = $rows->where('lead_type', $clt);
     $rows = $rows->paginate($limit_per_page)->withQueryString();
-    // printArray($rows->toArray());
-    // die;
+    //printArray($rows->toArray());
+    //die;
 
     $cp = $rows->currentPage();
     $pp = $rows->perPage();
@@ -85,11 +97,49 @@ class StudentC extends Controller
     $lpp = ['25', '50', '100'];
     $orderColumns = ['Name' => 'name', 'Date' => 'id'];
 
-    $cc = Student::with('getCourse')->where('intrested_course_category', '!=', '')->select('intrested_course_category')->distinct()->get();
+    $filterNationalities = Student::select('nationality')->where('nationality', '!=', '')->distinct()->get();
 
-    $lvl = Student::with('getLevel')->where('current_qualification_level', '!=', '')->select('current_qualification_level')->distinct()->get();
+    $filterCountries = Student::select('country')->where('country', '!=', '')->distinct();
+    if ($request->has('nationality') && $request->nationality != '') {
+      $filterCountries = $filterCountries->where('nationality', $request->nationality);
+    }
+    $filterCountries = $filterCountries->get();
 
-    $nat = Student::select('nationality')->where('nationality', '!=', '')->distinct()->get();
+    $filterStates = Student::select('state')->where('state', '!=', '')->distinct();
+    if ($request->has('nationality') && $request->nationality != '') {
+      $filterStates = $filterStates->where('nationality', $request->nationality);
+    }
+    if ($request->has('country') && $request->country != '') {
+      $filterStates = $filterStates->where('country', $request->country);
+    }
+    $filterStates = $filterStates->get();
+
+    $filterCities = Student::select('city')->where('city', '!=', '')->distinct();
+    if ($request->has('nationality') && $request->nationality != '') {
+      $filterCities = $filterCities->where('nationality', $request->nationality);
+    }
+    if ($request->has('country') && $request->country != '') {
+      $filterCities = $filterCities->where('country', $request->country);
+    }
+    if ($request->has('state') && $request->state != '') {
+      $filterCities = $filterCities->where('state', $request->state);
+    }
+    $filterCities = $filterCities->get();
+
+    $filterLevels = Student::with('getLevel')->where('current_qualification_level', '!=', '')->select('current_qualification_level')->distinct();
+    if ($request->has('nationality') && $request->nationality != '') {
+      $filterLevels = $filterLevels->where('nationality', $request->nationality);
+    }
+    if ($request->has('country') && $request->country != '') {
+      $filterLevels = $filterLevels->where('country', $request->country);
+    }
+    if ($request->has('state') && $request->state != '') {
+      $filterLevels = $filterLevels->where('state', $request->state);
+    }
+    if ($request->has('city') && $request->city != '') {
+      $filterLevels = $filterLevels->where('city', $request->city);
+    }
+    $filterLevels = $filterLevels->get();
 
     $lt = LeadType::all();
     //die;
@@ -98,7 +148,7 @@ class StudentC extends Controller
     $fupstatus = FollowUpStatus::all();
     $ls = LeadStatus::all();
     $counsellor = User::where('role', '=', 'Counsellor')->where('status', '=', '1')->get();
-    $data = compact('rows', 'cc', 'lvl', 'nat', 'i', 'lt', 'alt', 'fuptype', 'fupstatus', 'ls', 'counsellor', 'clt', 'lpp', 'orderColumns', 'filterApplied', 'order_by', 'order_in', 'limit_per_page');
+    $data = compact('rows', 'filterLevels', 'filterNationalities', 'filterCountries', 'filterStates', 'filterCities', 'i', 'lt', 'alt', 'fuptype', 'fupstatus', 'ls', 'counsellor', 'clt', 'lpp', 'orderColumns', 'filterApplied', 'order_by', 'order_in', 'limit_per_page');
     return view('admin.students')->with($data);
   }
   public function trash(Request $request)
@@ -127,9 +177,12 @@ class StudentC extends Controller
 
     $lvl = Student::with('getLevel')->where('current_qualification_level', '!=', '')->select('current_qualification_level')->distinct()->get();
 
-    $nat = Student::select('nationality')->where('nationality', '!=', '')->distinct()->get();
+    $filterNationalities = Student::select('nationality')->where('nationality', '!=', '')->distinct()->get();
+    $filterCountries = Student::select('country')->where('country', '!=', '')->distinct()->get();
+    $filterStates = Student::select('state')->where('state', '!=', '')->distinct()->get();
+    $filterCities = Student::select('city')->where('city', '!=', '')->distinct()->get();
 
-    $data = compact('rows', 'cc', 'lvl', 'nat', 'i');
+    $data = compact('rows', 'cc', 'lvl', 'filterNationalities', 'filterCountries', 'filterStates', 'filterCities', 'i');
     return view('admin.students-trash')->with($data);
   }
   public function delete($id)

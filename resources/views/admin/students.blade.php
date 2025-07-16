@@ -77,7 +77,7 @@
                     </div>
                   </div>
                 </form>
-                <div class="{{ $filterApplied == true ? '' : 'hide-this' }}" id="advSearchForm">
+                <div class="{{ $filterApplied == true ? '' : 'hide-thi' }}" id="advSearchForm">
                   <hr>
                   <form method="get" class="form" enctype="multipart/form-data">
                     <hr class="my-15">
@@ -86,7 +86,7 @@
                         <label>Nationality</label>
                         <select name="nationality" id="nationality" class="form-control select2">
                           <option value="">Select</option>
-                          @foreach ($nat as $na)
+                          @foreach ($filterNationalities as $na)
                             <option value="{{ $na->nationality }}"
                               {{ isset($_GET['nationality']) && $_GET['nationality'] == $na->nationality ? 'Selected' : '' }}>
                               {{ $na->nationality }}</option>
@@ -94,28 +94,61 @@
                         </select>
                       </div>
                       <div class="form-group col-md-3 col-sm-12">
+                        <label>country</label>
+                        <select name="country" id="country" class="form-control select2">
+                          <option value="">Select</option>
+                          @foreach ($filterCountries as $row)
+                            <option value="{{ $row->country }}"
+                              {{ isset($_GET['country']) && $_GET['country'] == $row->country ? 'Selected' : '' }}>
+                              {{ $row->country }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>state</label>
+                        <select name="state" id="state" class="form-control select2">
+                          <option value="">Select</option>
+                          @foreach ($filterStates as $row)
+                            <option value="{{ $row->state }}"
+                              {{ isset($_GET['state']) && $_GET['state'] == $row->state ? 'Selected' : '' }}>
+                              {{ $row->state }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>city</label>
+                        <select name="city" id="city" class="form-control select2">
+                          <option value="">Select</option>
+                          @foreach ($filterCities as $row)
+                            <option value="{{ $row->city }}"
+                              {{ isset($_GET['city']) && $_GET['city'] == $row->city ? 'Selected' : '' }}>
+                              {{ $row->city }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
                         <label>Level</label>
                         <select name="level" id="level" class="form-control select2">
                           <option value="">Select</option>
-                          @foreach ($lvl as $l)
+                          @foreach ($filterLevels as $l)
                             <option value="{{ $l->current_qualification_level }}"
                               {{ isset($_GET['level']) && $_GET['level'] == $l->current_qualification_level ? 'Selected' : '' }}>
                               {{ $l->getLevel->name ?? '' }}</option>
                           @endforeach
                         </select>
                       </div>
-                      <div class="form-group col-md-3 col-sm-12">
+                      {{-- <div class="form-group col-md-3 col-sm-12">
                         <label>Course</label>
                         <select name="course" id="course" class="form-control select2">
                           <option value="">Select</option>
-                          @foreach ($cc as $c)
+                          @foreach ($filterCourseCategories as $c)
                             <option value="{{ $c->intrested_course_category }}"
                               {{ isset($_GET['course']) && $_GET['course'] == $c->intrested_course_category ? 'Selected' : '' }}>
                               {{ $c->getCourse->category ?? '' }}</option>
                           @endforeach
                         </select>
-                      </div>
-                      <div class="form-group col-md-3 col-sm-12">
+                      </div> --}}
+                      {{-- <div class="form-group col-md-3 col-sm-12">
                         <label>Asigned</label>
                         <select name="asign" id="asign" class="form-control select2">
                           <option value="">Select</option>
@@ -125,7 +158,7 @@
                               {{ $row->name ?? '' }}</option>
                           @endforeach
                         </select>
-                      </div>
+                      </div> --}}
                       <div class="form-group col-md-3 col-sm-12">
                         <label>From</label>
                         <input type="date" name="from" id="from"
@@ -136,7 +169,31 @@
                         <input type="date" name="to" id="to"
                           value="{{ isset($_GET['to']) ? $_GET['to'] : '' }}" class="form-control">
                       </div>
-                      <div class="form-group col-md-3">
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>Application Submitted</label>
+                        <select name="application_submitted" id="application_submitted" class="form-control select2">
+                          <option value="">Select</option>
+                          <option value="1"
+                            {{ isset($_GET['application_submitted']) && $_GET['application_submitted'] == 1 ? 'Selected' : '' }}>
+                            Yes</option>
+                          <option value="0"
+                            {{ isset($_GET['application_submitted']) && $_GET['application_submitted'] == 0 ? 'Selected' : '' }}>
+                            No</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-3 col-sm-12">
+                        <label>Exam Attended</label>
+                        <select name="exam_attended" id="exam_attended" class="form-control select2">
+                          <option value="">Select</option>
+                          <option value="1"
+                            {{ isset($_GET['exam_attended']) && $_GET['exam_attended'] == 1 ? 'Selected' : '' }}>
+                            Yes</option>
+                          <option value="0"
+                            {{ isset($_GET['exam_attended']) && $_GET['exam_attended'] == 0 ? 'Selected' : '' }}>
+                            No</option>
+                        </select>
+                      </div>
+                      {{-- <div class="form-group col-md-3">
                         <label>Lead Status <span class="text-danger">*</span></label>
                         <select name="lead_status" id="f_lead_status" class="form-control select2">
                           <option value="">Select...</option>
@@ -150,7 +207,7 @@
                         <select name="lead_sub_status" id="f_lead_sub_status" class="form-control select2">
                           <option value="">Select...</option>
                         </select>
-                      </div>
+                      </div> --}}
                       <div class="form-group col-md-3 col-sm-12">
                         <button type="submit" class="btn btn-sm  btn-primary ">Apply</button>
                         &nbsp;
@@ -174,17 +231,23 @@
                     if (isset($_GET['nationality']) && $_GET['nationality'] != '') {
                         $ltc = $ltc->where('nationality', $_GET['nationality']);
                     }
+                    if (isset($_GET['country']) && $_GET['country'] != '') {
+                        $ltc = $ltc->where('country', $_GET['country']);
+                    }
+                    if (isset($_GET['state']) && $_GET['state'] != '') {
+                        $ltc = $ltc->where('state', $_GET['state']);
+                    }
+                    if (isset($_GET['city']) && $_GET['city'] != '') {
+                        $ltc = $ltc->where('city', $_GET['city']);
+                    }
                     if (isset($_GET['level']) && $_GET['level'] != '') {
                         $ltc = $ltc->where('current_qualification_level', $_GET['level']);
                     }
-                    if (isset($_GET['course']) && $_GET['course'] != '') {
-                        $ltc = $ltc->where('intrested_course_category', $_GET['course']);
+                    if (isset($_GET['application_submitted']) && $_GET['application_submitted'] != '') {
+                        $ltc = $ltc->where('submit_application', $_GET['application_submitted']);
                     }
-                    if (isset($_GET['asign']) && $_GET['asign'] != '') {
-                        $fasign = $_GET['asign'];
-                        $ltc = $ltc->whereHas('getAC', function ($query) use ($fasign) {
-                            $query->where('user_id', $_GET['asign']);
-                        });
+                    if (isset($_GET['exam_attended']) && $_GET['exam_attended'] != '') {
+                        $ltc = $ltc->whereHas('lastAttendedExam');
                     }
                     if (isset($_GET['from']) && $_GET['from'] != '') {
                         $from = date('Y-m-d', strtotime($_GET['from'] . '-1 days'));
@@ -194,18 +257,13 @@
                         $to = date('Y-m-d', strtotime($_GET['to'] . '+1 days'));
                         $ltc = $ltc->whereDate('created_at', '<', $to);
                     }
-                    if (isset($_GET['lead_status']) && $_GET['lead_status'] != '') {
-                        $ltc = $ltc->where('lead_status', $_GET['lead_status']);
-                    }
-                    if (isset($_GET['lead_sub_status']) && $_GET['lead_sub_status'] != '') {
-                        $ltc = $ltc->where('lead_sub_status', $_GET['lead_sub_status']);
-                    }
 
                     $ltc = $ltc->where('lead_type', $lt->slug)->count();
                   @endphp
                   <a href="{{ url('admin/students/' . $lt->slug . '?' . $qs) }}"
                     class="btn btn-sm btn-{{ $clt == $lt->slug ? 'success' : 'info btn-outline' }}">
-                    {{ $lt->title }} {{ $ltc }}
+                    {{ $lt->title }} <span
+                      class="badge bg-{{ $ltc == 0 ? 'secondary' : 'info' }}">{{ $ltc }}</span>
                   </a>
                 @endforeach
               </div>
@@ -479,6 +537,94 @@
   </script>
   <script>
     $(document).ready(function() {
+      $('#nationality').on('change', function(event) {
+        var nationality = $('#nationality').val();
+        $.ajax({
+          url: "{{ url('common/get-country') }}",
+          method: "GET",
+          data: {
+            nationality: nationality
+          },
+          success: function(result) {
+            $('#country').html(result);
+          }
+        })
+      });
+      $('#country').on('change', function(event) {
+        var nationality = $('#nationality').val();
+        var country = $('#country').val();
+        $.ajax({
+          url: "{{ url('common/get-state') }}",
+          method: "GET",
+          data: {
+            country: country,
+            nationality: nationality
+          },
+          success: function(result) {
+            $('#state').html(result);
+          }
+        })
+      });
+      $('#state').on('change', function(event) {
+        var nationality = $('#nationality').val();
+        var country = $('#country').val();
+        var state = $('#state').val();
+        $.ajax({
+          url: "{{ url('common/get-city') }}",
+          method: "GET",
+          data: {
+            country: country,
+            nationality: nationality,
+            state: state
+          },
+          success: function(result) {
+            $('#city').html(result);
+          }
+        })
+      });
+      $('#city').on('change', function(event) {
+        var nationality = $('#nationality').val();
+        var country = $('#country').val();
+        var state = $('#state').val();
+        var city = $('#city').val();
+        $.ajax({
+          url: "{{ url('common/get-level') }}",
+          method: "GET",
+          data: {
+            country: country,
+            nationality: nationality,
+            state: state,
+            city: city
+          },
+          success: function(result) {
+            $('#level').html(result);
+          }
+        })
+      });
+      // $('#level').on('change', function(event) {
+      //   var nationality = $('#nationality').val();
+      //   var country = $('#country').val();
+      //   var state = $('#state').val();
+      //   var city = $('#city').val();
+      //   var level = $('#level').val();
+      //   $.ajax({
+      //     url: "{{ url('common/get-course') }}",
+      //     method: "GET",
+      //     data: {
+      //       country: country,
+      //       nationality: nationality,
+      //       state: state,
+      //       city: city,
+      //       level: level
+      //     },
+      //     success: function(result) {
+      //       $('#course').html(result);
+      //     }
+      //   })
+      // });
+
+
+
       $('#f_lead_status').on('change', function(event) {
         var status_id = $('#f_lead_status').val();
         $.ajax({

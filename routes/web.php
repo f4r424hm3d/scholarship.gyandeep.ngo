@@ -42,6 +42,7 @@ use App\Http\Controllers\admin\StudentFollowUpC;
 use App\Http\Controllers\admin\StudentProfileC;
 use App\Http\Controllers\admin\StudentScholarshipLetterC;
 use App\Http\Controllers\admin\TestimonialC;
+use App\Http\Controllers\common\FilterStudentLeads;
 use App\Http\Controllers\common\ScholarshipLetterController;
 use App\Http\Controllers\common\StudentMailController;
 use App\Http\Controllers\common\StudentResultController;
@@ -631,6 +632,13 @@ Route::prefix('common')->group(function () {
   Route::get('get-template', [StudentScholarshipLetterC::class, 'getTemplate']);
 
   Route::post('student-scholarship-update', [StudentProfileC::class, 'updateScholarship'])->name('common.student.scholarship.update');
+
+
+  Route::get('get-country', [FilterStudentLeads::class, 'getCountry']);
+  Route::get('get-state', [FilterStudentLeads::class, 'getState']);
+  Route::get('get-city', [FilterStudentLeads::class, 'getCity']);
+  Route::get('get-level', [FilterStudentLeads::class, 'getLevel']);
+  Route::get('get-course', [FilterStudentLeads::class, 'getCourse']);
 });
 
 Route::middleware([CommonAuth::class])->group(function () {
