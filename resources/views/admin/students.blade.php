@@ -294,7 +294,15 @@
                   </select>
                 </div>
                 <div style="float:right;" class="mb-0">
-                  <input class="form-control" onkeyup="myNewF()" type="text" id="search" placeholder="Search">
+                  <a href="{{ route('students.export') }}?{{ http_build_query(array_merge(request()->except('page'), ['lead_type' => $clt])) }}"
+                    class="btn btn-sm btn-success">
+                    Export ({{ $clt }})
+                  </a>
+                  <a href="{{ route('students.export') }}?{{ http_build_query(request()->except(['page', 'lead_type'])) }}"
+                    class="btn btn-sm btn-info">
+                    Export All
+                  </a>
+
                 </div>
               </div>
               <div class="box-body">

@@ -458,6 +458,7 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
     });
 
     Route::prefix('/students')->group(function () {
+      Route::get('/export/{lead_type?}', [StudentC::class, 'export'])->name('students.export');
       Route::get('', [StudentC::class, 'index']);
       Route::get('/{slug}', [StudentC::class, 'index']);
     });

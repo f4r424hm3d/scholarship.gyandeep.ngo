@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Exports\StudentsExport;
 use App\Http\Controllers\Controller;
 use App\Imports\StudentImport;
 use App\Models\Country;
@@ -293,5 +294,9 @@ class StudentC extends Controller
         dd($ex);
       }
     }
+  }
+  public function export(Request $request)
+  {
+    return Excel::download(new StudentsExport($request), 'students.xlsx');
   }
 }
