@@ -15,6 +15,7 @@ use App\Http\Controllers\admin\ExamDateScheduleC;
 use App\Http\Controllers\admin\ExamInstructionC;
 use App\Http\Controllers\admin\ExamQuestionsC;
 use App\Http\Controllers\admin\ExamSubjectsC;
+use App\Http\Controllers\admin\ExportController;
 use App\Http\Controllers\admin\ExternalScholarshipC;
 use App\Http\Controllers\admin\FollowUpStatusC;
 use App\Http\Controllers\admin\FollowUpTypeC;
@@ -561,6 +562,8 @@ Route::middleware([AdminLoggedIn::class])->group(function () {
     Route::get('view-scholarship-letter/{id}', [ScholarshipLetterController::class, 'view']);
     Route::get('view-test-scholarship-letter/{id}', [ScholarshipLetterController::class, 'viewTest']);
     Route::get('print-scholarship-letter/{id}', [ScholarshipLetterController::class, 'print']);
+
+    Route::get('/export-student-chart', [ExportController::class, 'exportStudentChart'])->name('export.student.chart');
   });
 });
 
