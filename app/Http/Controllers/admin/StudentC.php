@@ -34,7 +34,7 @@ class StudentC extends Controller
     $rows = Student::with('getLevel', 'getCourse', 'getLastFup', 'getAC')->orderBy($order_by, $order_in);
     $filterApplied = false;
     if ($request->has('search') && $request->search != '') {
-      $rows = $rows->where('name', 'like', '%' . $request->search . '%')->orWhere('city', 'like', '%' . $request->search . '%')->orWhere('state', 'like', '%' . $request->search . '%');
+      $rows = $rows->where('name', 'like', '%' . $request->search . '%')->orWhere('email', 'like', '%' . $request->search . '%')->orWhere('mobile', 'like', '%' . $request->search . '%');
     } else {
       if ($request->has('nationality') && $request->nationality != '') {
         $rows = $rows->where('nationality', $request->nationality);
